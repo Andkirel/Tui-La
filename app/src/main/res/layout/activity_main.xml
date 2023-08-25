@@ -11,11 +11,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="551dp"
-        android:layout_height="476dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="398dp"
+        android:layout_height="377dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/logo" />
 
@@ -23,7 +24,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="48dp"
         android:fontFamily="@font/Nickainley"
         android:text="Tui-La"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -40,20 +41,24 @@
         android:fontFamily="@font/philosopher"
         android:text="Sign In"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="644dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="525dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="350dp"
         android:layout_height="64dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:clickable="true"
         android:fontFamily="@font/philosopher"
         android:text="Start your 2 month free trial! Create Account"
         android:textColor="#302E2E"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3"
-        tools:layout_editor_absoluteX="125dp" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
