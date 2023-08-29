@@ -26,7 +26,8 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="327dp"
-        android:layout_height="37dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="432dp"
         android:background="@drawable/tl_rounded_textbox"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
@@ -34,29 +35,30 @@
         android:inputType="text"
         android:padding="8dp"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="257dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="327dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="44dp"
+        android:layout_height="48dp"
         android:background="@drawable/tl_rounded_textbox"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
         android:hint=" Enter email"
-        android:inputType="textEmailAddress"
-        android:padding="8dp"
+        android:inputType="text"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:layout_editor_absoluteX="42dp" />
+        app:layout_constraintVertical_bias="0.109" />
 
     <EditText
         android:id="@+id/editText3"
         android:layout_width="327dp"
-        android:layout_height="37dp"
+        android:layout_height="48dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/tl_rounded_textbox"
         android:drawablePadding="5dp"
@@ -65,8 +67,11 @@
         android:inputType="textPassword"
         android:padding="8dp"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
-        tools:layout_editor_absoluteX="42dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView4"
@@ -102,17 +107,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:fontFamily="@font/philosopher"
         android:text="Already have an account?"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="79dp"
+        android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:clickable="true"
         android:fontFamily="@font/philosopher"
@@ -121,6 +128,11 @@
         android:textColor="#020202"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.807"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button3"
-        tools:layout_editor_absoluteX="273dp" />
-
+        app:layout_constraintVertical_bias="0.0" />
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>
