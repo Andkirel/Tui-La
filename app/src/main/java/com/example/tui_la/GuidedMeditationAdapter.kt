@@ -7,7 +7,11 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class GuidedMeditationAdapter(private val data: List<GuidedMeditationDataClass>, private val listener: RecyclerViewEvent) : RecyclerView.Adapter<GuidedMeditationAdapter.ItemViewHolder>() {
+
+class GuidedMeditationAdapter(
+    private val data: ArrayList<GuidedMeditationDataClass>,
+    private val listener: RecyclerViewEvent
+) : RecyclerView.Adapter<GuidedMeditationAdapter.ItemViewHolder>() {
 
     //Setup variables to hold the instance of the views defined in RecyclerView Item Layout
     inner class ItemViewHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
@@ -17,7 +21,7 @@ class GuidedMeditationAdapter(private val data: List<GuidedMeditationDataClass>,
             view.setOnClickListener(this)
         }
         override fun onClick(v: View?) {
-            val position = adapterPosition
+            val position = absoluteAdapterPosition
             if (position != RecyclerView.NO_POSITION){
                 listener.onItemClick(position)
             }
@@ -35,9 +39,8 @@ class GuidedMeditationAdapter(private val data: List<GuidedMeditationDataClass>,
     //layout file based on position of RecyclerView
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val selection: GuidedMeditationDataClass = data[position]
-
         holder.title.text = selection.name
-        holder.image.setImageResource(selection.image)
+        holder.image.setImageResource(selection.img)
     }
 
     //Returns number of items in RecyclerView

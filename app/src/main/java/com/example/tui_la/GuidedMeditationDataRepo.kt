@@ -19,7 +19,8 @@ object GuidedMeditationDataRepo{
     )
     val gmImg = mutableListOf<Int>(
         R.drawable.pexels_marian_florinel_condruz_1188009,
-
+        R.drawable.pexels_marian_florinel_condruz_1188009,
+        R.drawable.pexels_marian_florinel_condruz_1188009,
 
     )
 }

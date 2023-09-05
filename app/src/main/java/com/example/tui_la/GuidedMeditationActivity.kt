@@ -5,41 +5,40 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tui_la.GuidedMeditationAdapter
+import com.example.tui_la.GuidedMeditationDataRepo
+import com.example.tui_la.R
+import com.example.tui_la.GuidedMeditationDataClass
 
-class GuidedMeditationActivity : AppCompatActivity(), GuidedMeditationAdapter.RecyclerViewEvent {
+class GuidedMeditationActivity : AppCompatActivity(), GuidedMeditationAdapter.RecyclerViewEvent{
     private val data = createData()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_meditation_selection)
 
         val recyclerView: RecyclerView = findViewById(R.id.gm_recyclerview)
-        recyclerView.adapter = GuidedMeditationAdapter(createData(), this)
+        recyclerView.adapter = GuidedMeditationAdapter(data,this)
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun createData(): List<GuidedMeditationDataClass>{
-        val names = GuidedMeditationDataRepo.gmNames
-        val vids = GuidedMeditationDataRepo.gmAud
-        var img = GuidedMeditationDataRepo.gmImg
-        val selectionData = ArrayList<GuidedMeditationDataClass>()
-        for(i in 0..2){
-            selectionData.add(
-                GuidedMeditationDataClass(
-                    name = names[i],
-                    aud = vids[i],
-                    image = img[i]
-                )
-            )
-        }
-        return selectionData
-    }
-
     override fun onItemClick(position: Int) {
-        val pickedrow = data[position]
-
-        //Change from Toast to open to new fragment or whatever upon clicking
-        //Toast is here for testing
-        Toast.makeText(this,pickedrow.name,Toast.LENGTH_SHORT).show()
+        val gmName = data[position]
+        Toast.makeText(this,gmName.name,Toast.LENGTH_SHORT).show()
     }
-}
 
+    private fun createData():ArrayList<GuidedMeditationDataClass>{
+        val titles = GuidedMeditationDataRepo.gmNames
+        val aud = GuidedMeditationDataRepo.gmAud
+        val img = GuidedMeditationDataRepo.gmImg
+        val gmData = ArrayList<GuidedMeditationDataClass>()
+
+        for (i in 0..2){
+            gmData.add(i,GuidedMeditationDataClass(titles[i],aud[i],img[i]))
+        }
+
+        return gmData
+    }
+
+
+}

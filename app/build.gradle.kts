@@ -37,13 +37,12 @@ android {
 
 dependencies {
 
-    implementation("androidx.compose.foundation:foundation")
+    /*implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.ui:ui")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.lifecycle:lifecycle-view-model-compose:2.6.1")
-    implementation("androidx.compose.ui:ui-tooling:1.5.0")
+    implementation("androidx.compose.ui:ui")*/
+    //debugImplementation("androidx.compose.ui:ui-tooling")
+    //implementation("androidx.activity:activity-compose:1.7.2")
+    //implementation("androidx.compose.ui:ui-tooling:1.5.0")
 
     implementation ("androidx.media3:media3-exoplayer:1.1.1")
     implementation ("androidx.media3:media3-exoplayer-dash:1.1.1")
