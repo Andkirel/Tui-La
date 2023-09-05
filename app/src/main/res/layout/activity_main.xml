@@ -37,7 +37,7 @@
         android:id="@+id/button3"
         android:layout_width="366dp"
         android:layout_height="70dp"
-        android:background="@drawable/tl_rounded_textbox"
+        android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
         android:text="Sign In"
         android:textSize="24sp"

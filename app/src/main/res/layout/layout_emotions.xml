@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg"
+
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/Loved_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Loved"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/Relaxed_text"
+        app:layout_constraintTop_toBottomOf="@+id/Loved_Button" />
+
+    <TextView
+        android:id="@+id/Sad_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Sad"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/Loved_text"
+        app:layout_constraintTop_toBottomOf="@+id/Sad_button" />
+
+    <ImageButton
+        android:id="@+id/Loved_Button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/tl_rounded_textbox_blue"
+        app:layout_constraintStart_toEndOf="@+id/Relaxed_Button"
+        app:layout_constraintTop_toBottomOf="@+id/Excited_Text"
+        app:srcCompat="@drawable/loved" />
+
+    <ImageButton
+        android:id="@+id/Relaxed_Button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/tl_rounded_textbox_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Happy_text"
+        app:srcCompat="@drawable/relaxed" />
+
+    <ImageButton
+        android:id="@+id/Stressed_Button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        app:layout_constraintStart_toEndOf="@+id/Angry_button"
+        app:layout_constraintTop_toBottomOf="@+id/Sad_text"
+        app:srcCompat="@drawable/stressed" />
+
+    <ImageButton
+        android:id="@+id/Afraid_Button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Relaxed_text"
+        app:srcCompat="@drawable/afraid" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="380dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nickainley"
+        android:text=" How are you feeling?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/Angry_button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        app:layout_constraintStart_toEndOf="@+id/Afraid_Button"
+        app:layout_constraintTop_toBottomOf="@+id/Loved_text"
+        app:srcCompat="@drawable/angry" />
+
+    <ImageButton
+        android:id="@+id/Tired_Button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/tl_rounded_textbox_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toEndOf="@+id/Excited_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/sleepy" />
+
+    <ImageButton
+        android:id="@+id/Excited_button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/tl_rounded_textbox_green"
+        app:layout_constraintStart_toEndOf="@+id/Happy_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/excited" />
+
+    <ImageButton
+        android:id="@+id/Happy_button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/tl_rounded_textbox_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/happy" />
+
+    <ImageButton
+        android:id="@+id/Sad_button"
+        android:layout_width="104dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/tl_rounded_textbox_blue"
+        app:layout_constraintStart_toEndOf="@+id/Loved_Button"
+        app:layout_constraintTop_toBottomOf="@+id/Tired_Text"
+        app:srcCompat="@drawable/sad" />
+
+    <TextView
+        android:id="@+id/Happy_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Happy"
+        android:textColor="#050505"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Happy_button" />
+
+    <TextView
+        android:id="@+id/Excited_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Excited"
+        android:textColor="#070707"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/Happy_text"
+        app:layout_constraintTop_toBottomOf="@+id/Excited_button" />
+
+    <TextView
+        android:id="@+id/Tired_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Tired"
+        android:textColor="#040404"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Tired_Button" />
+
+    <TextView
+        android:id="@+id/Relaxed_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Relaxed"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Relaxed_Button" />
+
+    <TextView
+        android:id="@+id/Stressed_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Stressed"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/Angry_text"
+        app:layout_constraintTop_toBottomOf="@+id/Stressed_Button" />
+
+    <TextView
+        android:id="@+id/Angry_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Angry"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/Afraid_text"
+        app:layout_constraintTop_toBottomOf="@+id/Angry_button" />
+
+    <TextView
+        android:id="@+id/Afraid_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Afraid"
+        android:textColor="#090909"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Afraid_Button" />
+
+    <Button
+        android:id="@+id/MM_button"
+        android:layout_width="290dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:fontFamily="@font/philosopher"
+        android:text="Main Menu"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

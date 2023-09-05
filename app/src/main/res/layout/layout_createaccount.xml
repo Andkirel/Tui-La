@@ -27,6 +27,7 @@
         android:id="@+id/un_editText"
         android:layout_width="327dp"
         android:layout_height="48dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="432dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:drawablePadding="5dp"
@@ -36,30 +37,29 @@
         android:padding="8dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/email_editText"
         android:layout_width="327dp"
         android:layout_height="48dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
         android:hint=" Enter email"
         android:inputType="text"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/un_editText"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintTop_toBottomOf="@+id/un_editText" />
 
     <EditText
         android:id="@+id/editText3"
         android:layout_width="327dp"
         android:layout_height="48dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
@@ -67,22 +67,19 @@
         android:inputType="textPassword"
         android:padding="8dp"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_editText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/email_editText" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:fontFamily="@font/philosopher"
         android:text="a mental health support app"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/un_editText"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintVertical_bias="0.0" />
@@ -91,16 +88,14 @@
         android:id="@+id/ca_button"
         android:layout_width="290dp"
         android:layout_height="70dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="44dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
         android:text="Create Account"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
-        app:layout_constraintVertical_bias="0.311" />
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
     <TextView
         android:id="@+id/textView5"
