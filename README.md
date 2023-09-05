@@ -31,9 +31,9 @@ For new developers to set up and create/compile an initial build from this repo,
 1. Open the project in Android Studio
 2. Connect project to Firebase using Tools -> Firebase
 3. Click Run -> Select Device (or Alt + Shift + F11)
-3. Click Device Manager and Create Device
-4. Choose a device to emulate (we suggest a Pixel 4 or 5) with a **minimum API of 24**.
-5. Click Run -> Run Tui-La (or Shift + F10)
+4. Click Device Manager and Create Device
+5. Choose a device to emulate (we suggest a Pixel 4 or 5) with a **minimum API of 24**.
+6. Click Run -> Run Tui-La (or Shift + F10)
 
 ## License - Apache 2.0
 Copyright 2023 [name of copyright owner]
