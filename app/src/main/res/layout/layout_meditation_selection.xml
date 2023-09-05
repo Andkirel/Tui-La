@@ -43,7 +43,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<com.google.android.gms.ads.AdView
+    <com.google.android.gms.ads.admanager.AdManagerAdView
+        android:id="@+id/gmLayAdManagerAdView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        ads:adSize="BANNER"
+        ads:adUnitId="/6499/example/banner">
+    </com.google.android.gms.ads.admanager.AdManagerAdView>
+
+    <com.google.android.gms.ads.AdView
         android:id="@+id/banner_ad_meditation_selection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +66,7 @@
         ads:adUnitId="12345"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gm_recyclerview"

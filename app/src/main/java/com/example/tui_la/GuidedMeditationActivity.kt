@@ -1,21 +1,27 @@
 package com.example.tui_la
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tui_la.GuidedMeditationAdapter
-import com.example.tui_la.GuidedMeditationDataRepo
-import com.example.tui_la.R
-import com.example.tui_la.GuidedMeditationDataClass
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.admanager.AdManagerAdRequest
+import com.google.android.gms.ads.admanager.AdManagerAdView
 
 class GuidedMeditationActivity : AppCompatActivity(), GuidedMeditationAdapter.RecyclerViewEvent{
     private val data = createData()
-
+    lateinit var gmAdManagerAdView : AdManagerAdView
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_meditation_selection)
+
+        MobileAds.initialize(this)
+        gmAdManagerAdView = findViewById(R.id.gmLayAdManagerAdView)
+        val adRequest = AdManagerAdRequest.Builder().build()
+        gmAdManagerAdView.loadAd(adRequest)
 
         val recyclerView: RecyclerView = findViewById(R.id.gm_recyclerview)
         recyclerView.adapter = GuidedMeditationAdapter(data,this)
