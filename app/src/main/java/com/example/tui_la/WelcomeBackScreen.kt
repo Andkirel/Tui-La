@@ -13,7 +13,7 @@ class WelcomeBackScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.screen_welcome_welcomeback)
+        setContentView(R.layout.layout_welcome_welcomeback)
 
         /*TODO: add code to determine if new or returning user. Depending on answer, adjust WelcomeBackText to say "Welcome".
            Also adjust the usernameText to the correct username.*/
