@@ -1,8 +1,43 @@
 package com.example.tui_la
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 
 class GuidedMeditationPlayer : AppCompatActivity() {
+    var gmMediaPlayer: MediaPlayer? = null
+
+    fun playSound(){
+        if (gmMediaPlayer?.isPlaying == true){
+            gmMediaPlayer?.pause()
+        }
+        if (gmMediaPlayer == null){
+            gmMediaPlayer = MediaPlayer.create(this,R.raw.ocean_breathing_10mins)
+            gmMediaPlayer!!.isLooping = true
+            gmMediaPlayer!!.start()
+        } else gmMediaPlayer!!.start()
+    }
+
+    fun pauseSound(){
+        if (gmMediaPlayer?.isPlaying == true) gmMediaPlayer?.pause()
+    }
+
+    fun stopSound() {
+        if (gmMediaPlayer != null) {
+            gmMediaPlayer!!.stop()
+            gmMediaPlayer!!.release()
+            gmMediaPlayer = null
+        }
+    }
+
+    override fun onStop(){
+        super.onStop()
+        if (gmMediaPlayer != null){
+            gmMediaPlayer!!.release()
+            gmMediaPlayer = null
+        }
+    }
+
+
     /*lateinit var playerView: PlayerView
     lateinit var player: ExoPlayer
     override fun onCreate(savedInstanceState:Bundle?){
