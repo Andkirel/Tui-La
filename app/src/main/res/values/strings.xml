@@ -44,6 +44,14 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     
-
+    <!-- String for journal features -->
     <string name="journal">Journal</string>
+    <string name="journal_prompts">Journal Prompts</string>
+    <string name="journal_prompt_love">Increase Self love</string>
+    <string name="journal_prompt_confidence">Create Confidence</string>
+    <string name="journal_prompt_work">Shadow Work &amp; Inner Healing</string>
+    <string name="journal_prompt_passion">Finding Your Passion</string>
+    <string name="journal_prompt_anxiety">Relieve Anxiety</string>
+
+
 </resources>
