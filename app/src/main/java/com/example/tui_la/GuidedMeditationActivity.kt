@@ -28,13 +28,14 @@ class GuidedMeditationActivity : AppCompatActivity(),
         recyclerView.adapter = GuidedMeditationAdapter(data,this)
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
-
+    /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
     override fun onItemClick(position: Int) {
         val userPick = data[position]
         Toast.makeText(this,userPick.name,Toast.LENGTH_SHORT).show()
     }
-
+    /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
     override fun onClick(v: View?) {
+
         Toast.makeText(this,"Maybe",Toast.LENGTH_SHORT).show()
     }
 

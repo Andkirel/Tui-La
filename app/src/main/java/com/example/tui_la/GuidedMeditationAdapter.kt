@@ -1,6 +1,5 @@
 package com.example.tui_la
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GuidedMeditationAdapter(
     private val data: List<GuidedMeditationDataClass>,
-    private val listener: RecyclerViewEvent
-    //private val onClick:(GuidedMeditationDataClass)->Unit
+    private val listener: RecyclerViewEvent,
 ) : RecyclerView.Adapter<GuidedMeditationAdapter.ItemViewHolder>(){
 
     //Setup variables to hold the instance of the views defined in RecyclerView Item Layout
@@ -19,7 +17,11 @@ class GuidedMeditationAdapter(
         val txtview: TextView = view.findViewById(R.id.gmtesttextview)
         //val btn: Button = view.findViewById(R.id.gm_recyclerview_btn)
         init {
-            view.setOnClickListener(this)
+            view.setOnClickListener{
+                if (bindingAdapterPosition >= 0){
+                    listener.onItemClick(bindingAdapterPosition)
+                }
+            }
         }
         override fun onClick(v: View?) {
             val position = bindingAdapterPosition
@@ -38,12 +40,10 @@ class GuidedMeditationAdapter(
 
     //Set values to views pulled from RecyclerView row
     //layout file based on position of RecyclerView
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val selection: GuidedMeditationDataClass = data[position]
         holder.txtview.text = selection.name
         holder.txtview.setOnClickListener(listener)
-        //holder.itemView.setBackgroundResource(selection.img)
         holder.txtview.setBackgroundResource(selection.img)
         //holder.title.text = selection.name
         //holder.image.setImageResource(selection.img)
