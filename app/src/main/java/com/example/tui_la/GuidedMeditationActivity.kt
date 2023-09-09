@@ -1,6 +1,7 @@
 package com.example.tui_la
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,10 @@ class GuidedMeditationActivity : AppCompatActivity(),
     override fun onItemClick(position: Int) {
         val userPick = data[position]
         Toast.makeText(this,userPick.name,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onClick(v: View?) {
+        Toast.makeText(this,"Maybe",Toast.LENGTH_SHORT).show()
     }
 
     private fun createData():List<GuidedMeditationDataClass>{

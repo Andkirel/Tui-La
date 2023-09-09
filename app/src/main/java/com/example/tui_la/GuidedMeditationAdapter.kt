@@ -1,5 +1,6 @@
 package com.example.tui_la
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 class GuidedMeditationAdapter(
     private val data: List<GuidedMeditationDataClass>,
     private val listener: RecyclerViewEvent
-) : RecyclerView.Adapter<GuidedMeditationAdapter.ItemViewHolder>() {
+    //private val onClick:(GuidedMeditationDataClass)->Unit
+) : RecyclerView.Adapter<GuidedMeditationAdapter.ItemViewHolder>(){
 
     //Setup variables to hold the instance of the views defined in RecyclerView Item Layout
     inner class ItemViewHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
@@ -36,9 +38,12 @@ class GuidedMeditationAdapter(
 
     //Set values to views pulled from RecyclerView row
     //layout file based on position of RecyclerView
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val selection: GuidedMeditationDataClass = data[position]
         holder.txtview.text = selection.name
+        holder.txtview.setOnClickListener(listener)
+        //holder.itemView.setBackgroundResource(selection.img)
         holder.txtview.setBackgroundResource(selection.img)
         //holder.title.text = selection.name
         //holder.image.setImageResource(selection.img)
@@ -49,7 +54,8 @@ class GuidedMeditationAdapter(
         return data.size
     }
 
-    interface RecyclerViewEvent{
+    interface RecyclerViewEvent : View.OnClickListener {
         fun onItemClick(position: Int)
     }
+
 }
