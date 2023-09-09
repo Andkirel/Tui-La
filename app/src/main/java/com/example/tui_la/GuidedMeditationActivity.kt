@@ -1,9 +1,7 @@
 package com.example.tui_la
 
-import android.annotation.SuppressLint
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,12 +9,11 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
 
-class GuidedMeditationActivity : AppCompatActivity(), GuidedMeditationAdapter.RecyclerViewEvent{
+class GuidedMeditationActivity : AppCompatActivity(),
+    GuidedMeditationAdapter.RecyclerViewEvent {
     private val data = createData()
-    lateinit var gmAdManagerAdView : AdManagerAdView
-    var gmMediaPlayer: MediaPlayer? = null
+    private lateinit var gmAdManagerAdView : AdManagerAdView
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_meditation_selection)
@@ -32,56 +29,22 @@ class GuidedMeditationActivity : AppCompatActivity(), GuidedMeditationAdapter.Re
     }
 
     override fun onItemClick(position: Int) {
-        val gmImg = data[position]
-
-        runPlayer()
-        //Toast.makeText(this,gmImg.name,Toast.LENGTH_SHORT).show()
+        val userPick = data[position]
+        Toast.makeText(this,userPick.name,Toast.LENGTH_SHORT).show()
     }
 
-    private fun createData():ArrayList<GuidedMeditationDataClass>{
+    private fun createData():List<GuidedMeditationDataClass>{
         val titles = GuidedMeditationDataRepo.gmNames
         val aud = GuidedMeditationDataRepo.gmAud
         val img = GuidedMeditationDataRepo.gmImg
+        val vids = GuidedMeditationDataRepo.gmVid
+
         val gmData = ArrayList<GuidedMeditationDataClass>()
 
         for (i in 0..4){
-            gmData.add(i,GuidedMeditationDataClass(titles[i],aud[i],img[i]))
+            gmData.add(GuidedMeditationDataClass(titles[i],aud[i],img[i],vids[i]))
         }
         return gmData
     }
 
-    fun runPlayer() {
-        setContentView(R.layout.layout_meditation_player)
-        val btn: ImageButton = findViewById(R.id.playButton)
-        fun playSound() {
-            if (gmMediaPlayer?.isPlaying == true) {
-                gmMediaPlayer?.pause()
-            }
-            if (gmMediaPlayer == null) {
-                gmMediaPlayer = MediaPlayer.create(this, R.raw.ocean_breathing_10mins)
-                gmMediaPlayer!!.isLooping = true
-                gmMediaPlayer!!.start()
-            } else gmMediaPlayer!!.start()
-        }
-
-        fun pauseSound() {
-            if (gmMediaPlayer?.isPlaying == true) gmMediaPlayer?.pause()
-        }
-
-        fun stopSound() {
-            if (gmMediaPlayer != null) {
-                gmMediaPlayer!!.stop()
-                gmMediaPlayer!!.release()
-                gmMediaPlayer = null
-            }
-        }
-
-       /* override fun onStop() {
-            super.onStop()
-            if (gmMediaPlayer != null) {
-                gmMediaPlayer!!.release()
-                gmMediaPlayer = null
-            }
-        }*/
-    }
 }

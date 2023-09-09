@@ -15,10 +15,11 @@
             android:exported="false" />
 
         <activity android:name=".GuidedMeditationActivity"
-            android:exported="true"
-            android:launchMode="singleInstance"/>
+            android:exported="true" />
         <activity android:name=".GuidedMeditationPlayer"
             android:exported="true"/>
+        <activity android:name=".WelcomeBackScreen"
+            android:exported="false"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
