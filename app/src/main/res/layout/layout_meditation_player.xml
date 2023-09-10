@@ -6,28 +6,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto">
 
-    <!--<VideoView
-        android:id="@+id/gm_videoView"
+    <TextView
+        android:id="@+id/guidedMeditationTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/philosopher"
+        android:text="You Are Not Alone"
+        android:textAlignment="center"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/playButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="178dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="177dp"
-        android:contentDescription="Button to play audio"
-        android:onClick="playSound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_media_play" />-->
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/gm_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.google.android.gms.ads.admanager.AdManagerAdView
         android:id="@+id/gmLayAdManagerAdView"
@@ -54,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/gmTestText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,6 +67,6 @@
         android:layout_marginTop="72dp"
         android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gmTestText1" />
+        app:layout_constraintTop_toBottomOf="@+id/gmTestText1" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

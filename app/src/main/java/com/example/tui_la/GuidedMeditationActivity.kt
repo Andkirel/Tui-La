@@ -1,5 +1,6 @@
 package com.example.tui_la
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -35,7 +36,8 @@ class GuidedMeditationActivity : AppCompatActivity(),
     }
     /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
     override fun onClick(v: View?) {
-
+        val intent = Intent(this, GuidedMeditationPlayer::class.java)
+        startActivity(intent)
         Toast.makeText(this,"Maybe",Toast.LENGTH_SHORT).show()
     }
 

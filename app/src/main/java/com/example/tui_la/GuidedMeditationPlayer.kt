@@ -1,99 +1,56 @@
 package com.example.tui_la
 
-import android.media.MediaPlayer
+import android.net.Uri
+import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 
-class GuidedMeditationPlayer : AppCompatActivity() {
-    var gmMediaPlayer: MediaPlayer? = null
+class GuidedMeditationPlayer : AppCompatActivity(), Player.Listener{
+    private lateinit var player: ExoPlayer
+    private lateinit var playerView: PlayerView
+    private lateinit var audioTitle: TextView
 
-    fun playSound(){
-        if (gmMediaPlayer?.isPlaying == true){
-            gmMediaPlayer?.pause()
-        }
-        if (gmMediaPlayer == null){
-            gmMediaPlayer = MediaPlayer.create(this,R.raw.ocean_breathing_10mins)
-            gmMediaPlayer!!.isLooping = true
-            gmMediaPlayer!!.start()
-        } else gmMediaPlayer!!.start()
-    }
-
-    fun pauseSound(){
-        if (gmMediaPlayer?.isPlaying == true) gmMediaPlayer?.pause()
-    }
-
-    fun stopSound() {
-        if (gmMediaPlayer != null) {
-            gmMediaPlayer!!.stop()
-            gmMediaPlayer!!.release()
-            gmMediaPlayer = null
-        }
-    }
-
-    override fun onStop(){
-        super.onStop()
-        if (gmMediaPlayer != null){
-            gmMediaPlayer!!.release()
-            gmMediaPlayer = null
-        }
-    }
-
-
-    /*lateinit var playerView: PlayerView
-    lateinit var player: ExoPlayer
-    override fun onCreate(savedInstanceState:Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_meditation_player)
-        playerView = findViewById(R.id.guidedMeditationAudioPlayer)
+        audioTitle = findViewById(R.id.guidedMeditationTitle)
+        setupPlayer()
+        addMp4Files()
 
+    }
 
-        var source = MediaSource
-        val player = ExoPlayer.Builder(this).build()
-            .setMediaSource()
-
+    private fun setupPlayer(){
+        player = ExoPlayer.Builder(this).build()
+        playerView = findViewById(R.id.gm_player)
         playerView.player = player
-        *//*val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
-        var mediaList = mutableListOf<Int>()
-        mediaList.add(R.raw.basic_relaxation_10mins)
-        mediaList.add(R.raw.allowing_uncertainty_10mins)
-        mediaList.add(R.raw.ocean_breathing_10mins)*//*
-        MediaDescription desc = new MediaDescription.Builder()
-            .setMediaUri()
-            .build()
+        player.addListener(this)
+    }
 
-        //Factory(dataSourceFactory).createMediaSource(MediaItem.fromUri(hlsUri))
-        val mediaItem = androidx.media3.common.MediaItem.Builder()
-            .setMimeType(HlsMediaSource.)
-            .setUri(R.raw.basic_relaxation_10mins)
-            .build()
-        val hlsMediaSource = HlsMediaSource.Factory(MediaItem.Builder())
-
-        *//*val mediaSource = ProgressiveMediaSource.Factory(
-            DefaultDataSource.Factory(this)
-        ).createMediaSource(mediaItem)*//*
+    private fun addMp4Files(){
+        val mediaItem = MediaItem.fromUri(Uri.parse("android.resource://" + packageName+ "/"+ R.raw.basic_relaxation_10mins))
         player.addMediaItem(mediaItem)
-
-        player.prepare()
-        player.play()
-    }*/
-    /*private val audUris = emptyList<Uri>()
-    val player: Player
-
-    val audList = audUris.map { audUris ->
-        audUris.map {audUris -> VideoItem(
-            contentUri = audUris,
-            mediaItem = MediaItem.fromUri()
-            name = ""
-    )}}
-
-    init{
         player.prepare()
     }
-    fun addAudio(aud: Int){
-        player.addMediaItem(MediaItem.fromUri(audUris))
-    }
-    fun playAud(uri: Uri){
-        player.setMediaItem(
 
-        )
-    }*/
+    override fun onPlaybackStateChanged(playbackState: Int) {
+        super.onPlaybackStateChanged(playbackState)
+        when(playbackState){
+            Player.STATE_BUFFERING -> {
+                //make progressbar visible
+            }
+            Player.STATE_READY -> {
+                //make progress bar invisible
+            }
+        }
+    }
+
+    override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
+        super.onMediaMetadataChanged(mediaMetadata)
+        audioTitle.text = mediaMetadata.title ?: mediaMetadata.displayTitle ?: "Title not found"
+    }
 }
