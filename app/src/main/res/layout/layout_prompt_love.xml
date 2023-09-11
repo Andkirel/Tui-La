@@ -1,110 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg">
 
-
     <TextView
-        android:id="@+id/journalPromptTitle"
+        android:id="@+id/journalPromptLove"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="@string/journal_prompts"
-        android:textAppearance="@font/philosopher"
+        android:text="@string/journal_prompt_love"
         android:textAlignment="center"
+        android:textAppearance="@font/philosopher"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/journalPrompt1"
+        app:layout_constraintBottom_toTopOf="@+id/journalPromptLove1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/journalPrompt1"
+        android:id="@+id/journalPromptLove1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
-        android:text="@string/journal_prompt_love"
+        android:text="@string/journal_prompt_love_1"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/journalPrompt2"
+        app:layout_constraintBottom_toTopOf="@+id/journalPromptLove2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journalPromptTitle" />
-
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptLove" />
     <Button
-        android:id="@+id/journalPrompt2"
+        android:id="@+id/journalPromptLove2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
-        android:text="@string/journal_prompt_confidence"
+        android:text="@string/journal_prompt_love_2"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/journalPrompt3"
+        app:layout_constraintBottom_toTopOf="@+id/journalPromptLove3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journalPrompt1" />
-
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptLove1" />
     <Button
-        android:id="@+id/journalPrompt3"
+        android:id="@+id/journalPromptLove3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
-        android:text="@string/journal_prompt_work"
+        android:text="@string/journal_prompt_love_3"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/journalPrompt4"
+        app:layout_constraintBottom_toTopOf="@+id/journalPromptLove4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journalPrompt2" />
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptLove2" />
 
     <Button
-        android:id="@+id/journalPrompt4"
+        android:id="@+id/journalPromptLove4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
-        android:text="@string/journal_prompt_passion"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/journalPrompt5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journalPrompt3" />
-
-    <Button
-        android:id="@+id/journalPrompt5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/tl_rounded_textbox_pink"
-        android:fontFamily="@font/philosopher"
-        android:text="@string/journal_prompt_anxiety"
+        android:text="@string/journal_prompt_love_4"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/journalPrompt4" />
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptLove3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
