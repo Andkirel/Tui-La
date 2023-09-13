@@ -5,7 +5,7 @@
     android:id="@+id/journal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.journal.JournalFragment">
+    tools:context=".com.example.tui_la.JournalFragment">
 
     <ImageView
         android:id="@+id/journalBkgd"

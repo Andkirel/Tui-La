@@ -2,7 +2,7 @@ package com.example.tui_la
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.tui_la.ui.journal.JournalFragment
+import com.example.tui_la.com.example.tui_la.JournalFragment
 
 class JournalActivity : AppCompatActivity() {
 

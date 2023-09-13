@@ -1,4 +1,4 @@
-package com.example.tui_la.ui.journal
+package com.example.tui_la.com.example.tui_la
 
 import androidx.lifecycle.ViewModel
 
