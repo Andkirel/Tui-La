@@ -96,4 +96,6 @@
     <string name="emoji_happy_image">Happy_image</string>
     <string name="emoji_sad_image">sad image</string>
     <string name="home_menu">Home</string>
+    <string name="menu_backbutton_disc">menu_backbutton_disc</string>
+    <string name="payment_backbutton_disc">payment_backbutton_disc</string>
 </resources>
