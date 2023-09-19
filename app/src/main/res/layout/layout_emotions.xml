@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
 
-    tools:context=".MainActivity">
+    tools:context=".com.example.tui_la.MainActivity">
 
     <TextView
         android:id="@+id/Loved_text"

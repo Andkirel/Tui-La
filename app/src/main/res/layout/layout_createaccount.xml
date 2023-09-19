@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
 
-    tools:context=".MainActivity">
+    tools:context=".CreateAccount_Fragment">
 
     <TextView
         android:id="@+id/title"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFF"
 
-    tools:context=".MainActivity">
+    tools:context=".com.example.tui_la.MainActivity">
 
     <Button
         android:id="@+id/paypal_button"
