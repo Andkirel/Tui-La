@@ -29,7 +29,7 @@ class CreateAccount_Fragment : Fragment() {
 
         val usernameEditText: EditText = view.findViewById(R.id.un_editText)
         val emailEditText: EditText = view.findViewById(R.id.email_editText)
-        val passwordEditText: EditText = view.findViewById(R.id.editText3)
+        val passwordEditText: EditText = view.findViewById(R.id.pw_editText)
         val createAccountButton: Button = view.findViewById(R.id.ca_button)
         val loginTextView: TextView = view.findViewById(R.id.textView6)
 
@@ -38,8 +38,8 @@ class CreateAccount_Fragment : Fragment() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(activity, "Fields cannot be empty.", Toast.LENGTH_SHORT).show()
+            if (username.isEmpty() || email.isEmpty() || !email.contains("@") || password.isEmpty() || password.length < 6) {
+                Toast.makeText(activity, "Invalid username, email, or password.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -57,6 +57,11 @@ class CreateAccount_Fragment : Fragment() {
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
                                         Toast.makeText(activity, "Account created.", Toast.LENGTH_SHORT).show()
+
+                                        // Navigate to the login fragment
+                                        parentFragmentManager.beginTransaction()
+                                            .replace(R.id.coordinatorLayout, LogIn_Fragment())
+                                            .commit()
                                     } else {
                                         Toast.makeText(activity, "Failed to save user info.", Toast.LENGTH_SHORT).show()
                                     }
@@ -65,13 +70,17 @@ class CreateAccount_Fragment : Fragment() {
                             Toast.makeText(activity, "Failed to get user ID.", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        Toast.makeText(activity, "Account creation failed.", Toast.LENGTH_SHORT).show()
+                        val exception = task.exception
+                        Toast.makeText(activity, "Failed to create account: ${exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
 
         loginTextView.setOnClickListener {
-            // Switch to login fragment to sign in? or send user to next activity?
+            // Navigate to the login fragment
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.coordinatorLayout, LogIn_Fragment())
+                .commit()
         }
 
         return view

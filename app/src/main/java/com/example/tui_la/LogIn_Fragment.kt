@@ -32,8 +32,8 @@ class LogIn_Fragment : Fragment() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(activity, "Fields cannot be empty.", Toast.LENGTH_SHORT).show()
+            if (email.isEmpty() || !email.contains("@") || password.isEmpty() || password.length < 6) {
+                Toast.makeText(activity, "Invalid email or password.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
