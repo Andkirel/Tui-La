@@ -5,9 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
-
-    tools:context=".MainActivity">
+    android:background="@drawable/main_bg">
 
     <TextView
         android:id="@+id/title"
@@ -85,7 +83,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/ca_button"
+        android:id="@+id/Button_CreateAccount_CA"
         android:layout_width="290dp"
         android:layout_height="70dp"
         android:layout_marginStart="60dp"
@@ -108,7 +106,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/ca_button"
+        app:layout_constraintTop_toBottomOf="@+id/Button_CreateAccount_CA"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -127,7 +125,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.807"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ca_button"
+        app:layout_constraintTop_toBottomOf="@+id/Button_CreateAccount_CA"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,16 +5,14 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
-
-    tools:context=".MainActivity">
+    android:background="@drawable/main_bg">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="398dp"
         android:layout_height="377dp"
         android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/Button_Signin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/Button_Signin"
         android:layout_width="366dp"
         android:layout_height="70dp"
         android:layout_marginBottom="116dp"
@@ -58,6 +56,6 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/Button_Signin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

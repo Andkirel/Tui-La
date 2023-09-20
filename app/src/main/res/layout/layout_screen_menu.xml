@@ -5,9 +5,8 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg"
+    android:background="@drawable/main_bg" >
 
-    tools:context=".MainActivity">
 
 
     <Button
@@ -105,7 +104,7 @@
         android:id="@+id/imageView3"
         android:layout_width="65dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:contentDescription="@string/menu_backbutton_disc"
         app:layout_constraintStart_toStartOf="parent"
