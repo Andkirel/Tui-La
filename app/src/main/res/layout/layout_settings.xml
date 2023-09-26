@@ -5,8 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg" >
-
+    android:background="@drawable/main_bg">
 
 
     <Button
@@ -14,11 +13,11 @@
         android:layout_width="361dp"
         android:layout_height="78dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="100dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
-        android:text="@string/home_menu"
-        android:textSize="34sp"
+        android:text="@string/account_settings"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,8 +29,8 @@
         android:layout_marginEnd="24dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
-        android:text="@string/guided_meditation"
-        android:textSize="34sp"
+        android:text="@string/notifications"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_home" />
 
@@ -43,8 +42,8 @@
         android:layout_marginEnd="24dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
-        android:text="@string/guided_breathing"
-        android:textSize="34sp"
+        android:text="@string/badges_achievements"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_GM" />
 
@@ -56,8 +55,8 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
-        android:text="@string/journal"
-        android:textSize="34sp"
+        android:text="@string/app_settings"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_GB" />
 
@@ -69,8 +68,8 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
-        android:text="@string/records"
-        android:textSize="34sp"
+        android:text="@string/app_help"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_journal" />
 
@@ -82,30 +81,17 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
-        android:text="@string/education"
-        android:textSize="34sp"
+        android:text="@string/dscript_manage_subscription"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_records" />
 
-    <Button
-        android:id="@+id/button_menu_CS"
-        android:layout_width="361dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="#00FFFFFF"
-        android:fontFamily="@font/philosopher"
-        android:text="@string/crisis_support"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_menu_education" />
-
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/imageButton"
         android:layout_width="78dp"
         android:layout_height="78dp"
         android:background="#00FFFFFF"
-        android:contentDescription="@string/dscript_menu_backbutton"
+        android:contentDescription="@string/backb"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_button" />

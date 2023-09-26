@@ -124,14 +124,14 @@
         app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_Records" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
+        android:id="@+id/ImageButton_MainMenu_Settings"
+        android:layout_width="73dp"
+        android:layout_height="71dp"
         android:background="#00FFFFFF"
-        android:contentDescription="@string/menu_image"
+        android:contentDescription="@string/Dscript_mainmenu_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu_dots" />
+        app:srcCompat="@drawable/gear_icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
