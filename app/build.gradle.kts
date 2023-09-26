@@ -51,6 +51,8 @@ dependencies {
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
 
+    implementation("androidx.cardview:cardview:1.0.0")
+
     implementation ("androidx.media3:media3-exoplayer:1.1.1")
     implementation ("androidx.media3:media3-exoplayer-dash:1.1.1")
     implementation ("androidx.media3:media3-ui:1.1.1")

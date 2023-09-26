@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/journalEntry"
+        android:id="@+id/journalText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="128dp"
@@ -40,7 +40,9 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="104dp"
         android:background="@drawable/tl_rounded_textbox_pink"
+        android:onClick="backButtonClick"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="@+id/journalBkgd"
         app:layout_constraintEnd_toEndOf="parent"
