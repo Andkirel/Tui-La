@@ -125,4 +125,15 @@
     <string name="back">back</string>
     <string name="backb">backB</string>
     <string name="AS_account_settings">Account Settings</string>
+    <string name="B_change_password">Change Password</string>
+    <string name="B_update_email">Update Email</string>
+    <string name="title_email">Email:</string>
+    <string name="title_name">Name:</string>
+    <string name="placeholder">Andrew</string>
+    <string name="placeholder_email">98andrewruiz@gmail.com</string>
+    <string name="B_delete_account">Delete Account</string>
+    <string name="IB_notifications_screen_back_button">Notifications screen back button</string>
+    <string name="_10_00_am">10:00 AM</string>
+    <string name="_4_00_pm">4:00 PM</string>
+    <string name="_2_00_pm">2:00 PM</string>
 </resources>

@@ -9,20 +9,26 @@
 
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="471dp" />
+        android:id="@+id/Button_AS_PWReset"
+        android:layout_width="237dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:text="@string/B_change_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_AS_Changeemail" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="543dp" />
+        android:id="@+id/Button_AS_Changeemail"
+        android:layout_width="237dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:text="@string/B_update_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
     <TextView
         android:id="@+id/textView20"
@@ -30,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:fontFamily="@font/philosopher"
-        android:text="Email:"
+        android:text="@string/title_email"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
@@ -38,8 +44,8 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
+        android:layout_width="73dp"
+        android:layout_height="65dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/backb"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,12 +56,12 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="80dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/AS_account_settings"
         android:textColor="#000000"
         android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,7 +72,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/philosopher"
-        android:text="Name:"
+        android:text="@string/title_name"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +87,7 @@
         android:ems="10"
         android:fontFamily="@font/philosopher"
         android:inputType="text"
-        android:text="Andrew"
+        android:text="@string/placeholder"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,18 +102,21 @@
         android:ems="10"
         android:fontFamily="@font/philosopher"
         android:inputType="textEmailAddress"
-        android:text="98andrewruiz@gmail.com"
+        android:text="@string/placeholder_email"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="405dp" />
+        android:id="@+id/Button_AS_dacc"
+        android:layout_width="237dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:text="@string/B_delete_account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_AS_PWReset" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
