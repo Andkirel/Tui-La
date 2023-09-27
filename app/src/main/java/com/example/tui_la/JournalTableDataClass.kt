@@ -8,5 +8,4 @@ data class JournalTableDataClass(
     var time: String,
     var date: String,
     @DrawableRes var emotion: Int
-
 )

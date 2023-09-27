@@ -10,7 +10,7 @@ import com.example.tui_la.R
 
 class JournalFragment : Fragment() {
 
-    companion object {
+    /*companion object {
         fun newInstance() = JournalFragment()
     }
 
@@ -27,6 +27,6 @@ class JournalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.fragment_journal, container, false)
-    }
+    }*/
 
 }

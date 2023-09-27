@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/journal_cardView"
     android:layout_margin="5dp"
-    android:contentPadding="5dp">
+    android:padding="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -40,9 +40,9 @@
             android:id="@+id/ivEmotion"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:text="Emotion"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/afraid" />
 
         <TextView
             android:id="@+id/tvTime"

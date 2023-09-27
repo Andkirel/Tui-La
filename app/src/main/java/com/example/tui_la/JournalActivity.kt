@@ -2,8 +2,6 @@ package com.example.tui_la
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -14,12 +12,12 @@ class JournalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_journal_contents)
-
+/*
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, JournalFragment.newInstance())
                 .commitNow()
-        }
+        }*/
 
         // getting the recyclerview by its id
         var recyclerview = findViewById<RecyclerView>(R.id.rvJournal)
@@ -27,13 +25,19 @@ class JournalActivity : AppCompatActivity() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-        // ArrayList of class JournalTableDataClass
+        // List of class JournalTableDataClass
         val data = ArrayList<JournalTableDataClass>()
 
-        // pass the entryList to our Adapter
+        // get data
+        // sample info
+        for (i in 1..10) {
+            data.add(JournalTableDataClass("Test entry title " + i, "time " + i,"date " + i, R.drawable.happy))
+        }
+
+        // pass the list to the adapter
         val adapter = JournalTableAdapter(data)
 
-        // Setting the Adapter with the recyclerview
+        // Setting the adapter to the recyclerview
         recyclerview.adapter = adapter
     }
 
