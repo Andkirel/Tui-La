@@ -48,7 +48,7 @@ class WelcomeBackScreen : AppCompatActivity() {
         launchHowFeelingScreen()
     }
     private fun launchHowFeelingScreen() {
-        val intent = Intent(this, FirstFragment::class.java)
+        val intent = Intent(this, GuidedMeditationActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         this.finish()

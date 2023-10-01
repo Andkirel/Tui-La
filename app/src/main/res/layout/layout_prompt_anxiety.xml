@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg">
+
+    <TextView
+        android:id="@+id/journalPromptAnxiety"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/journal_prompt_anxiety"
+        android:textAlignment="center"
+        android:textAppearance="@font/philosopher"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/journalPromptAnxiety1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:text="@string/journal_prompt_anxiety_1"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:fontFamily="@font/philosopher"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/journalPromptAnxiety2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptAnxiety" />
+    <Button
+        android:id="@+id/journalPromptAnxiety2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:fontFamily="@font/philosopher"
+        android:text="@string/journal_prompt_anxiety_2"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/journalPromptAnxiety3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptAnxiety1" />
+    <Button
+        android:id="@+id/journalPromptAnxiety3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:fontFamily="@font/philosopher"
+        android:text="@string/journal_prompt_anxiety_3"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/journalPromptAnxiety4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptAnxiety2" />
+
+    <Button
+        android:id="@+id/journalPromptAnxiety4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:fontFamily="@font/philosopher"
+        android:text="@string/journal_prompt_anxiety_4"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/journalPromptAnxiety3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
