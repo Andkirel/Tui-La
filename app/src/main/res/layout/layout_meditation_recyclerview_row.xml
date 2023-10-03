@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<Button
+            android:id="@+id/gm_recyclerview_btn"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            android:fontFamily="@font/philosopher"
+            android:includeFontPadding="true"
+            android:padding="5dp"
+            android:shadowColor="@color/cardview_dark_background"
+            android:shadowDx="4"
+            android:shadowDy="5"
+            android:shadowRadius="10"
+            android:text="Self Compassion in Stressful Moments"
+            android:textAlignment="viewEnd"
+            android:textColor="#FF9800"
+            android:textSize="25sp"
+
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />-->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/gmtesttextview"
+                android:layout_width="match_parent"
+                android:layout_height="126dp"
+                android:background="@color/cardview_shadow_end_color"
+                android:clickable="true"
+                android:fontFamily="@font/philosopher"
+                android:gravity="bottom"
+                android:includeFontPadding="true"
+                android:padding="5dp"
+                android:shadowColor="@color/white"
+                android:shadowDx="4"
+                android:shadowDy="5"
+                android:shadowRadius="10"
+                android:text="You are Not Alone"
+                android:textAlignment="viewEnd"
+                android:textColor="#a4133c"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -46,6 +46,43 @@
     
 
     <string name="journal">Journal</string>
+    <string name="journal_prompts">Journal Prompts</string>
+    <string name="journal_prompt_love">Increase Self love</string>
+    <string name="journal_prompt_confidence">Create Confidence</string>
+    <string name="journal_prompt_work">Shadow Work &amp; Inner Healing</string>
+    <string name="journal_prompt_passion">Finding Your Passion</string>
+    <string name="journal_prompt_anxiety">Relieve Anxiety</string>
+
+    <string name="journal_prompt_passion_1">passion sample 1</string>
+    <string name="journal_prompt_passion_2">passion sample 2</string>
+    <string name="journal_prompt_passion_3">passion sample 3</string>
+    <string name="journal_prompt_passion_4">passion sample 4</string>
+    <string name="journal_prompt_passion_5">passion sample 5</string>
+
+    <string name="journal_prompt_confidence_1">confidence sample 1</string>
+    <string name="journal_prompt_confidence_2">confidence sample 2</string>
+    <string name="journal_prompt_confidence_3">confidence sample 3</string>
+    <string name="journal_prompt_confidence_4">confidence sample 4</string>
+    <string name="journal_prompt_confidence_5">confidence sample 5</string>
+
+    <string name="journal_prompt_anxiety_1">anxiety sample 1</string>
+    <string name="journal_prompt_anxiety_2">anxiety sample 2</string>
+    <string name="journal_prompt_anxiety_3">anxiety sample 3</string>
+    <string name="journal_prompt_anxiety_4">anxiety sample 4</string>
+    <string name="journal_prompt_anxiety_5">anxiety sample 5</string>
+
+    <string name="journal_prompt_love_1">love sample 1</string>
+    <string name="journal_prompt_love_2">love sample 2</string>
+    <string name="journal_prompt_love_3">love sample 3</string>
+    <string name="journal_prompt_love_4">love sample 4</string>
+    <string name="journal_prompt_love_5">love sample 5</string>
+
+    <string name="journal_prompt_work_1">work sample 1</string>
+    <string name="journal_prompt_work_2">work sample 2</string>
+    <string name="journal_prompt_work_3">work sample 3</string>
+    <string name="journal_prompt_work_4">work sample 4</string>
+    <string name="journal_prompt_work_5">work sample 5</string>
+
     <string name="menu_image">Menu image</string>
     <string name="crisis_support">Crisis Support</string>
     <string name="education">Education</string>
