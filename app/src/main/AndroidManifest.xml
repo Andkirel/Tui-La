@@ -11,6 +11,8 @@
         <activity
             android:name="MainFiles.MainActivity"
             android:exported="true"  />
+        <activity android:name="MainFiles.Login_screen"></activity>
+        <activity android:name="MainFiles.Create_Account"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

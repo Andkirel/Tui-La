@@ -109,17 +109,19 @@
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/Login_text"
         app:layout_constraintTop_toBottomOf="@+id/Button_CreateAccount_CA"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/Login_text"
         android:layout_width="79dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:clickable="true"
+        android:contextClickable="true"
         android:fontFamily="@font/philosopher"
+        android:longClickable="false"
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="#000000"
@@ -131,5 +133,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Button_CreateAccount_CA"
         app:layout_constraintVertical_bias="0.0" />
+    <ImageButton
+        android:id="@+id/Backbutton_createaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/backb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
