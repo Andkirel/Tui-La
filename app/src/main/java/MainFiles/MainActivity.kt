@@ -10,7 +10,7 @@ import com.example.tui_la.R
 class MainActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_support)
+        setContentView(R.layout.activity_main)
 
         /*val signinbutton = findViewById<Button>(R.id.Button_Signin)
         signinbutton.setOnClickListener{
