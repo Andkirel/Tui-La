@@ -45,13 +45,13 @@ class WelcomeBackScreen : AppCompatActivity() {
                 progressBar.progress = progressBarStatus
             }
         }).start()
-        launchHowFeelingScreen()
+       // launchHowFeelingScreen()
     }
-    private fun launchHowFeelingScreen() {
-        val intent = Intent(this, FirstFragment::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-        this.finish()
+   // private fun launchHowFeelingScreen() {
+    //    val intent = Intent(this, FirstFragment::class.java)
+     //   intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+      //  startActivity(intent)
+      //  this.finish()
     }
 
-}
+//}

@@ -7,44 +7,34 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_bg">
 
-    <Button
-        android:id="@+id/Button_MainScreen_GB"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="76dp"
-        android:background="#D3F9EC"
-        android:fontFamily="@font/philosopher"
-        android:text="@string/guided_breathing"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TL" />
-
-    <ImageView
-        android:id="@+id/HomescreenLogo"
-        android:layout_width="241dp"
-        android:layout_height="155dp"
-        android:layout_marginTop="72dp"
-        android:contentDescription="@string/menu_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
     <TextView
-        android:id="@+id/TL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/nickainley_normal"
-        android:text="@string/tui_la"
+        android:id="@+id/textView9"
+        android:layout_width="373dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Guided Breathing"
         android:textColor="#000000"
-        android:textSize="60sp"
+        android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Button_MainScreen_GB"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="#D3F9EC"
+        android:fontFamily="@font/philosopher"
+        android:text="3 Minute Timed Session"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/Button_MainScreen_GM"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -56,28 +46,28 @@
 
     <Button
         android:id="@+id/Button_MainScreen_GM"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="24dp"
         android:background="#D3F9EC"
         android:fontFamily="@font/philosopher"
-        android:text="@string/guided_meditation"
+        android:text="1 Minute Timed Session"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TL" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
         android:id="@+id/Button_MainScreen_Jour"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:background="#D4EFF6"
         android:fontFamily="@font/philosopher"
-        android:text="@string/Button_journal"
+        android:text="5 Minute Timed Session"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -86,58 +76,55 @@
 
     <Button
         android:id="@+id/Button_MainScreen_Records"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="76dp"
         android:background="#D4EFF6"
         android:fontFamily="@font/philosopher"
-        android:text="@string/records"
+        android:text="10 Minute Timed Session"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toEndOf="@+id/Button_MainScreen_Jour"
         app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_GB" />
 
     <Button
         android:id="@+id/Button_MainScreen_EDU"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:background="#F8E0D4"
         android:fontFamily="@font/philosopher"
-        android:text="@string/education"
+        android:text="Infinite Session"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_Jour" />
 
-    <Button
-        android:id="@+id/Button_MainScreen_Crisis"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="76dp"
-        android:background="#F8E0D4"
-        android:fontFamily="@font/philosopher"
-        android:text="@string/crisis_support"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_Records" />
-
     <ImageButton
         android:id="@+id/ImageButton_MainMenu_Settings"
-        android:layout_width="73dp"
-        android:layout_height="71dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:contentDescription="@string/Dscript_mainmenu_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gear_icon" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/menu_dots" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,6 @@
         android:id="@+id/CHN_edittext"
         android:layout_width="327dp"
         android:layout_height="78dp"
-        android:layout_marginStart="52dp"
         android:layout_marginTop="56dp"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
@@ -32,6 +31,7 @@
         android:inputType="text"
         android:padding="8dp"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -48,13 +48,13 @@
         android:padding="8dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ED_edittext" />
 
     <EditText
         android:id="@+id/CN_edittext"
         android:layout_width="327dp"
         android:layout_height="84dp"
-        android:layout_marginStart="52dp"
         android:layout_marginTop="304dp"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
@@ -62,6 +62,7 @@
         android:inputType="text"
         android:padding="8dp"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +70,7 @@
         android:id="@+id/ED_edittext"
         android:layout_width="167dp"
         android:layout_height="78dp"
-        android:layout_marginEnd="192dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="228dp"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
@@ -78,7 +79,7 @@
         android:padding="8dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Continue_button"
