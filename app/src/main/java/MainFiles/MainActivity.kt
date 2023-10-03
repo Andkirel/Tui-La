@@ -12,10 +12,10 @@ class MainActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*val signinbutton = findViewById<Button>(R.id.Button_Signin)
+        val signinbutton = findViewById<Button>(R.id.Button_Signin)
         signinbutton.setOnClickListener{
             val Intent = Intent(this,Login_screen::class.java)
             startActivity(Intent)
-        }*/
+        }
     }
 }
