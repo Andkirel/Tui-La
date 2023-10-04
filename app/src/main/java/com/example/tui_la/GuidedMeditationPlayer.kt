@@ -32,9 +32,9 @@ class GuidedMeditationPlayer : AppCompatActivity(), Player.Listener{
     }
 
     private fun addMp4Files(){
-        val mediaItem = MediaItem.fromUri(Uri.parse("android.resource://" + packageName+ "/"+ R.raw.basic_relaxation_10mins))
-        player.addMediaItem(mediaItem)
-        player.prepare()
+//        val mediaItem = MediaItem.fromUri(Uri.parse("android.resource://" + packageName+ "/"+ R.raw.basic_relaxation_10mins))
+//        player.addMediaItem(mediaItem)
+//        player.prepare()
     }
 
     override fun onPlaybackStateChanged(playbackState: Int) {

@@ -43,14 +43,14 @@ class GuidedMeditationActivity : AppCompatActivity(),
 
     private fun createData():List<GuidedMeditationDataClass>{
         val titles = GuidedMeditationDataRepo.gmNames
-        val aud = GuidedMeditationDataRepo.gmAud
+       // val aud = GuidedMeditationDataRepo.gmAud
         val img = GuidedMeditationDataRepo.gmImg
-        val vids = GuidedMeditationDataRepo.gmVid
+      //  val vids = GuidedMeditationDataRepo.gmVid
 
         val gmData = ArrayList<GuidedMeditationDataClass>()
 
         for (i in 0..4){
-            gmData.add(GuidedMeditationDataClass(titles[i],aud[i],img[i],vids[i]))
+          //  gmData.add(GuidedMeditationDataClass(titles[i],aud[i],img[i],vids[i]))
         }
         return gmData
     }

@@ -36,13 +36,13 @@
         app:layout_constraintStart_toEndOf="@+id/Button_MainScreen_GM"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <com.google.android.gms.ads.AdView
+    <!--<com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="411dp"
         android:layout_height="78dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />-->
 
     <Button
         android:id="@+id/Button_MainScreen_GM"
