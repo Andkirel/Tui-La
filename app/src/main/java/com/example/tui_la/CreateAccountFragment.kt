@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class CreateAccount_Fragment : Fragment() {
+class CreateAccountFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
@@ -24,9 +24,11 @@ class CreateAccount_Fragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.layout_createaccount, container, false)
 
+        // Initialize Firebase Auth and Realtime Database
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
+        // Initialize views
         val usernameEditText: EditText = view.findViewById(R.id.un_editText)
         val emailEditText: EditText = view.findViewById(R.id.email_editText)
         val passwordEditText: EditText = view.findViewById(R.id.pw_editText)
@@ -38,6 +40,7 @@ class CreateAccount_Fragment : Fragment() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
+            // Basic validation
             if (username.isEmpty() || email.isEmpty() || !email.contains("@") || password.isEmpty() || password.length < 6) {
                 Toast.makeText(activity, "Invalid username, email, or password.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -45,8 +48,8 @@ class CreateAccount_Fragment : Fragment() {
 
             // Create user in Firebase Authentication
             auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
+                .addOnCompleteListener { authTask ->
+                    if (authTask.isSuccessful) {
                         val userId = auth.currentUser?.uid
                         if (userId != null) {
                             // Save user information to Realtime Database
@@ -54,13 +57,13 @@ class CreateAccount_Fragment : Fragment() {
                             database.getReference("users")
                                 .child(userId)
                                 .setValue(user)
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
+                                .addOnCompleteListener { dbTask ->
+                                    if (dbTask.isSuccessful) {
                                         Toast.makeText(activity, "Account created.", Toast.LENGTH_SHORT).show()
 
                                         // Navigate to the login fragment
                                         parentFragmentManager.beginTransaction()
-                                            .replace(R.id.coordinatorLayout, LogIn_Fragment())
+                                            .replace(R.id.coordinatorLayout, LogInFragment())
                                             .commit()
                                     } else {
                                         Toast.makeText(activity, "Failed to save user info.", Toast.LENGTH_SHORT).show()
@@ -70,7 +73,7 @@ class CreateAccount_Fragment : Fragment() {
                             Toast.makeText(activity, "Failed to get user ID.", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        val exception = task.exception
+                        val exception = authTask.exception
                         Toast.makeText(activity, "Failed to create account: ${exception?.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -79,7 +82,7 @@ class CreateAccount_Fragment : Fragment() {
         loginTextView.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, LogIn_Fragment())
+                .replace(R.id.coordinatorLayout, LogInFragment())
                 .commit()
         }
 
