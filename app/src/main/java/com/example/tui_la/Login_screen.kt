@@ -12,7 +12,7 @@ class Login_screen:AppCompatActivity() {
 
         val loginback = findViewById<ImageButton>(R.id.Backbutton_login)
         loginback.setOnClickListener {
-            val Intent = Intent(this, MainActivity::class.java)
+            val Intent = Intent(this, Landing::class.java)
             startActivity(Intent)
         }
     }

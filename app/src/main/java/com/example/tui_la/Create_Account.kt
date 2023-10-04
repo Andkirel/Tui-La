@@ -13,7 +13,7 @@ class Create_Account : AppCompatActivity() {
 
         val CAback = findViewById<ImageButton>(R.id.Backbutton_createaccount)
         CAback.setOnClickListener {
-            val Intent = Intent(this, MainActivity::class.java)
+            val Intent = Intent(this, Landing::class.java)
             startActivity(Intent)
         }
         val loginhyper = findViewById<TextView>(R.id.Login_text)
