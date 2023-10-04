@@ -1,11 +1,10 @@
-package MainFiles
+package com.example.tui_la
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tui_la.R
 
 class Create_Account : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

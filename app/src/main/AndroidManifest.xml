@@ -9,10 +9,22 @@
         android:theme="@style/Theme.TuiLa"
         tools:targetApi="31">
         <activity
-            android:name="MainFiles.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"  />
-        <activity android:name="MainFiles.Login_screen"></activity>
-        <activity android:name="MainFiles.Create_Account"></activity>
+        <activity android:name=".Login_screen"></activity>
+        <activity android:name=".Create_Account"></activity>
+        <activity android:name=".Acc_Settings"></activity>
+        <activity android:name=".Add_payment"></activity>
+        <activity android:name=".App_settings"></activity>
+        <activity android:name=".B_E_options"></activity>
+        <activity android:name=".Badges"></activity>
+        <activity android:name=".Csupport"></activity>
+        <activity android:name=".Emotions"></activity>
+        <activity android:name=".MainMenu"></activity>
+        <activity android:name=".Nav_menu"></activity>
+        <activity android:name=".Payment"></activity>
+        <activity android:name=".Prompt"></activity>
+        <activity android:name=".Settings_menu"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
