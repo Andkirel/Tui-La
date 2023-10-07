@@ -6,7 +6,9 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/main_bg"
+
+    tools:context=".LogInFragment">
 
     <ImageView
         android:id="@+id/logo"
@@ -71,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/Button_login_loginButton"
+        android:id="@+id/loginButton"
         android:layout_width="232dp"
         android:layout_height="55dp"
         android:background="@drawable/tl_rounded_textbox_pink"

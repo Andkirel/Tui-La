@@ -1,14 +1,3 @@
-package com.example.tui_la
-
-import android.content.Intent
-import android.os.Bundle
-
-import android.widget.ProgressBar
-import androidx.appcompat.app.AppCompatActivity
-
-class WelcomeBackScreen : AppCompatActivity() {
-    private var progressBarStatus = 0
-    private var loadInt:Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
