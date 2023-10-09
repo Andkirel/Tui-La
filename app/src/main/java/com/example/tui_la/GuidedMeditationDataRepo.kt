@@ -26,6 +26,11 @@ object GuidedMeditationDataRepo {
         796953958
     )
     val gmImgs = mutableListOf(
-        R.drawable.excited
+        R.drawable.gm_image_mountain_lake,
+        R.drawable.gm_image_starry_river,
+        R.drawable.gm_image_mountain_lake,
+        R.drawable.gm_image_starry_river,
+        R.drawable.gm_image_mountain_lake,
+        R.drawable.gm_image_starry_river
     )
 }

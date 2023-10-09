@@ -59,9 +59,9 @@ var trackId = 1016402329
         jsonObject.put("client_secret",SC_Client_Secret)
 
         setupPlayer()
-        //runBlocking{postAuthorization()}
-        accessToken="2-294264--tjnJtg8acDa6b13M5d62wpu"
-        refreshToken="cTzsgE7WbjxgGVOLDSTq4ibyjK0KrO83"
+        runBlocking{postAuthorization()}
+        //accessToken="2-294264--tjnJtg8acDa6b13M5d62wpu"
+        //refreshToken="cTzsgE7WbjxgGVOLDSTq4ibyjK0KrO83"
 
         runBlocking{
             launch{

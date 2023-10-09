@@ -15,7 +15,7 @@
             android:exported="false" />
         <activity
             android:name=".GuidedMeditationActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".GuidedMeditationExoPlayer"
             android:exported="false" />
