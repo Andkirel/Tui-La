@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class GuidedMeditationAdapter(
-    private val data: List<GuidedMeditationDataClass>,
+    private val data: List<GuidedMeditationData>,
     private val listener: RecyclerViewEvent,
 ) : RecyclerView.Adapter<GuidedMeditationAdapter.ItemViewHolder>(){
 
@@ -39,10 +39,10 @@ class GuidedMeditationAdapter(
     //Set values to views pulled from RecyclerView row
     //layout file based on position of RecyclerView
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val selection: GuidedMeditationDataClass = data[position]
-        holder.txtview.text = selection.name
+        val selection: GuidedMeditationData = data[position]
+        holder.txtview.text = selection.trackName
         holder.txtview.setOnClickListener(listener)
-        holder.txtview.setBackgroundResource(selection.img)
+        holder.txtview.setBackgroundResource(selection.gmImages)
         //holder.title.text = selection.name
         //holder.image.setImageResource(selection.img)
     }

@@ -13,7 +13,12 @@
         <activity
             android:name=".JournalActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".GuidedMeditationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GuidedMeditationExoPlayer"
+            android:exported="false" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts"/>

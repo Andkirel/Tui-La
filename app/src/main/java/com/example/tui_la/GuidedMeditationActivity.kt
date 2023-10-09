@@ -34,7 +34,7 @@ import com.google.android.gms.ads.admanager.AdManagerAdView
     /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
     override fun onItemClick(position: Int) {
         val userPick = data[position]
-        Toast.makeText(this,userPick.name,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,userPick.trackName,Toast.LENGTH_SHORT).show()
     }
 
     /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
@@ -46,14 +46,14 @@ import com.google.android.gms.ads.admanager.AdManagerAdView
     }
 
     @SuppressLint("UnsafeOptInUsageError")
-    private fun createData():List<GuidedMeditationDataClass>{
-        val titles = GuidedMeditationDataRepo.gmNames
-        val img = GuidedMeditationDataRepo.gmImg
+    private fun createData():List<GuidedMeditationData>{
+        val title = GuidedMeditationDataRepo.gmNames
+        val trackId = GuidedMeditationDataRepo.soundcloudTrackID
+        val img = GuidedMeditationDataRepo.gmImgs
 
-        val gmData = ArrayList<GuidedMeditationDataClass>()
+        val gmData = ArrayList<GuidedMeditationData>()
         for (i in 0..3){
-            //gmData.add(GuidedMeditationDataClass(titles[i],aud[i],img[i],vids[i]))
-            gmData.add(GuidedMeditationDataClass(titles[i],img[i]))
+            gmData.add(GuidedMeditationData(title[i],trackId[i],img[i]))
         }
         return gmData
     }

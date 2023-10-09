@@ -3,9 +3,9 @@ package com.example.tui_la
 import androidx.annotation.DrawableRes
 
 data class GuidedMeditationData (
-    var name: String,
+    var trackName: String,
     val trackId: Int,
-    @DrawableRes val img: Int
+    @DrawableRes val gmImages: Int
 )
 
 object GuidedMeditationDataRepo {
