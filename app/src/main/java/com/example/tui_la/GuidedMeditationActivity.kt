@@ -6,20 +6,21 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.util.UnstableApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
 
-class GuidedMeditationActivity : AppCompatActivity(),
+@UnstableApi class GuidedMeditationActivity : AppCompatActivity(),
     GuidedMeditationAdapter.RecyclerViewEvent {
     private val data = createData()
     private lateinit var gmAdManagerAdView : AdManagerAdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_meditation_selection)
+        setContentView(R.layout.layout_guided_meditation)
 
         MobileAds.initialize(this)
         gmAdManagerAdView = findViewById(R.id.gmLayAdManagerAdView)
@@ -39,7 +40,7 @@ class GuidedMeditationActivity : AppCompatActivity(),
     /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
     //TODO: Look into adding ViewAnimator to pop open the player?
     override fun onClick(v: View?) {
-        val intent = Intent(this, GuidedMeditationPlayer::class.java)
+        val intent = Intent(this, GuidedMeditationExoPlayer::class.java)
         startActivity(intent)
         Toast.makeText(this,"Maybe",Toast.LENGTH_SHORT).show()
     }
@@ -47,9 +48,7 @@ class GuidedMeditationActivity : AppCompatActivity(),
     @SuppressLint("UnsafeOptInUsageError")
     private fun createData():List<GuidedMeditationDataClass>{
         val titles = GuidedMeditationDataRepo.gmNames
-        //val aud = GuidedMeditationDataRepo.gmAud
         val img = GuidedMeditationDataRepo.gmImg
-        //val vids = GuidedMeditationDataRepo.gmVid
 
         val gmData = ArrayList<GuidedMeditationDataClass>()
         for (i in 0..3){
