@@ -1,9 +1,8 @@
 package com.example.tui_la
 
 import androidx.annotation.DrawableRes
-import com.google.firebase.database.DatabaseReference
 
-data class JournalTable(
+data class JournalData(
     var title: String? = null,
     var time: String? = null,
     var date: String? = null,

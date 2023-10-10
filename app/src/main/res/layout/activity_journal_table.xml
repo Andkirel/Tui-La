@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_bg"
-    tools:context=".JournalActivity">
+    tools:context=".JournalTableActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvJournal"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/journalTableEmotionHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.578" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/journalTableJournalHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/philosopher"
