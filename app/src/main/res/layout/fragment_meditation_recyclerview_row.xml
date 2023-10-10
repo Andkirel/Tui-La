@@ -29,17 +29,16 @@
                 android:gravity="bottom"
                 android:includeFontPadding="true"
                 android:padding="5dp"
-                android:shadowColor="@color/white"
+                android:shadowColor="@color/black"
                 android:shadowDx="4"
                 android:shadowDy="5"
                 android:shadowRadius="10"
                 android:text="You are Not Alone"
                 android:textAlignment="viewEnd"
-                android:textColor="#a4133c"
+                android:textColor="#FFB3C1"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                tools:ignore="RtlCompat"
-                android:focusable="true" />
+                tools:ignore="RtlCompat" />
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

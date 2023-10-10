@@ -27,10 +27,10 @@ import java.time.LocalDateTime
     private var currTime = LocalDateTime.now()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("Current Date Time",currTime.toString())
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_guided_meditation)
+
+        Log.i("Current Date Time",currTime.toString())
 
         MobileAds.initialize(this)
         gmAdManagerAdView = findViewById(R.id.gmLayAdManagerAdView)
@@ -62,7 +62,7 @@ import java.time.LocalDateTime
         val img = GuidedMeditationDataRepo.gmImgs
 
         val gmData = ArrayList<GuidedMeditationData>()
-        for (i in 0..3){
+        for (i in 0..5){
             gmData.add(GuidedMeditationData(title[i],trackId[i],img[i]))
         }
         return gmData
