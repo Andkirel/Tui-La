@@ -43,9 +43,11 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    
+
 
     <string name="journal">Journal</string>
+    <string name="journal_prompted">Prompted</string>
+    <string name="journal_unprompted">Unprompted</string>
     <string name="journal_prompts">Journal Prompts</string>
     <string name="journal_prompt_love">Increase Self love</string>
     <string name="journal_prompt_confidence">Create Confidence</string>
@@ -173,4 +175,6 @@
     <string name="_10_00_am">10:00 AM</string>
     <string name="_4_00_pm">4:00 PM</string>
     <string name="_2_00_pm">2:00 PM</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
