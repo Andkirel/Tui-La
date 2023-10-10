@@ -22,6 +22,8 @@ import androidx.media3.ui.PlayerView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -44,11 +46,15 @@ val jsonObject = JSONObject()
 var httpStreamUrl=""
 var trackId = 1016402329
 
+
 @UnstableApi class GuidedMeditationExoPlayer: AppCompatActivity(), Player.Listener{
     private lateinit var gmAdManagerAdView: AdManagerAdView
     private lateinit var player: ExoPlayer
     private lateinit var playerView: PlayerView
     private lateinit var audioTitle: TextView
+    private lateinit var auth : FirebaseAuth
+    private lateinit var database : FirebaseDatabase
+
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -58,8 +64,11 @@ var trackId = 1016402329
         jsonObject.put("client_id",SC_Client_ID)
         jsonObject.put("client_secret",SC_Client_Secret)
 
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+
         setupPlayer()
-        runBlocking{postAuthorization()}
+        runBlocking { postAuthorization() }
         //accessToken="2-294264--tjnJtg8acDa6b13M5d62wpu"
         //refreshToken="cTzsgE7WbjxgGVOLDSTq4ibyjK0KrO83"
 

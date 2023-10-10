@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -56,6 +57,9 @@ dependencies {
     implementation ("androidx.media3:media3-exoplayer-dash:1.1.1")
     implementation ("androidx.media3:media3-ui:1.1.1")
     implementation ("androidx.media3:media3-exoplayer-hls:1.1.1")
+    implementation("com.google.firebase:firebase-common-ktx:20.4.0")
+    implementation("com.google.firebase:firebase-database-ktx:20.2.2")
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

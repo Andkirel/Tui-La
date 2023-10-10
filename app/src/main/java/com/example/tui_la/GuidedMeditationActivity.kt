@@ -3,6 +3,7 @@ package com.example.tui_la
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +13,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import java.time.LocalDateTime
 
 @UnstableApi class GuidedMeditationActivity : AppCompatActivity(),
     GuidedMeditationAdapter.RecyclerViewEvent {
     private val data = createData()
     private lateinit var gmAdManagerAdView : AdManagerAdView
+    private lateinit var auth : FirebaseAuth
+    private lateinit var database : FirebaseDatabase
+    @SuppressLint("NewApi")
+    private var currTime = LocalDateTime.now()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("Current Date Time",currTime.toString())
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_guided_meditation)
 

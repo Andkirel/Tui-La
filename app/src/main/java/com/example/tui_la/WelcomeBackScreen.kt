@@ -1,5 +1,6 @@
 package com.example.tui_la
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 
@@ -47,8 +48,9 @@ class WelcomeBackScreen : AppCompatActivity() {
         }).start()
         launchHowFeelingScreen()
     }
+    @SuppressLint("UnsafeOptInUsageError")
     private fun launchHowFeelingScreen() {
-        val intent = Intent(this, FirstFragment::class.java)
+        val intent = Intent(this, GuidedMeditationActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         this.finish()

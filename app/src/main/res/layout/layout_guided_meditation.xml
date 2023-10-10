@@ -70,7 +70,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/gm_recyclerview"
         android:layout_width="392dp"
-        android:layout_height="570dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
