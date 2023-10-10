@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/Continue_button"
+        android:id="@+id/Button_AP_Continue"
         android:layout_width="290dp"
         android:layout_height="70dp"
         android:layout_marginStart="60dp"

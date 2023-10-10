@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Button_MainScreen_GB"
+        android:id="@+id/Button_GB_3min"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="16dp"
@@ -33,19 +34,19 @@
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/Button_MainScreen_GM"
+        app:layout_constraintStart_toEndOf="@+id/Button_GB_1min"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-    <!--<com.google.android.gms.ads.AdView
+    <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="411dp"
         android:layout_height="78dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/Button_MainScreen_GM"
+        android:id="@+id/Button_GB_1min"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="64dp"
@@ -60,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
-        android:id="@+id/Button_MainScreen_Jour"
+        android:id="@+id/Button_GB_5min"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="64dp"
@@ -72,10 +73,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_GM" />
+        app:layout_constraintTop_toBottomOf="@+id/Button_GB_1min" />
 
     <Button
-        android:id="@+id/Button_MainScreen_Records"
+        android:id="@+id/Button_GB_10min"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="8dp"
@@ -88,11 +89,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.101"
-        app:layout_constraintStart_toEndOf="@+id/Button_MainScreen_Jour"
-        app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_GB" />
+        app:layout_constraintStart_toEndOf="@+id/Button_GB_5min"
+        app:layout_constraintTop_toBottomOf="@+id/Button_GB_3min" />
 
     <Button
-        android:id="@+id/Button_MainScreen_EDU"
+        android:id="@+id/Button_GB_Infinite"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_marginStart="64dp"
@@ -104,12 +105,12 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_Jour" />
+        app:layout_constraintTop_toBottomOf="@+id/Button_GB_5min" />
 
     <ImageButton
-        android:id="@+id/ImageButton_MainMenu_Settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ImageButton_GB_Settings"
+        android:layout_width="69dp"
+        android:layout_height="63dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/Dscript_mainmenu_settings"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,7 +118,7 @@
         app:srcCompat="@drawable/gear_icon" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/ImageButton_GB_Nav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
