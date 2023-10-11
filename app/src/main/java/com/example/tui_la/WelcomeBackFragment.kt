@@ -1,19 +1,27 @@
 package com.example.tui_la
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.app.Activity
+import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class WelcomeBackFragment : Fragment() {
     private var progressBarStatus = 0
-    private var loadInt: Int = 0
     private var uid: String? = null
     private var secondaryString: String? = null
+    private val database = FirebaseDatabase.getInstance().reference
+
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,24 +34,32 @@ class WelcomeBackFragment : Fragment() {
         uid = arguments?.getString("UID")
         secondaryString = arguments?.getString("someString")
 
+        progressBar = view.findViewById(R.id.welcomeScreenProgressBar)
+        val usernameTextView = view.findViewById<TextView>(R.id.usernameText)
 
-        // Initialize the ProgressBar and the associated loading thread
-        val progressBar = view.findViewById<ProgressBar>(R.id.welcomeScreenProgressBar)
-
-        Thread(Runnable {
-            while (progressBarStatus < 100){
-                try{
-                    loadInt += 25
-                    Thread.sleep(1000)
-                } catch (e: InterruptedException){
-                    e.printStackTrace()
-                }
-                this.progressBarStatus = loadInt
-                progressBar.progress = progressBarStatus
+        // Fetch username from Firebase
+        uid?.let {
+            database.child("users").child(it).child("username").get().addOnSuccessListener { snapshot ->
+                val username = snapshot.value.toString()
+                usernameTextView.text = username
             }
-        }).start()
+        }
+
+        // Start the loading coroutine
+        CoroutineScope(Dispatchers.Main).launch {
+            delayLoading()
+            launchHowFeelingScreen(uid ?: "", secondaryString ?: "")
+        }
 
         return view
+    }
+
+    private suspend fun delayLoading() {
+        for (i in 0 until 4) {
+            delay(1000) // simulate loading for 1 second
+            progressBarStatus += 25
+            progressBar.progress = progressBarStatus
+        }
     }
 
     private fun launchHowFeelingScreen(uid: String, secondary: String) {

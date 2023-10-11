@@ -41,12 +41,4 @@ class LogInActivity : AppCompatActivity(), ICommunicatorLogin {
 
         replaceFragment(fragment)
     }
-
-    fun onUserLoggedIn(uid: String) {
-        // Navigate to the HomeActivity once the user is logged in
-        val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("UID", uid)
-        startActivity(intent)
-        finish()
-    }
 }

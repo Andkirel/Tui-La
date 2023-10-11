@@ -107,9 +107,9 @@
     <string name="payment_googlepay">Pay with Google Pay</string>
     <string name="login_logo">login_logo</string>
     <string name="login_title">Login</string>
-    <string name="login_username">Username</string>
+    <string name="login_email">Email</string>
     <string name="login_password">Password</string>
-    <string name="login_forgot_username_password">Forgot Username/Password</string>
+    <string name="login_forgot_email_password">Forgot Email/Password</string>
     <string name="login_remember_me">Remember me</string>
     <string name="login_button">Login</string>
     <string name="emoji_main_menu">Main Menu</string>

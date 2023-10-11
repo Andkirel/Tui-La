@@ -42,7 +42,12 @@ class LogInFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val uid = auth.currentUser?.uid ?: return@addOnCompleteListener
-                        (activity as? LogInActivity)?.onUserLoggedIn(uid)
+                        val bundle = Bundle().apply {
+                            putString("UID", uid)
+                        }
+                        val welcomeBackFragment = WelcomeBackFragment()
+                        welcomeBackFragment.arguments = bundle
+                        (activity as? LogInActivity)?.replaceFragment(welcomeBackFragment)
                     } else {
                         Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
