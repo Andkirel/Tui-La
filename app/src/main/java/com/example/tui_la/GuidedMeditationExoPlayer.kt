@@ -27,6 +27,8 @@ import androidx.media3.ui.PlayerView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -55,19 +57,25 @@ var trackId = 314179591
     private lateinit var player: ExoPlayer
     private lateinit var playerView: PlayerView
     private lateinit var audioTitle: TextView
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_meditation_player)
-        audioTitle=findViewById(R.id.guidedMeditationTitle)
+        audioTitle = findViewById(R.id.guidedMeditationTitle)
 
         jsonObject.put("client_id",SC_Client_ID)
         jsonObject.put("client_secret",SC_Client_Secret)
 
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        //Log.i("tokenTime", tokenTime.toString())
+
         setupPlayer()
         //runBlocking { postAuthorization() }
-        accessToken = "2-294264--xR6EntyxvBpckXPfog4O7Tt"
-        refreshToken = "jf2Mkh3NgVPssFCcVQaUEH7cA5HQdEzl"
+        accessToken = "2-294264--ZvmZGNHUIECkKW5QrdbcKEh"
+        refreshToken = "a4Iwe323FRjvfzTnmiGc6rUDWn6UQCZb"
 
         runBlocking{
             launch{
@@ -77,24 +85,13 @@ var trackId = 314179591
             getStreamingTrack()
         }
 
-
         //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-
-        /*if(savedInstanceState!=null){
-        savedInstanceState.getInt("mediaItem").let{restoredMedia->
-        valseekTime=savedInstanceState.getLong("seekTime")
-        player.seekTo(restoredMedia,seekTime)
-        player.play()
-        }
-        }*/
 
         MobileAds.initialize(this)
         gmAdManagerAdView = findViewById(R.id.gmLayAdManagerAdView)
         val adRequest= AdManagerAdRequest.Builder().build()
         gmAdManagerAdView.loadAd(adRequest)
     }
-
-
 
     private fun postAuthorization(){
         val uriBuilder= Uri.Builder()

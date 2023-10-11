@@ -16,6 +16,7 @@ import com.google.android.gms.ads.admanager.AdManagerAdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @UnstableApi class GuidedMeditationActivity : AppCompatActivity(),
     GuidedMeditationAdapter.RecyclerViewEvent {
@@ -24,13 +25,18 @@ import java.time.LocalDateTime
     private lateinit var auth : FirebaseAuth
     private lateinit var database : FirebaseDatabase
     @SuppressLint("NewApi")
-    private var currTime = LocalDateTime.now()
+    private var currTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_guided_meditation)
 
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        //var expired = database.getReference("data").child("SoundCloud Access Token").child("expires_in")
+
         Log.i("Current Date Time",currTime.toString())
+        //Log.i("Firebase Expires In",expired.toString())
 
         MobileAds.initialize(this)
         gmAdManagerAdView = findViewById(R.id.gmLayAdManagerAdView)
@@ -41,18 +47,18 @@ import java.time.LocalDateTime
         recyclerView.adapter = GuidedMeditationAdapter(data,this)
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
-    /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
+    //    KEEP THIS!    //
     override fun onItemClick(position: Int) {
         val userPick = data[position]
         Toast.makeText(this,userPick.trackName,Toast.LENGTH_SHORT).show()
     }
 
-    /////!!!!!!!!!!!!!!!    KEEP THIS!  !!!!!!//////////
+    //    KEEP THIS!    //
     //TODO: Look into adding ViewAnimator to pop open the player?
     override fun onClick(v: View?) {
         val intent = Intent(this, GuidedMeditationExoPlayer::class.java)
         startActivity(intent)
-        Toast.makeText(this,"Maybe",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"Loading, please wait...",Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("UnsafeOptInUsageError")

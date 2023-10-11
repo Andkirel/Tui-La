@@ -36,7 +36,7 @@
                 android:text="You are Not Alone"
                 android:textAlignment="viewEnd"
                 android:textColor="#FFB3C1"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 tools:ignore="RtlCompat" />
         </androidx.cardview.widget.CardView>
