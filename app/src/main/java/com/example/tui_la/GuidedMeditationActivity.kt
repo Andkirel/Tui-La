@@ -25,7 +25,7 @@ import java.time.format.DateTimeFormatter
     private lateinit var auth : FirebaseAuth
     private lateinit var database : FirebaseDatabase
     @SuppressLint("NewApi")
-    private var currTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))
+    private var currTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

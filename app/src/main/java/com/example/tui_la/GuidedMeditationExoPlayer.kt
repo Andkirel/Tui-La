@@ -20,6 +20,7 @@ import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.RenderersFactory
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
+import androidx.media3.exoplayer.source.MergingMediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.extractor.DefaultExtractorsFactory
@@ -29,6 +30,8 @@ import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -59,6 +62,8 @@ var trackId = 314179591
     private lateinit var audioTitle: TextView
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
+    private lateinit var storage : FirebaseStorage
+    private lateinit var testVid : StorageReference
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -70,12 +75,27 @@ var trackId = 314179591
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
+        storage = FirebaseStorage.getInstance()
+        var storageRef = storage.reference
+        var vidRef : StorageReference? = storageRef.child("Guided Meditation Videos")
+        val fileName = "large_moon_on_lake_video.mp4"
+        val testVid = vidRef?.child(fileName)
+        /*database.getReference("data").addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                database.reference.child("SoundCloud Access Token")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })*/
         //Log.i("tokenTime", tokenTime.toString())
 
         setupPlayer()
         //runBlocking { postAuthorization() }
-        accessToken = "2-294264--ZvmZGNHUIECkKW5QrdbcKEh"
-        refreshToken = "a4Iwe323FRjvfzTnmiGc6rUDWn6UQCZb"
+        accessToken = "2-294264--eSXpuPw0S13RI2eX2aJAJ9T"
+        refreshToken = "y8qbcNgRhE6Dqa8dQ4HGQRiog1FK346q"
 
         runBlocking{
             launch{
@@ -186,7 +206,11 @@ var trackId = 314179591
             .setAllowCrossProtocolRedirects(true)
         val progressiveMediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri(httpStreamUrl))
-        player.setMediaSource(progressiveMediaSource)
+        var vidSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(fromUri("https://firebasestorage.googleapis.com/v0/b/tui-la.appspot.com/o/Guided%20Meditation%20Videos%2Flarge_moon_on_lake_video.mp4?alt=media&token=a5b04e55-0fd1-457c-a9dd-83c0e7265371&_gl=1*dtfdkc*_ga*MTM5MDAzMTAzNi4xNjkyMzIxMjc4*_ga_CW55HF8NVT*MTY5NzEzMzM0NS4xOC4xLjE2OTcxMzUwMzcuNjAuMC4w"))
+        val mergeSource = MergingMediaSource(progressiveMediaSource,vidSource)
+        player.setMediaSource(mergeSource)
+        //player.setMediaSource(progressiveMediaSource)
         player.prepare()
         player.play()
     }
