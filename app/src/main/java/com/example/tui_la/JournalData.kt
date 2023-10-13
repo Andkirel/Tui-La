@@ -6,7 +6,7 @@ data class JournalData(
     var title: String? = null,
     var time: String? = null,
     var date: String? = null,
-    var sampleText: String,
+    var entry: String,
     @DrawableRes var emotion: Int
 )
 

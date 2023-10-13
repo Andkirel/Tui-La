@@ -36,7 +36,7 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>,
         // sets the date text
         holder.date.text = selection.date
         // sets the preview of the journal entry
-        holder.sampleText.text = selection.sampleText.substring(0,31).plus("...")
+        holder.entry.text = selection.entry.substring(0,31)/*.plus("...")*/
         // sets the emotion drawable
         holder.emotion.setImageResource(selection.emotion)
     }
@@ -50,7 +50,7 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>,
         var title: TextView = entryView.findViewById(R.id.tvTitle)
         var date: TextView = entryView.findViewById(R.id.tvDate)
         var time: TextView = entryView.findViewById(R.id.tvTime)
-        var sampleText: TextView = entryView.findViewById(R.id.tvJournalSample)
+        var entry: TextView = entryView.findViewById(R.id.tvJournalSample)
         var emotion: ImageView = entryView.findViewById(R.id.ivEmotion)
     }
 }

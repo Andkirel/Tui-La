@@ -15,7 +15,7 @@ class JournalTableActivity : AppCompatActivity() {
 
     private lateinit var database:DatabaseReference
     private lateinit var journalRecyclerView: RecyclerView
-    // List of class JournalTable
+    // List of class JournalData
     private lateinit var journalArrayList: ArrayList<JournalData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +34,6 @@ class JournalTableActivity : AppCompatActivity() {
 
         // get data; pull from firebase
         getUserData()
-
-/*
-        // sample info
-        for (i in 1..10) {
-            journalArrayList.add(JournalTable("Test entry title " + i, "time " + i,"date " + i,"sample" + i, R.drawable.happy))
-        }
-*/
     }
 
     private fun getUserData() {
