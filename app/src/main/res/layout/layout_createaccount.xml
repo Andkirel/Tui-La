@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/main_bg"
+
+    tools:context=".CreateAccountFragment">
 
     <TextView
         android:id="@+id/title"
@@ -53,7 +56,7 @@
         app:layout_constraintTop_toBottomOf="@+id/un_editText" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/pw_editText"
         android:layout_width="327dp"
         android:layout_height="48dp"
         android:layout_marginStart="40dp"
@@ -83,7 +86,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/Button_CreateAccount_CA"
+        android:id="@+id/ca_button"
         android:layout_width="290dp"
         android:layout_height="70dp"
         android:layout_marginStart="60dp"
@@ -93,7 +96,7 @@
         android:text="Create Account"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/pw_editText" />
 
     <TextView
         android:id="@+id/textView5"
@@ -106,7 +109,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/Button_CreateAccount_CA"
+        app:layout_constraintTop_toBottomOf="@+id/ca_button"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -125,7 +128,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.807"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_CreateAccount_CA"
+        app:layout_constraintTop_toBottomOf="@+id/ca_button"
         app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
