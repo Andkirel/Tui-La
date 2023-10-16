@@ -23,7 +23,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginLeft="4dp"
-        android:background=""
+        android:background="#55000000"
         android:src="@drawable/back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +41,7 @@
         android:textColor="@color/white"
         android:textAlignment="center"
         android:textStyle="italic"
-        android:fontFamily="@font/Nickainley"
+        android:fontFamily="@font/nickainley"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
@@ -96,7 +96,6 @@
         android:background="@drawable/tl_rounded_textbox_pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         android:onClick="save"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

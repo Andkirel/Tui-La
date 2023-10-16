@@ -13,6 +13,9 @@
         <activity
             android:name=".JournalTableActivity"
             android:exported="true" />
+        <activity
+            android:name=".JournalWriteActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".GuidedMeditationActivity"

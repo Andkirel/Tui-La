@@ -36,7 +36,7 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>,
         // sets the date text
         holder.date.text = selection.date
         // sets the preview of the journal entry
-        holder.entry.text = selection.entry.substring(0,31)/*.plus("...")*/
+        /*holder.entry.text = selection.entry.substring(0,31)*//*.plus("...")*/
         // sets the emotion drawable
         holder.emotion.setImageResource(selection.emotion)
     }
