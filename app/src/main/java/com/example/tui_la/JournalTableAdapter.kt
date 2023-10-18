@@ -21,23 +21,18 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var selection: JournalData = entryList[position]
+        val selection: JournalData = entryList[position]
 
-        var title: String
+ /*     var title: String
         var time: String
         var date: String
-        var sampleText: String
-        var emotion: ImageView
+        var entry: String
+        var emotion: ImageView*/
 
-        // sets the title text
         holder.title.text = selection.title
-        // sets the time text
         holder.time.text = selection.time
-        // sets the date text
         holder.date.text = selection.date
-        // sets the preview of the journal entry
-        /*holder.entry.text = selection.entry.substring(0,31)*//*.plus("...")*/
-        // sets the emotion drawable
+        holder.entry.text = selection.entry!!.substring(0,31).plus("...")
         holder.emotion.setImageResource(selection.emotion)
     }
 
@@ -47,11 +42,11 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>,
 
     class ViewHolder(entryView: View) :
         RecyclerView.ViewHolder(entryView)/*, View.OnClickListener*/ {
-        var title: TextView = entryView.findViewById(R.id.tvTitle)
-        var date: TextView = entryView.findViewById(R.id.tvDate)
-        var time: TextView = entryView.findViewById(R.id.tvTime)
-        var entry: TextView = entryView.findViewById(R.id.tvJournalSample)
-        var emotion: ImageView = entryView.findViewById(R.id.ivEmotion)
+        val title: TextView = entryView.findViewById(R.id.tvTitle)
+        val date: TextView = entryView.findViewById(R.id.tvDate)
+        val time: TextView = entryView.findViewById(R.id.tvTime)
+        val entry: TextView = entryView.findViewById(R.id.tvEntry)
+        val emotion: ImageView = entryView.findViewById(R.id.ivEmotion)
     }
 }
     /*    init {
