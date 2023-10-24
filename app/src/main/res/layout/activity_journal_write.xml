@@ -80,6 +80,7 @@
         android:fontFamily="@font/philosopher"
         android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
         android:text=""
+        android:gravity="left|top"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

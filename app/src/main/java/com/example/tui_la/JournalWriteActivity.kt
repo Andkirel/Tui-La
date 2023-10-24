@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -53,13 +54,15 @@ class JournalWriteActivity : AppCompatActivity() {
 
     private fun writeNewJournalData(userId: String, title: String, time: String, date: String, entry: String/*, emotion: DrawableRes*/){
         val data = JournalData(title,time,date,entry,0)
+
+        val journalId = firebaseReference.push().key!!
         
-        firebaseReference.child("users").child(userId).child("Journal").setValue(data)
+        firebaseReference.child("users").child(userId).child("Journal")/*.child(journalId)*/.setValue(data)
             .addOnCompleteListener{
-
+                Toast.makeText(this, "Entry saved", Toast.LENGTH_LONG).show()
             }
-            .addOnFailureListener{
-
+            .addOnFailureListener{ err ->
+                Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
             }
     }
 

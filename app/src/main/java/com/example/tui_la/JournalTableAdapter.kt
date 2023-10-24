@@ -32,7 +32,7 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>,
         holder.title.text = selection.title
         holder.time.text = selection.time
         holder.date.text = selection.date
-        holder.entry.text = selection.entry!!.substring(0,31).plus("...")
+        holder.entry.text = selection.entry/*!!.substring(0,31).plus("...")*/
         holder.emotion.setImageResource(selection.emotion)
     }
 
