@@ -2,6 +2,7 @@ package com.example.tui_la
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -54,6 +55,12 @@ class JournalTableActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val userData = snapshot.getValue(JournalData::class.java)
+
+                    journalArrayList.add(userData!!)
+
+                    // Setting the adapter to the recyclerview
+                    journalRecyclerView.adapter = JournalTableAdapter(journalArrayList)
+
                 }
             }
             override fun onCancelled(error: DatabaseError) {}
