@@ -27,7 +27,6 @@
         android:src="@drawable/back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         android:onClick="back"
         />
 
@@ -37,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/journal"
-        android:textSize="48sp"
+        android:textSize="42sp"
         android:textColor="@color/white"
         android:textAlignment="center"
         android:textStyle="italic"
@@ -58,12 +57,12 @@
 
     <EditText
         android:id="@+id/journalWriteEntryTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="4dp"
         android:ems="9"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:text=""
         app:layout_constraintBottom_toTopOf="@id/journalWriteEntry"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +80,7 @@
         android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
         android:text=""
         android:gravity="left|top"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
