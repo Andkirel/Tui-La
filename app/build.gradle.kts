@@ -74,8 +74,6 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-crashlytics:18.5.0")
     implementation("com.google.firebase:firebase-analytics:21.4.0")
-    implementation("com.google.firebase:firebase-database-ktx:20.2.2")
-    implementation("com.google.firebase:firebase-auth-ktx:22.1.1")
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     //implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     testImplementation("junit:junit:4.13.2")
