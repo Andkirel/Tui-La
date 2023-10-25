@@ -43,9 +43,9 @@ class MainMenu: AppCompatActivity() {
             val Intent = Intent(this, Csupport::class.java)
             startActivity(Intent)
         }
-        val MMBackbutton = findViewById<ImageButton>(R.id.ImageButton_MainMenu_Settings)
-        MMBackbutton.setOnClickListener {
-            val Intent = Intent(this, Login_screen::class.java)
+        val MMSettings = findViewById<ImageButton>(R.id.ImageButton_MainMenu_Settings)
+        MMSettings.setOnClickListener {
+            val Intent = Intent(this, Settings_menu::class.java)
             startActivity(Intent)
         }
     }

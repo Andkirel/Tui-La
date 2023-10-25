@@ -5,15 +5,15 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-import com.google.firebase.database.DataSnapshot
+/*import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ValueEventListener*/
 
 class JournalTableActivity : AppCompatActivity() {
 
-    private lateinit var database:DatabaseReference
+    /*private lateinit var database:DatabaseReference
     private lateinit var journalRecyclerView: RecyclerView
     // List of class JournalTable
     private lateinit var journalArrayList: ArrayList<JournalData>
@@ -35,12 +35,12 @@ class JournalTableActivity : AppCompatActivity() {
         // get data; pull from firebase
         getUserData()
 
-/*
+*//*
         // sample info
         for (i in 1..10) {
             journalArrayList.add(JournalTable("Test entry title " + i, "time " + i,"date " + i,"sample" + i, R.drawable.happy))
         }
-*/
+*//*
     }
 
     private fun getUserData() {
@@ -64,5 +64,5 @@ class JournalTableActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
-    }
+    }*/
 }

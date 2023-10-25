@@ -22,7 +22,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginLeft="4dp"
-        android:background=""
+        android:background="#00FFFFFF"
         android:src="@drawable/back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +37,7 @@
         android:textColor="@color/white"
         android:textAlignment="center"
         android:textStyle="italic"
-        android:fontFamily="@font/Nickainley"
+        android:fontFamily="@font/nickainley_normal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />

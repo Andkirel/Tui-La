@@ -11,16 +11,15 @@
         android:id="@+id/Button_MainScreen_GB"
         android:layout_width="115dp"
         android:layout_height="115dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="76dp"
         android:background="#D3F9EC"
         android:fontFamily="@font/philosopher"
         android:text="@string/guided_breathing"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TL" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <ImageView
         android:id="@+id/HomescreenLogo"
@@ -46,34 +45,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<com.google.android.gms.ads.AdView
+    <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="411dp"
         android:layout_height="78dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/Button_MainScreen_GM"
         android:layout_width="115dp"
         android:layout_height="115dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="120dp"
         android:background="#D3F9EC"
         android:fontFamily="@font/philosopher"
         android:text="@string/guided_meditation"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TL" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <Button
         android:id="@+id/Button_MainScreen_Jour"
         android:layout_width="115dp"
         android:layout_height="115dp"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:background="#D4EFF6"
         android:fontFamily="@font/philosopher"
@@ -81,7 +78,8 @@
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_GM" />
 
     <Button
@@ -89,21 +87,20 @@
         android:layout_width="115dp"
         android:layout_height="115dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="76dp"
         android:background="#D4EFF6"
         android:fontFamily="@font/philosopher"
         android:text="@string/records"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_GB" />
 
     <Button
         android:id="@+id/Button_MainScreen_EDU"
         android:layout_width="115dp"
         android:layout_height="115dp"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:background="#F8E0D4"
         android:fontFamily="@font/philosopher"
@@ -111,7 +108,8 @@
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_Jour" />
 
     <Button
@@ -119,14 +117,14 @@
         android:layout_width="115dp"
         android:layout_height="115dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="76dp"
         android:background="#F8E0D4"
         android:fontFamily="@font/philosopher"
         android:text="@string/crisis_support"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/Button_MainScreen_Records" />
 
     <ImageButton
@@ -138,6 +136,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gear_icon" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.31" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

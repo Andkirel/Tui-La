@@ -18,7 +18,7 @@ class Login_screen:AppCompatActivity() {
         }
         val login = findViewById<Button>(R.id.Button_login_loginButton)
         login.setOnClickListener {
-            val Intent = Intent(this, WelcomeBackScreen::class.java)
+            val Intent = Intent(this, Emotions::class.java)
             startActivity(Intent)
         }
     }
