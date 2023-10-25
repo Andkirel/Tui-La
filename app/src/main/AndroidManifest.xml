@@ -24,6 +24,22 @@
             </intent-filter>
         </activity>
 
+            android:name=".JournalTableActivity"
+            android:exported="true" />
+        <activity
+            android:name=".JournalWriteActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name=".GuidedMeditationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GuidedMeditationPlayer"
+            android:exported="true" />
+        <activity
+            android:name=".WelcomeBackScreen"
+            android:exported="false" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -31,7 +47,7 @@
         will need to get our own Ad Manager app ID when going to publish later -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
 
 </manifest>
