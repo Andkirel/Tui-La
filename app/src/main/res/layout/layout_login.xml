@@ -5,7 +5,9 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/main_bg"
+
+    tools:context=".LogInFragment">
 
     <ImageView
         android:id="@+id/logo"
@@ -43,7 +45,7 @@
         android:background="@drawable/tl_rounded_textbox_pink"
         android:drawablePadding="5dp"
         android:fontFamily="@font/philosopher"
-        android:hint="@string/login_username"
+        android:hint="@string/login_email"
         android:padding="8dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/password"
@@ -71,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/Button_login_loginButton"
+        android:id="@+id/loginButton"
         android:layout_width="232dp"
         android:layout_height="55dp"
         android:background="@drawable/tl_rounded_textbox_pink"
@@ -97,7 +99,7 @@
         android:focusable="auto"
         android:focusableInTouchMode="true"
         android:fontFamily="@font/philosopher"
-        android:text="@string/login_forgot_username_password"
+        android:text="@string/login_forgot_email_password"
         android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"

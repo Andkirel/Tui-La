@@ -1,12 +1,15 @@
 package com.example.tui_la
 
 import androidx.annotation.DrawableRes
+import java.lang.reflect.Constructor
 
 data class JournalData(
-    var title: String? = null,
-    var time: String? = null,
-    var date: String? = null,
-    var sampleText: String,
-    @DrawableRes var emotion: Int
-)
+    val title: String? = null,
+    val time: String? = null,
+    val date: String? = null,
+    val entry: String? = null,
+    @DrawableRes val emotion: Int
+) {
+    constructor() : this("","","","",0)
+}
 

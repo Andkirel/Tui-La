@@ -15,17 +15,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ImageButton
         android:id="@+id/journalWriteBackButton"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginLeft="4dp"
-        android:background="#00FFFFFF"
+        android:background="#55000000"
         android:src="@drawable/back_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="back"
+        />
 
     <TextView
         android:id="@+id/journalWriteHeader"
@@ -33,16 +36,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/journal"
-        android:textSize="48sp"
+        android:textSize="42sp"
         android:textColor="@color/white"
         android:textAlignment="center"
         android:textStyle="italic"
-        android:fontFamily="@font/nickainley_normal"
+        android:fontFamily="@font/nickainley"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <ImageView
+        android:id="@+id/journalWriteEmotion"
         android:layout_width="84dp"
         android:layout_height="84dp"
         android:layout_marginEnd="16dp"
@@ -53,12 +57,12 @@
 
     <EditText
         android:id="@+id/journalWriteEntryTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="250sp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="4dp"
         android:ems="9"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:text=""
         app:layout_constraintBottom_toTopOf="@id/journalWriteEntry"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,11 +79,13 @@
         android:fontFamily="@font/philosopher"
         android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
         android:text=""
-        android:textSize="24sp"
+        android:gravity="left|top"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ImageButton
         android:id="@+id/journalWriteSaveButton"
@@ -90,8 +96,6 @@
         android:background="@drawable/tl_rounded_textbox_pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="save"
         />
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
