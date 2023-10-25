@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.ArrayRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tui_la.JournalTableAdapter.*
@@ -27,7 +28,11 @@ class JournalTableActivity : AppCompatActivity() {
     private lateinit var firebaseReference: DatabaseReference
 
     private lateinit var journalRecyclerView: RecyclerView
+
+    // implement clearing on logout
     private lateinit var journalArrayList: ArrayList<JournalData>
+    // holds journal identifier keys
+    private lateinit var entryKeyList: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +65,7 @@ class JournalTableActivity : AppCompatActivity() {
                     for (key in snapshot.children) {
                         val userData = key.getValue(JournalData::class.java)
                         journalArrayList.add(userData!!)
+                        entryKeyList.add(key.toString())
                     }
                     // Setting the adapter to the recyclerview
                     val jAdapter = JournalTableAdapter(journalArrayList)
@@ -71,6 +77,10 @@ class JournalTableActivity : AppCompatActivity() {
 
                             journalWrite.putExtra("journalTitle", journalArrayList[position].title)
                             journalWrite.putExtra("journalEntry", journalArrayList[position].entry)
+                            journalWrite.putExtra("journalId", entryKeyList[position])
+                            journalWrite.putExtra("journalTime", journalArrayList[position].time)
+                            journalWrite.putExtra("journalDate", journalArrayList[position].date)
+
                             startActivity(journalWrite)
                         }
                     })
