@@ -1,9 +1,11 @@
 package com.example.tui_la
 
+import android.content.Intent
 import android.icu.text.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 
@@ -35,6 +37,7 @@ class JournalWriteActivity : AppCompatActivity() {
         firebaseReference = Firebase.database.reference
 
         // set the fields using firebase data if available
+        setJournalData()
 
     }
 
@@ -66,8 +69,15 @@ class JournalWriteActivity : AppCompatActivity() {
             }
     }
 
+    private fun setJournalData() {
+        findViewById<TextView>(R.id.journalWriteEntryTitle).text = intent.getStringExtra("journalTitle")
+        findViewById<TextView>(R.id.journalWriteEntry).text = intent.getStringExtra("journalEntry")
+        /*findViewById<ImageView>(R.id.journalWriteEmotion).drawable*/
+    }
 
-    fun cancel(view: View) {
+    fun back(view: View) {
+        val journalTable = Intent(this, JournalTableActivity::class.java)
 
+        startActivity(journalTable)
     }
 }

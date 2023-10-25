@@ -1,10 +1,12 @@
 package com.example.tui_la
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tui_la.JournalTableAdapter.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 
@@ -59,76 +61,24 @@ class JournalTableActivity : AppCompatActivity() {
                         val userData = key.getValue(JournalData::class.java)
                         journalArrayList.add(userData!!)
                     }
-
-                    /*val userData = snapshot.getValue(JournalData::class.java)
-
-                    journalArrayList.add(userData!!)*/
-
                     // Setting the adapter to the recyclerview
-                    journalRecyclerView.adapter = JournalTableAdapter(journalArrayList)
+                    val jAdapter = JournalTableAdapter(journalArrayList)
+                    journalRecyclerView.adapter = jAdapter
 
+                    jAdapter.setOnItemClickListener(object : JournalTableAdapter.onitemClickListener{
+                        override fun onItemClick(position: Int) {
+                            val journalWrite = Intent(this@JournalTableActivity, JournalWriteActivity::class.java)
+
+                            journalWrite.putExtra("journalTitle", journalArrayList[position].title)
+                            journalWrite.putExtra("journalEntry", journalArrayList[position].entry)
+                            startActivity(journalWrite)
+                        }
+                    })
                 }
             }
-            override fun onCancelled(error: DatabaseError) {}
+            override fun onCancelled(error: DatabaseError) {
+
+            }
         })
-
- /*       firebaseReference.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (userSnapshot in snapshot.children) {
-                        val userData = userSnapshot.getValue(JournalData::class.java)
-                        journalArrayList.add(userData!!)
-                    }
-                    //Setting the adapter to the recyclerview
-                    journalRecyclerView.adapter = JournalTableAdapter(journalArrayList)
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })*/
-/*        val entryListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                //val userData = snapshot.getValue(JournalData::class.java)
-                //if (snapshot.exists()){
-                    //for (userSnapshot in snapshot.children) {
-                        //val userData = userSnapshot.getValue(JournalData::class.java)
-                        //journalArrayList.add(userData!!)
-                    //}
-
-                //}
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        }*/
-        //firebaseReference.addValueEventListener(entryListener)
-
-        //Setting the adapter to the recyclerview
-        //journalRecyclerView.adapter = JournalTableAdapter(journalArrayList)
-
-
-
-/*
-        database = FirebaseDatabase.getInstance().getReference("Users")
-        database.addValueEventListener(object : ValueEventListener{
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (userSnapshot in snapshot.children) {
-                        val user = userSnapshot.getValue(JournalData::class.java)
-                        journalArrayList.add(user!!)
-
-                    }
-                    // Setting the adapter to the recyclerview
-                    journalRecyclerView.adapter = JournalTableAdapter(journalArrayList)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })*/
     }
 }
