@@ -53,10 +53,16 @@ class JournalTableActivity : AppCompatActivity() {
     private fun getUserData() {
         firebaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                journalArrayList.clear()
                 if (snapshot.exists()) {
-                    val userData = snapshot.getValue(JournalData::class.java)
+                    for (key in snapshot.children) {
+                        val userData = key.getValue(JournalData::class.java)
+                        journalArrayList.add(userData!!)
+                    }
 
-                    journalArrayList.add(userData!!)
+                    /*val userData = snapshot.getValue(JournalData::class.java)
+
+                    journalArrayList.add(userData!!)*/
 
                     // Setting the adapter to the recyclerview
                     journalRecyclerView.adapter = JournalTableAdapter(journalArrayList)

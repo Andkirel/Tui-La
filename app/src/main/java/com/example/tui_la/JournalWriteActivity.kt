@@ -57,7 +57,7 @@ class JournalWriteActivity : AppCompatActivity() {
 
         val journalId = firebaseReference.push().key!!
         
-        firebaseReference.child("users").child(userId).child("Journal")/*.child(journalId)*/.setValue(data)
+        firebaseReference.child("users").child(userId).child("Journal").child(journalId).setValue(data)
             .addOnCompleteListener{
                 Toast.makeText(this, "Entry saved", Toast.LENGTH_LONG).show()
             }

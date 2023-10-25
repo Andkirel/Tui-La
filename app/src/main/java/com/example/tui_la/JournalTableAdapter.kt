@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 class JournalTableAdapter(private var entryList : MutableList<JournalData>,
                           /*private var listener: RecyclerViewEvent*/
     ) : RecyclerView.Adapter<JournalTableAdapter.ViewHolder>() {
+
+    
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
