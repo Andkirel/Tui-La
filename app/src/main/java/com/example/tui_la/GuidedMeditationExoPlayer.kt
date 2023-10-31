@@ -4,18 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.SurfaceHolder
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.MediaController
 import android.widget.TextView
-import android.widget.VideoView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.updateLayoutParams
 import androidx.media3.common.MediaItem.fromUri
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
@@ -36,18 +30,19 @@ import androidx.media3.exoplayer.source.MergingMediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.extractor.DefaultExtractorsFactory
-import androidx.media3.ui.PlayerControlView
 import androidx.media3.ui.PlayerView
-import com.example.tui_la.databinding.LayoutMeditationPlayerBinding
-import com.google.android.gms.ads.admanager.AdManagerAdView
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.api.client.googleapis.extensions.android.accounts.GoogleAccountManager
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.services.drive.DriveScopes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
@@ -56,15 +51,21 @@ import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 import javax.net.ssl.HttpsURLConnection
+
 
 //!!DO NOT CHANGE SC_CLIENT_ID OR SC_CLIENT_SECRET.They are necessary to access the SoundCloud API.!!//
 private const val SC_Client_ID = "7mveilIe54NH0aS3LBqBdkJuyo8CCvIu"
 private const val SC_Client_Secret = "gdzGo4IE4O3AmipQwvu6TGDE52sKBiJY"
 private const val Google_Cloud_API_Key = "AIzaSyA6n51QSYLze9UusF2luIrpk3momzDcm3w"
+private const val Tui_La_Service_Email = "tui-la-admin@tui-la-guided-meditation.iam.gserviceaccount.com"
+private const val Tui_La_Service_Key_ID = "bb19377f0716e67b35ed30e309f3c51e4a8fee2f"
+private const val Tui_La_Service_OAuth2_Client_ID = "117055122084581803157"
+private const val Tui_La_Google_OAuth2_Client_ID = "156633646436-olagt48bvdajeu9jvibkh840no7nt53f"
+private const val Tui_La_Google_Client_ID_Web_Application = "156633646436-t251lu3n50kpmnstfham4ubj8pd34in9.apps.googleusercontent.com"
+private const val Tui_La_Google_Client_Web_Client_Secret = "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"
+private const val Tui_La_Google_Authorized_Redirect_Uri = "https://tui-la.com/callback"
+
 private var accessToken:String=""
 private var refreshToken:String=""
 val jsonObject = JSONObject()
@@ -73,40 +74,24 @@ var trackId = 314179591
 var trackDuration = 660062
 private const val TAG = "PlayerActivity"
 
-@UnstableApi class GuidedMeditationExoPlayer: AppCompatActivity(), Player.Listener{
-    private lateinit var gmAdManagerAdView: AdManagerAdView
+@UnstableApi class GuidedMeditationExoPlayer: AppCompatActivity(), Player.Listener, CoroutineScope by MainScope(){
     lateinit var videoPlayer : ExoPlayer
     lateinit var audioPlayer : ExoPlayer
     private lateinit var videoPlayerView: PlayerView
     private lateinit var audioPlayerView: PlayerView
     private val playbackStateListener: Player.Listener = playbackStateListener()
-    lateinit var videoView: VideoView
-    lateinit var mediaController: MediaController
-    private lateinit var playerControlView: PlayerControlView
     private lateinit var audioTitle: TextView
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
-    private lateinit var storage : FirebaseStorage
-    private lateinit var testVid : StorageReference
     private lateinit var listener: ValueEventListener
-    private lateinit var binding: LayoutMeditationPlayerBinding
-    private var surfaceHolder : SurfaceHolder? = null
 
-    @SuppressLint("NewApi")
-    private var currDate = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE) //example: 2023-10-20 as year-month-day with dashes
-    @RequiresApi(Build.VERSION_CODES.O)
-    private var currTime = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")) //with 24-hr clock, example: 07:02 for AM, 19:02 for PM
-    private val viewBinding by lazy ( LazyThreadSafetyMode.NONE ){
-        LayoutMeditationPlayerBinding.inflate(layoutInflater)
+    companion object {
+        private const val REQUEST_SIGN_IN = 1
     }
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        /*binding = LayoutMeditationPlayerBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)*/
-        //setContentView(R.layout.layout_meditation_player)
-        setContentView(viewBinding.root)
+        setContentView(R.layout.layout_meditation_player)
         audioTitle = findViewById(R.id.guidedMeditationTitle)
         audioTitle.text = "My Title"
         val backButton : Button = findViewById(R.id.btn_gm_player_back)
@@ -117,60 +102,131 @@ private const val TAG = "PlayerActivity"
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
-        storage = FirebaseStorage.getInstance()
-        var storageRef = storage.reference
-        var vidRef : StorageReference? = storageRef.child("Guided Meditation Videos")
-        val fileName = "large_moon_on_lake_video.mp4"
-/*
-        val expirationDateRef = database.getReferenceFromUrl("https://tui-la-default-rtdb.firebaseio.com/data/SoundCloud%20Access%20Token/date_acquired")
-        expirationDateRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val res = snapshot.getValue<String>()
-            }
+        val reference = database.getReference("data/SoundCloud Access Token/date_time_acquired")
+        /*// Read the stored timestamp value
+        reference.addListenerForSingleValueEvent(object : ValueEventListener {
+            @RequiresApi(Build.VERSION_CODES.O)
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val storedTimestamp = dataSnapshot.getValue(Long::class.java)
 
+                if (storedTimestamp == null) {
+                    // Node is null, populate it with the current date and time
+                    val currentDateTime = LocalDateTime.now()
+                    val currentTimestamp = currentDateTime.toEpochSecond(java.time.ZoneOffset.UTC)
+                    reference.setValue(currentTimestamp)
+                } else {
+                    // Node is not null, compare the stored date and time plus one hour with the current date and time
+                    val storedDateTime = LocalDateTime.ofEpochSecond(storedTimestamp, 0, java.time.ZoneOffset.UTC)
+                    val currentDateTime = LocalDateTime.now()
+                    val currentDateTimePlusOneHour = currentDateTime.plusHours(1)
+
+                    if (storedDateTime.plusHours(1).isBefore(currentDateTime)) {
+                        // The stored date and time plus one hour is in the past
+                        // Update the stored date and time
+                        val newTimestamp = currentDateTimePlusOneHour.toEpochSecond(java.time.ZoneOffset.UTC)
+                        reference.setValue(newTimestamp)
+
+                        // Update the API key here
+                        postAuthorization()
+                    }
+                }
+            }
             override fun onCancelled(error: DatabaseError) {
-                Log.d("Error","Issue with expirationTimeRef ValueEventListener")
+                Log.e("Database Error : ", "Firebase DateTime Check")
             }
-        })
-        //val dbSnapshot = expirationTimeRef.get().result.key
-        if (currDate != expirationDateRef.get().result.key.toString()){ //expirationDateRef.child("date_acquired").get().result.key
-            postAuthorization()
-        }
-        var stringTime = expirationDateRef.child("time_acquired").get().result.key?.toInt()
-        val total = stringTime?.plus(3599)
-        if (currTime > total.toString()){
-            postAuthorization()
-        }
-        val testVid = vidRef?.child(fileName)*/
-        /*database.getReference("data").addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                database.reference.child("SoundCloud Access Token")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
         })*/
-        //Log.i("tokenTime", tokenTime.toString())
-
         setupPlayer()
-
+        //requestSignIn()
+        runBlocking{ googleDriveAuthorization() }
+        streamMusic()
         //runBlocking { postAuthorization() }
-        accessToken = "2-294264--JhLvzHZ0GwiVlxRda407s2f"
-        refreshToken = "NhBrQTECo1xJ2hiU6kwmbZVDxRcJnUIJ"
+        //accessToken = "2-294264--JhLvzHZ0GwiVlxRda407s2f"
+        //refreshToken = "NhBrQTECo1xJ2hiU6kwmbZVDxRcJnUIJ"
 
-        runBlocking{
+        /*runBlocking{
             launch{
                 delay(2000)
                 streamMusic()
             }
+            accessToken = database.getReference("data/SoundCloud Access Token/access_token").toString()
             getStreamingTrack()
         }
+*/
 
         //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
     }
+    private fun googleDriveAuthorization() {
+        val fileKey = "1RMdKtJUQoYA4t1KfycAuq24QizkKemx7"
+        val videoFolderID = "1S2sGWvIeG3kKtECt200Q92WwgmXnEvZX"
+        val accManager : GoogleAccountManager = GoogleAccountManager(this)
+        val myAccount = accManager.getAccountByName(Tui_La_Service_Email)
+        val myCredential = GoogleAccountCredential.usingOAuth2(applicationContext, listOf(DriveScopes.DRIVE,DriveScopes.DRIVE_FILE))
+            .setSelectedAccount(myAccount)
+        GoogleSignIn.getLastSignedInAccount(myCredential.context)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val authUrl = URL("https://accounts.google.com/o/oauth2/v2/auth")
+            val authHttpsURLConnection = authUrl.openConnection() as HttpsURLConnection
+            authHttpsURLConnection.setRequestProperty("client_id", Tui_La_Service_OAuth2_Client_ID)
+            authHttpsURLConnection.setRequestProperty("redirect_uri",
+                "https://www.googleapis.com/drive/v3/drives")
+            authHttpsURLConnection.setRequestProperty("response_type","code")
+            authHttpsURLConnection.setRequestProperty("scopes","https://www.googleapis.com/auth/drive")
+            authHttpsURLConnection.setRequestProperty(
+                "Authorization: Bearer",
+                Tui_La_Service_OAuth2_Client_ID
+            )
+            authHttpsURLConnection.setRequestProperty("Accept", "application/json")
+            authHttpsURLConnection.doInput = true
+            authHttpsURLConnection.doOutput = true
+            //val sslConnection = authUrl.openConnection() as SSLConnectionSocketFactory
+
+            //Check if connection is successful
+            val responseCode = authHttpsURLConnection.responseCode
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                //Folder ID: 1S2sGWvIeG3kKtECt200Q92WwgmXnEvZX
+                //File ID: 1RMdKtJUQoYA4t1KfycAuq24QizkKemx7
+                //val url = URL("https://www.googleapis.com/drive/v3/folders/1S2sGWvIeG3kKtECt200Q92WwgmXnEvZX HTTP/1.1")
+                val fileUrl = URL("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7 HTTP/1.1")
+
+                //authHttpsURLConnection.url.sameFile(url)
+                //val httpsURLConnection = url.openConnection() as HttpsURLConnection
+                authHttpsURLConnection.url.sameFile(fileUrl)
+                authHttpsURLConnection.connect()
+                authHttpsURLConnection.requestMethod = "GET"
+
+                val responseCode1 = authHttpsURLConnection.responseCode
+                if (responseCode1 == HttpURLConnection.HTTP_OK) {
+                    val reader = authHttpsURLConnection.inputStream.bufferedReader()
+                    val response1 = reader.readText()
+                    val jsonObject1 = Gson().toJson(response1).toString()
+                    var vidMediaMeta : String = ""
+
+                    Log.i("Response Message: ",responseCode1.toString())
+                    //Log.i("Video Media Metadata: ", jsonObject1)
+                    //Log.i("Drive : ", jsonObject1)
+                    reader.close()
+                    authHttpsURLConnection.disconnect()
+                } else {
+                    Log.e("HTTPS Drives Connection Error", responseCode1.toString())
+                    Log.e("ERROR MESSAGE", authHttpsURLConnection.responseMessage)
+                }
+            } else {
+                Log.e("Authorization Connection Error", responseCode.toString())
+                Log.e("ERROR MESSAGE", authHttpsURLConnection.responseMessage)
+                if (responseCode == 429) { //Cannot ask for more access tokens because hit the rate_limit
+                    val reader = authHttpsURLConnection.inputStream.bufferedReader()
+                    val response = reader.readText()
+                    Log.d("RATE LIMIT:", response)
+                    reader.close()
+                    authHttpsURLConnection.disconnect()
+                }
+            }
+        }
+
+    }
+
     private fun postAuthorization(){
         val uriBuilder= Uri.Builder()
             .appendQueryParameter("client_id",SC_Client_ID)
@@ -178,7 +234,7 @@ private const val TAG = "PlayerActivity"
             .appendQueryParameter("grant_type","client_credentials")
             .build()
 
-        val params=uriBuilder.toString().replace("?","") //Remove the "?" from the beginning of the parameters?name=Jack&salary=8054&age=45
+        val params=uriBuilder.toString().replace("?","") // Remove the "?" from the beginning of the parameter
         val postData=params.toByteArray(StandardCharsets.UTF_8)
 
         GlobalScope.launch(Dispatchers.IO){
@@ -188,31 +244,40 @@ private const val TAG = "PlayerActivity"
             httpsURLConnection.setRequestProperty("grant_type","client_credentials")
             httpsURLConnection.setRequestProperty("client_id",SC_Client_ID)
             httpsURLConnection.setRequestProperty("client_secret",SC_Client_Secret)
-            httpsURLConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded") //The format of the content we're sending to the server. Confirmed via SoundCloud Public API Specification.
-            httpsURLConnection.setRequestProperty("accept","application/json;charset=utf-8") //The format of response we want to get from the server. Confirmed via SoundCloud Public API Specification.
+            httpsURLConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded") // The format of the content we're sending to the server. Confirmed via SoundCloud Public API Specification.
+            httpsURLConnection.setRequestProperty("accept","application/json;charset=utf-8") // The format of response we want to get from the server. Confirmed via SoundCloud Public API Specification.
             httpsURLConnection.doInput=true
             httpsURLConnection.doOutput=true
             val dataOutputStream = DataOutputStream(httpsURLConnection.outputStream)
             dataOutputStream.write(postData)
             dataOutputStream.flush()
 
-            //Check if connection is successful
+            // Check if connection is successful
             val responseCode= httpsURLConnection.responseCode
             if(responseCode == HttpURLConnection.HTTP_OK){
+                // Get token database references
+                val accessTokenReference = database.getReference("SoundCloud Access Token/access_token")
+                val refreshTokenReference = database.getReference("SoundCloud Access Token/refresh_token")
+                // Get returned stream, parse, and place in jsonObject
                 val reader=httpsURLConnection.inputStream.bufferedReader()
                 val response=reader.readText()
                 val jsonObject = JSONObject(response)
+
                 accessToken = jsonObject.getString("access_token")
                 refreshToken = jsonObject.getString("refresh_token")
                 Log.i("ACCESS TOKEN : ",accessToken)
                 Log.i("REFRESH TOKEN : ",refreshToken)
+                // Reset values of database references
+                accessTokenReference.setValue(accessToken)
+                refreshTokenReference.setValue(jsonObject.getString("refresh_token"))
+                // Close and disconnect
                 reader.close()
                 httpsURLConnection.disconnect()
             }
             else{
                 Log.e("HTTPURLCONNECTION_ERROR",responseCode.toString())
                 Log.e("ERROR MESSAGE",httpsURLConnection.responseMessage)
-                if(responseCode==429){ //Cannot ask for more access tokens because hit the rate_limit
+                if(responseCode==429){ // Cannot ask for more access tokens because hit the rate_limit
                     val reader=httpsURLConnection.inputStream.bufferedReader()
                     val response=reader.readText()
                     Log.d("RATE LIMIT:",response)
@@ -266,6 +331,9 @@ private const val TAG = "PlayerActivity"
             .createMediaSource(fromUri(httpStreamUrl))
         var vidSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri("https://firebasestorage.googleapis.com/v0/b/tui-la.appspot.com/o/Guided%20Meditation%20Videos%2Flarge_moon_on_lake_video.mp4?alt=media&token=a5b04e55-0fd1-457c-a9dd-83c0e7265371&_gl=1*dtfdkc*_ga*MTM5MDAzMTAzNi4xNjkyMzIxMjc4*_ga_CW55HF8NVT*MTY5NzEzMzM0NS4xOC4xLjE2OTcxMzUwMzcuNjAuMC4w"))
+        val googleVidSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7?alt=media&key=$Google_Cloud_API_Key"))
+
         val loopVideo = ConcatenatingMediaSource2.Builder()
             .add(vidSource, trackDuration.toLong())
             .add(vidSource, trackDuration.toLong())
@@ -274,15 +342,15 @@ private const val TAG = "PlayerActivity"
 
         val mergeSource = MergingMediaSource(progressiveMediaSource,vidSource)
 
-        audioPlayer.setMediaSource(progressiveMediaSource)
+        //audioPlayer.setMediaSource(progressiveMediaSource)
 
-        videoPlayer.setMediaSource(vidSource)
+        videoPlayer.setMediaSource(googleVidSource)
 
         videoPlayer.prepare()
         videoPlayer.play()
 
-        audioPlayer.prepare()
-        audioPlayer.play()
+        //audioPlayer.prepare()
+        //audioPlayer.play()
 
     }
 
@@ -308,11 +376,6 @@ private const val TAG = "PlayerActivity"
             }
         videoPlayer.repeatMode = Player.REPEAT_MODE_ALL
         videoPlayerView = findViewById(R.id.gm_player_video)
-        var vidHeight = videoPlayerView.height
-
-        //videoPlayerView.layoutParams.height = vidHeight
-        videoPlayerView.updateLayoutParams { height = window.attributes.height - 55 }
-
         videoPlayerView.player = videoPlayer
 
         audioPlayer = ExoPlayer.Builder(this)
