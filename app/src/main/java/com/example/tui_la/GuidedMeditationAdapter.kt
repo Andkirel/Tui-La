@@ -13,7 +13,7 @@ class GuidedMeditationAdapter(
 
     //Setup variables to hold the instance of the views defined in fragment_meditation_recyclerview_row.xml
     inner class ItemViewHolder(view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
-        val txtview: TextView = view.findViewById(R.id.gmrowtextview)
+        val textView: TextView = view.findViewById(R.id.gmrowtextview)
         init {
             view.setOnClickListener{
                 if (bindingAdapterPosition >= 0){
@@ -40,11 +40,9 @@ class GuidedMeditationAdapter(
     //layout file based on position of RecyclerView
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val selection: GuidedMeditationData = data[position]
-        holder.txtview.text = selection.trackName
-        holder.txtview.setOnClickListener(listener)
-        holder.txtview.setBackgroundResource(selection.gmImages)
-        //holder.title.text = selection.name
-        //holder.image.setImageResource(selection.img)
+        holder.textView.text = selection.trackName
+        holder.textView.setOnClickListener(listener)
+        holder.textView.setBackgroundResource(selection.gmImages)
     }
 
     //Returns number of items in RecyclerView
