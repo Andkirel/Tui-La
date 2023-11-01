@@ -47,7 +47,6 @@ class JournalWriteActivity : AppCompatActivity() {
     }
 
     fun save(view: View) {
-
         if(entryKey.isBlank()) {
             // get all of the fields that have data
             journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
@@ -97,7 +96,7 @@ class JournalWriteActivity : AppCompatActivity() {
         startActivity(journalTable)
     }
 
-    fun updateEntry(userId: String, title: String, entry: String/*, emotion: DrawableRes*/) {
+    private fun updateEntry(userId: String, title: String, entry: String/*, emotion: DrawableRes*/) {
         val data = JournalData(title,currentTime,currentDate,entry,0)
 
         firebaseReference.child("users").child(userId).child("Journal").child(entryKey).setValue(data)

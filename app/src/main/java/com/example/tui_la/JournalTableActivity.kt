@@ -71,6 +71,8 @@ class JournalTableActivity : AppCompatActivity() {
                     val jAdapter = JournalTableAdapter(journalArrayList)
                     journalRecyclerView.adapter = jAdapter
 
+                    // Makes recycler view items clickable
+                    // Takes user to a page with the information of the clicked entry
                     jAdapter.setOnItemClickListener(object : JournalTableAdapter.onitemClickListener{
                         override fun onItemClick(position: Int) {
                             val journalWrite = Intent(this@JournalTableActivity, JournalWriteActivity::class.java)
