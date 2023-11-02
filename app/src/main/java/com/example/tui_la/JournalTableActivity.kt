@@ -50,8 +50,9 @@ class JournalTableActivity : AppCompatActivity() {
         // creates a vertical layout Manager
         journalRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // list of class JournalTable
+        // initialize lists
         journalArrayList = arrayListOf<JournalData>()
+        entryKeyList = arrayListOf<String>()
 
         // get data; pull from firebase
         getUserData()
@@ -65,7 +66,10 @@ class JournalTableActivity : AppCompatActivity() {
                     for (key in snapshot.children) {
                         val userData = key.getValue(JournalData::class.java)
                         journalArrayList.add(userData!!)
-                        entryKeyList.add(key.toString())
+                        // each string is currently the entire data snapshot
+                        //entryKeyList.add(key.toString())
+                        //entryKeyList.add(key.getValue().toString())
+                        entryKeyList.add(key.key.toString())
                     }
                     // Setting the adapter to the recyclerview
                     val jAdapter = JournalTableAdapter(journalArrayList)

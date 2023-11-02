@@ -47,7 +47,8 @@ class JournalWriteActivity : AppCompatActivity() {
     }
 
     fun save(view: View) {
-        if(entryKey.isBlank()) {
+        if (entryKey.isBlank()) {
+
             // get all of the fields that have data
             journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
             journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
@@ -58,9 +59,19 @@ class JournalWriteActivity : AppCompatActivity() {
             currentDate = DateFormat.getDateInstance().format(calendar)
             currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
 
-            writeNewJournalData(auth.uid!!, journalTitle, currentTime,currentDate, journalEntry/*,journalEmotion*/)
-        }
-        else{
+            writeNewJournalData(
+                auth.uid!!,
+                journalTitle,
+                currentTime,
+                currentDate,
+                journalEntry/*,journalEmotion*/
+            )
+        } else {
+
+            journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
+            journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
+            /*journalEmotion = findViewById<ImageView>(R.id.journalWriteEmotion)*/
+
             updateEntry(auth.uid!!, journalTitle, journalEntry/*,journalEmotion*/)
         }
     }
@@ -81,13 +92,18 @@ class JournalWriteActivity : AppCompatActivity() {
 
     private fun setJournalData() {
 
-        findViewById<TextView>(R.id.journalWriteEntryTitle).text = intent.getStringExtra("journalTitle")
-        findViewById<TextView>(R.id.journalWriteEntry).text = intent.getStringExtra("journalEntry")
-        /*findViewById<ImageView>(R.id.journalWriteEmotion).drawable*/
+        if (!(intent.getStringExtra("journalId").isNullOrBlank()))   {
 
-        entryKey = intent.getStringExtra("journalId")!!
-        currentDate = intent.getStringExtra("journalDate")!!
-        currentTime = intent.getStringExtra("journalTime")!!
+            entryKey = intent.getStringExtra("journalId")!!
+            currentDate = intent.getStringExtra("journalDate")!!
+            currentTime = intent.getStringExtra("journalTime")!!
+
+            findViewById<TextView>(R.id.journalWriteEntryTitle).text = intent.getStringExtra("journalTitle")
+            findViewById<TextView>(R.id.journalWriteEntry).text = intent.getStringExtra("journalEntry")
+            /*findViewById<ImageView>(R.id.journalWriteEmotion).drawable*/
+
+
+        }
     }
 
     fun back(view: View) {
@@ -106,5 +122,9 @@ class JournalWriteActivity : AppCompatActivity() {
             .addOnFailureListener{err ->
                 Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
             }
+    }
+
+    private fun delete(){
+
     }
 }
