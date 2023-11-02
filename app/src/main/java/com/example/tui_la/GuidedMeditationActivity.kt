@@ -54,7 +54,6 @@ import java.time.format.DateTimeFormatter
     }
 
     //    KEEP THIS!    //
-    //TODO: Look into adding ViewAnimator to pop open the player?
     override fun onClick(v: View?) {
         val intent = Intent(this, GuidedMeditationExoPlayer::class.java)
         startActivity(intent)
