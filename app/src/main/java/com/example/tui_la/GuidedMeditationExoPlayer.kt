@@ -3,6 +3,7 @@ package com.example.tui_la
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +15,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.common.MediaItem.fromUri
 import androidx.media3.common.MediaMetadata
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
+import androidx.media3.common.Player.EVENT_IS_PLAYING_CHANGED
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.DataSource
 import androidx.media3.datasource.DefaultDataSource
@@ -27,6 +30,7 @@ import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.extractor.DefaultExtractorsFactory
+import androidx.media3.ui.PlayerControlView
 import androidx.media3.ui.PlayerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.api.client.googleapis.extensions.android.accounts.GoogleAccountManager
@@ -59,41 +63,44 @@ import javax.net.ssl.HttpsURLConnection
 private const val SC_Client_ID = "7mveilIe54NH0aS3LBqBdkJuyo8CCvIu"
 private const val SC_Client_Secret = "gdzGo4IE4O3AmipQwvu6TGDE52sKBiJY"
 private const val Google_Cloud_API_Key = "AIzaSyA6n51QSYLze9UusF2luIrpk3momzDcm3w"
-private const val Tui_La_Service_Email = "tui-la-admin@tui-la-guided-meditation.iam.gserviceaccount.com"
+private const val Tui_La_Service_Email =
+    "tui-la-admin@tui-la-guided-meditation.iam.gserviceaccount.com"
 private const val Tui_La_Service_Key_ID = "bb19377f0716e67b35ed30e309f3c51e4a8fee2f"
 private const val Tui_La_Service_OAuth2_Client_ID = "117055122084581803157"
 private const val Tui_La_Google_OAuth2_Client_ID = "156633646436-olagt48bvdajeu9jvibkh840no7nt53f"
-private const val Tui_La_Google_Client_ID_Web_Application = "156633646436-t251lu3n50kpmnstfham4ubj8pd34in9.apps.googleusercontent.com"
+private const val Tui_La_Google_Client_ID_Web_Application =
+    "156633646436-t251lu3n50kpmnstfham4ubj8pd34in9.apps.googleusercontent.com"
 private const val Tui_La_Google_Client_Web_Client_Secret = "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"
 private const val Tui_La_Google_Authorized_Redirect_Uri = "https://tui-la.com/callback"
 
-var accessToken=""
-var refreshToken=""
+var accessToken = ""
+var refreshToken = ""
 var httpStreamUrl = ""
 var trackId = 1074950746
 private const val TAG = "PlayerActivity"
 
-@UnstableApi class GuidedMeditationExoPlayer: AppCompatActivity(), Player.Listener, CoroutineScope by MainScope(){
-    lateinit var videoPlayer : ExoPlayer
-    lateinit var audioPlayer : ExoPlayer
+@UnstableApi
+class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
+    CoroutineScope by MainScope() {
+    lateinit var videoPlayer: ExoPlayer
+    lateinit var audioPlayer: ExoPlayer
     private lateinit var videoPlayerView: PlayerView
     private lateinit var audioPlayerView: PlayerView
-    private val playbackStateListener: Player.Listener = playbackStateListener()
+    private var playbackStateListener: Player.Listener = playbackStateListener()
+    private lateinit var playerControlView: PlayerControlView
+    //private lateinit var playbackState : PlaybackState
     private lateinit var audioTitle: TextView
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var listener: ValueEventListener
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_meditation_player)
         audioTitle = findViewById(R.id.guidedMeditationTitle)
         audioTitle.text = "My Title"
-        val backButton : Button = findViewById(R.id.btn_gm_player_back)
+        val backButton: Button = findViewById(R.id.btn_gm_player_back)
         backButton.setBackgroundResource(R.drawable.back_button)
-
-       /* jsonObject.put("client_id",SC_Client_ID)
-        jsonObject.put("client_secret",SC_Client_Secret)*/
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
@@ -110,14 +117,16 @@ private const val TAG = "PlayerActivity"
                     reference.setValue(currentTimestamp)
                 } else {
                     // Node is not null, compare the stored date and time plus one hour with the current date and time
-                    val storedDateTime = LocalDateTime.ofEpochSecond(storedTimestamp, 0, java.time.ZoneOffset.UTC)
+                    val storedDateTime =
+                        LocalDateTime.ofEpochSecond(storedTimestamp, 0, java.time.ZoneOffset.UTC)
                     val currentDateTime = LocalDateTime.now()
                     val currentDateTimePlusOneHour = currentDateTime.plusHours(1)
 
                     if (storedDateTime.plusHours(1).isBefore(currentDateTime)) {
                         // The stored date and time plus one hour is in the past
                         // Update the stored date and time
-                        val newTimestamp = currentDateTimePlusOneHour.toEpochSecond(java.time.ZoneOffset.UTC)
+                        val newTimestamp =
+                            currentDateTimePlusOneHour.toEpochSecond(java.time.ZoneOffset.UTC)
                         reference.setValue(newTimestamp)
 
                         // Update the API key here
@@ -125,28 +134,34 @@ private const val TAG = "PlayerActivity"
                     }
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 Log.e("Database Error : ", "Firebase DateTime Check Error")
             }
         })
         setupPlayer()
-        runBlocking{
-            launch{
+
+        runBlocking {
+            launch {
                 delay(2000)
                 streamMusic()
             }
-            launch{
+            launch {
                 delay(1000)
                 getStreamingTrack()
             }
             googleDriveAuthorization()
         }
-        //window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
+
     private fun googleDriveAuthorization() {
         val accManager = GoogleAccountManager(this)
         val myAccount = accManager.getAccountByName(Tui_La_Service_Email)
-        val myCredential = GoogleAccountCredential.usingOAuth2(applicationContext, listOf(DriveScopes.DRIVE,DriveScopes.DRIVE_FILE))
+        val myCredential = GoogleAccountCredential.usingOAuth2(
+            applicationContext,
+            listOf(DriveScopes.DRIVE, DriveScopes.DRIVE_FILE)
+        )
             .setSelectedAccount(myAccount)
         GoogleSignIn.getLastSignedInAccount(myCredential.context)
 
@@ -154,10 +169,15 @@ private const val TAG = "PlayerActivity"
             val authUrlGoogle = URL("https://accounts.google.com/o/oauth2/v2/auth")
             val authGoogleURLConnection = authUrlGoogle.openConnection() as HttpsURLConnection
             authGoogleURLConnection.setRequestProperty("client_id", Tui_La_Service_OAuth2_Client_ID)
-            authGoogleURLConnection.setRequestProperty("redirect_uri",
-                "https://www.googleapis.com/drive/v3/drives")
-            authGoogleURLConnection.setRequestProperty("response_type","code")
-            authGoogleURLConnection.setRequestProperty("scopes","https://www.googleapis.com/auth/drive")
+            authGoogleURLConnection.setRequestProperty(
+                "redirect_uri",
+                "https://www.googleapis.com/drive/v3/drives"
+            )
+            authGoogleURLConnection.setRequestProperty("response_type", "code")
+            authGoogleURLConnection.setRequestProperty(
+                "scopes",
+                "https://www.googleapis.com/auth/drive"
+            )
             authGoogleURLConnection.setRequestProperty(
                 "Authorization: Bearer",
                 Tui_La_Service_OAuth2_Client_ID
@@ -172,7 +192,8 @@ private const val TAG = "PlayerActivity"
                 //Folder ID: 1S2sGWvIeG3kKtECt200Q92WwgmXnEvZX
                 //File ID: 1RMdKtJUQoYA4t1KfycAuq24QizkKemx7
                 //val url = URL("https://www.googleapis.com/drive/v3/folders/1S2sGWvIeG3kKtECt200Q92WwgmXnEvZX HTTP/1.1")
-                val fileUrl = URL("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7 HTTP/1.1")
+                val fileUrl =
+                    URL("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7 HTTP/1.1")
 
                 authGoogleURLConnection.url.sameFile(fileUrl) // Uses the same connection that was confirmed by OAuth2 to access the file.
                 authGoogleURLConnection.connect()
@@ -184,7 +205,7 @@ private const val TAG = "PlayerActivity"
                     val response1 = reader.readText()
                     val jsonObject1 = Gson().toJson(response1).toString()
 
-                    Log.i("Response Message: ",responseCodeGoogleGetFile.toString())
+                    Log.i("Response Message: ", responseCodeGoogleGetFile.toString())
                     reader.close()
                     authGoogleURLConnection.disconnect()
                 } else {
@@ -198,40 +219,49 @@ private const val TAG = "PlayerActivity"
         }
     }
 
-    private fun postAuthorization(){
-        val uriBuilder= Uri.Builder()
-            .appendQueryParameter("client_id",SC_Client_ID)
-            .appendQueryParameter("client_secret",SC_Client_Secret)
-            .appendQueryParameter("grant_type","client_credentials")
+    private fun postAuthorization() {
+        val uriBuilder = Uri.Builder()
+            .appendQueryParameter("client_id", SC_Client_ID)
+            .appendQueryParameter("client_secret", SC_Client_Secret)
+            .appendQueryParameter("grant_type", "client_credentials")
             .build()
 
-        val params=uriBuilder.toString().replace("?","") // Remove the "?" from the beginning of the parameter
-        val postData=params.toByteArray(StandardCharsets.UTF_8)
+        val params = uriBuilder.toString()
+            .replace("?", "") // Remove the "?" from the beginning of the parameter
+        val postData = params.toByteArray(StandardCharsets.UTF_8)
 
-        GlobalScope.launch(Dispatchers.IO){
+        GlobalScope.launch(Dispatchers.IO) {
             val authUrlSC = URL("https://api.soundcloud.com/oauth2/token")
             val httpsURLConnectionSC = authUrlSC.openConnection() as HttpsURLConnection
-            httpsURLConnectionSC.requestMethod="POST"
-            httpsURLConnectionSC.setRequestProperty("grant_type","client_credentials")
-            httpsURLConnectionSC.setRequestProperty("client_id",SC_Client_ID)
-            httpsURLConnectionSC.setRequestProperty("client_secret",SC_Client_Secret)
-            httpsURLConnectionSC.setRequestProperty("Content-Type","application/x-www-form-urlencoded") // The format of the content we're sending to the server. Confirmed via SoundCloud Public API Specification.
-            httpsURLConnectionSC.setRequestProperty("accept","application/json;charset=utf-8") // The format of response we want to get from the server. Confirmed via SoundCloud Public API Specification.
-            httpsURLConnectionSC.doInput=true
-            httpsURLConnectionSC.doOutput=true
+            httpsURLConnectionSC.requestMethod = "POST"
+            httpsURLConnectionSC.setRequestProperty("grant_type", "client_credentials")
+            httpsURLConnectionSC.setRequestProperty("client_id", SC_Client_ID)
+            httpsURLConnectionSC.setRequestProperty("client_secret", SC_Client_Secret)
+            httpsURLConnectionSC.setRequestProperty(
+                "Content-Type",
+                "application/x-www-form-urlencoded"
+            ) // The format of the content we're sending to the server. Confirmed via SoundCloud Public API Specification.
+            httpsURLConnectionSC.setRequestProperty(
+                "accept",
+                "application/json;charset=utf-8"
+            ) // The format of response we want to get from the server. Confirmed via SoundCloud Public API Specification.
+            httpsURLConnectionSC.doInput = true
+            httpsURLConnectionSC.doOutput = true
             val dataOutputStream = DataOutputStream(httpsURLConnectionSC.outputStream)
             dataOutputStream.write(postData)
             dataOutputStream.flush()
 
             // Check if connection is successful
-            val responseCodeSoundCloudAuth= httpsURLConnectionSC.responseCode
-            if(responseCodeSoundCloudAuth == HttpURLConnection.HTTP_OK){
+            val responseCodeSoundCloudAuth = httpsURLConnectionSC.responseCode
+            if (responseCodeSoundCloudAuth == HttpURLConnection.HTTP_OK) {
                 // Get token database references
-                val accessTokenReference = database.getReference("data/SoundCloud Access Token/access_token")
-                val refreshTokenReference = database.getReference("data/SoundCloud Access Token/refresh_token")
+                val accessTokenReference =
+                    database.getReference("data/SoundCloud Access Token/access_token")
+                val refreshTokenReference =
+                    database.getReference("data/SoundCloud Access Token/refresh_token")
                 // Get returned stream, parse, and place in jsonObject
-                val reader=httpsURLConnectionSC.inputStream.bufferedReader()
-                val response=reader.readText()
+                val reader = httpsURLConnectionSC.inputStream.bufferedReader()
+                val response = reader.readText()
                 val jsonObject = JSONObject(response)
 
                 // If need to confirm or double-check the returned access_token and refresh_token,
@@ -247,14 +277,13 @@ private const val TAG = "PlayerActivity"
                 // Close and disconnect
                 reader.close()
                 httpsURLConnectionSC.disconnect()
-            }
-            else{
-                Log.e("SoundCloud Auth Connection Error",responseCodeSoundCloudAuth.toString())
-                Log.e("ERROR MESSAGE",httpsURLConnectionSC.responseMessage)
-                if(responseCodeSoundCloudAuth==429){ // Cannot ask for more access tokens because hit the rate_limit
-                    val reader=httpsURLConnectionSC.inputStream.bufferedReader()
-                    val response=reader.readText()
-                    Log.d("RATE LIMIT:",response)
+            } else {
+                Log.e("SoundCloud Auth Connection Error", responseCodeSoundCloudAuth.toString())
+                Log.e("ERROR MESSAGE", httpsURLConnectionSC.responseMessage)
+                if (responseCodeSoundCloudAuth == 429) { // Cannot ask for more access tokens because hit the rate_limit
+                    val reader = httpsURLConnectionSC.inputStream.bufferedReader()
+                    val response = reader.readText()
+                    Log.d("RATE LIMIT:", response)
                     reader.close()
                     httpsURLConnectionSC.disconnect()
                 }
@@ -263,24 +292,24 @@ private const val TAG = "PlayerActivity"
         }
     }
 
-    private fun getStreamingTrack(){
-        GlobalScope.launch(Dispatchers.IO){
+    private fun getStreamingTrack() {
+        GlobalScope.launch(Dispatchers.IO) {
             val accessToken = database.getReference("data/SoundCloud Access Token/access_token")
             //val refreshToken = database.getReference("data/SoundCloud Access Token/refresh_token")
             val audioUrlSC = URL("https://api.soundcloud.com/tracks/${trackId}/streams")
             var audioConnectionSC = audioUrlSC.openConnection() as HttpsURLConnection
             audioConnectionSC.requestMethod = "GET"
-            audioConnectionSC.setRequestProperty("accept","application/json; charset=utf-8")
-            audioConnectionSC.setRequestProperty("Authorization","OAuth $accessToken")
+            audioConnectionSC.setRequestProperty("accept", "application/json; charset=utf-8")
+            audioConnectionSC.setRequestProperty("Authorization", "OAuth $accessToken")
 
             audioConnectionSC.doInput = true
             audioConnectionSC.doOutput = false
 
             //Check if connection is successful
             val responseCodeAudioConnection = audioConnectionSC.responseCode
-            if(responseCodeAudioConnection == HttpURLConnection.HTTP_OK){
-                val response= audioConnectionSC.inputStream.bufferedReader().readText()
-                val jsonObject= JSONTokener(response).nextValue() as JSONObject
+            if (responseCodeAudioConnection == HttpURLConnection.HTTP_OK) {
+                val response = audioConnectionSC.inputStream.bufferedReader().readText()
+                val jsonObject = JSONTokener(response).nextValue() as JSONObject
                 httpStreamUrl = jsonObject.getString("http_mp3_128_url")
                 audioConnectionSC.disconnect()
 
@@ -291,33 +320,29 @@ private const val TAG = "PlayerActivity"
                 myHls1=jsonObject.getString("hls_mp3_128_url")
                 val myHls2=jsonObject.getString("hls_opus_64_url")
                 val myPrev=jsonObject.getString("preview_mp3_128_url")*/
-            }
-            else {
-                Log.e("Track Streaming Error",responseCodeAudioConnection.toString())
-                Log.e("ERROR MESSAGE:",audioConnectionSC.responseMessage)
+            } else {
+                Log.e("Track Streaming Error", responseCodeAudioConnection.toString())
+                Log.e("ERROR MESSAGE:", audioConnectionSC.responseMessage)
                 audioConnectionSC.disconnect()
             }
         }
     }
 
-    private fun streamMusic(){
+    private fun streamMusic() {
         val dataSourceFactory = DefaultHttpDataSource.Factory()
             .setAllowCrossProtocolRedirects(true)
         val progressiveMediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri(httpStreamUrl))
         val googleVidSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7?alt=media&key=$Google_Cloud_API_Key"))
-        val testMediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+        val googleAudSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/12CflTXe6_8KKRYOYq0Ssx41lpQUsJXip?alt=media&key=$Google_Cloud_API_Key"))
-        audioPlayer.setMediaSource(testMediaSource)
-
+        audioPlayer.setMediaSource(googleAudSource)
         videoPlayer.setMediaSource(googleVidSource)
-
-        videoPlayer.prepare()
-        videoPlayer.play()
-
         audioPlayer.prepare()
+        videoPlayer.prepare()
         audioPlayer.play()
+        videoPlayer.play()
 
     }
 
@@ -328,59 +353,86 @@ private const val TAG = "PlayerActivity"
     }*/
 
     @SuppressLint("UnsafeOptInUsageError")
-    private fun setupPlayer(){
-        val renderersFactory = buildRenderersFactory(this,true)
-        val mediaSourceFactory = DefaultMediaSourceFactory(getDataSourceFactory(this),DefaultExtractorsFactory())
+    private fun setupPlayer() {
+        val renderersFactory = buildRenderersFactory(this, true)
+        val mediaSourceFactory =
+            DefaultMediaSourceFactory(getDataSourceFactory(this), DefaultExtractorsFactory())
         val trackSelector = DefaultTrackSelector(this)
         videoPlayer = ExoPlayer.Builder(this)
             .setTrackSelector(trackSelector)
             .setRenderersFactory(renderersFactory)
             .setMediaSourceFactory(mediaSourceFactory)
             .setUseLazyPreparation(true)
-            .build().apply{
-                trackSelectionParameters = DefaultTrackSelector.Parameters.getDefaults(applicationContext)
-                playWhenReady=false
+            .build().apply {
+                trackSelectionParameters =
+                    DefaultTrackSelector.Parameters.getDefaults(applicationContext)
+                playWhenReady = false
             }
-        videoPlayer.repeatMode = Player.REPEAT_MODE_ALL // Constantly repeats the video stream over and over for the length of the audio
+        videoPlayer.repeatMode =
+            Player.REPEAT_MODE_ALL // Constantly repeats the video stream over and over for the length of the audio
         videoPlayer.volume = 0f // Mutes any audio coming from the video stream
         videoPlayerView = findViewById(R.id.gm_player_video)
         videoPlayerView.player = videoPlayer
-        videoPlayerView.useController = false
+        videoPlayerView.useController = true
+        videoPlayerView.setShowNextButton(false)
+        videoPlayerView.setShowPreviousButton(false)
 
         audioPlayer = ExoPlayer.Builder(this)
             .setTrackSelector(trackSelector)
             .setRenderersFactory(renderersFactory)
             .setMediaSourceFactory(mediaSourceFactory)
             .setUseLazyPreparation(true)
-            .build().apply{
-                trackSelectionParameters = DefaultTrackSelector.Parameters.getDefaults(applicationContext)
-                playWhenReady=false
+            .build().apply {
+                trackSelectionParameters =
+                    DefaultTrackSelector.Parameters.getDefaults(applicationContext)
+                playWhenReady = false
             }
         audioPlayerView = findViewById(R.id.gm_player_audio)
         audioPlayerView.player = audioPlayer
         audioPlayerView.setBackgroundColor(Color.TRANSPARENT)
-        audioPlayerView.showController()
+        audioPlayerView.useController = true
+        audioPlayerView.setShowRewindButton(true)
+        audioPlayerView.setShowFastForwardButton(true)
+        //audioPlayerView.showController()
 
-        /*val audioPlayerListener = audioPlayer.addListener(
+        val playbackStateBuilder = PlaybackState.Builder()
+            .setActions(PlaybackState.ACTION_PLAY_PAUSE)
+            .setActions(PlaybackState.ACTION_REWIND)
+            .setActions(PlaybackState.ACTION_FAST_FORWARD)
+            .build()
+
+
+          /* val playerControl = PlayerControlView(this)
+           playerControl.findViewById<PlayerControlView>(R.id.gm_player_controlview)
+           playerControl.player = audioPlayer
+           playerControl.show()
+           playerControl.showTimeoutMs = 50*/
+
+        audioPlayer.addListener(playbackStateListener)
+        videoPlayer.addListener(playbackStateListener)
+        //val audioPlayerListener = audioPlayer.addListener(
+
+        audioPlayer.addListener(
             object: Player.Listener {
-                override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    if (isPlaying) {
-                        //active playback
-                    } else {
-                        // Not playing because playback is paused, ended, suppressed, or the player
-                        // is buffering, stopped or failed. Check player.playWhenReady,
-                        // player.playbackState, player.playbackSuppressionReason and
-                        // player.playerError for details.
+                override fun onEvents(player: Player, events: Player.Events) {
+                    super.onEvents(player, events)
+                    if (events.contains(EVENT_IS_PLAYING_CHANGED)){
+                        if (!player.isPlaying){
+                            videoPlayer.pause()
+                        }
+                        else {
+                            videoPlayer.play()
+                        }
                     }
                 }
 
                 override fun onPlayerError(error: PlaybackException) {
                     val cause = error.cause
-                    if (cause is HttpDataSourceException){
+                    if (cause is HttpDataSource.HttpDataSourceException){
                         //An HTTP error occurred.
                         val httpError = cause
                         //It's possible to find out more about the error both by casting and querying the cause
-                        if (httpError is InvalidResponseCodeException){
+                        if (httpError is HttpDataSource.InvalidResponseCodeException){
                             // Cast to InvalidResponseCodeException and retrieve the response code, message
                             // and headers.
                         } else {
@@ -390,13 +442,13 @@ private const val TAG = "PlayerActivity"
                     }
                 }
             }
-        )*/
-
-        //videoPlayer.addListener(this)
+        )
     }
-    private fun buildRenderersFactory(context: Context, preferExtensionRenderer:Boolean
+
+    private fun buildRenderersFactory(
+        context: Context, preferExtensionRenderer: Boolean
     ): RenderersFactory {
-        val extensionRendererMode=if(preferExtensionRenderer)
+        val extensionRendererMode = if (preferExtensionRenderer)
             DefaultRenderersFactory.EXTENSION_RENDERER_MODE_PREFER
         else DefaultRenderersFactory.EXTENSION_RENDERER_MODE_ON
 
@@ -404,39 +456,107 @@ private const val TAG = "PlayerActivity"
             .setExtensionRendererMode(extensionRendererMode)
             .setEnableDecoderFallback(true)
     }
-    private fun getDataSourceFactory(context:Context): DataSource.Factory=
-    DefaultDataSource.Factory(context,getHttpDataSourceFactory())
 
-    private fun getHttpDataSourceFactory(): HttpDataSource.Factory{
+    private fun getDataSourceFactory(context: Context): DataSource.Factory =
+        DefaultDataSource.Factory(context, getHttpDataSourceFactory())
+
+    private fun getHttpDataSourceFactory(): HttpDataSource.Factory {
         return DefaultHttpDataSource.Factory()
             .setAllowCrossProtocolRedirects(true)
     }
-private fun playbackStateListener() = object : Player.Listener {
-    override fun onPlaybackStateChanged(playbackState: Int) {
-        super.onPlaybackStateChanged(playbackState)
-        val stateString: String = when (playbackState) {
-            Player.STATE_IDLE -> "Player.STATE_IDLE      -"
-            Player.STATE_BUFFERING -> "Player.STATE_BUFFERING -"
-            Player.STATE_READY -> "Player.STATE_READY     -"
-            Player.STATE_ENDED -> "Player.STATE_ENDED     -"
-            else -> "UNKNOWN_STATE             -"
-        }
-        Log.d(TAG, "changed player state to $stateString")
-    }
-}
 
-    override fun onStop(){
+    override fun onEvents(player: Player, events: Player.Events) {
+        super.onEvents(player, events)
+        if (events.contains(Player.EVENT_IS_PLAYING_CHANGED)) {
+            audioPlayer.pause()
+            videoPlayer.pause()
+        }
+    }
+    private fun playbackStateListener() = object : Player.Listener {
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            super.onPlaybackStateChanged(playbackState)
+            val stateString: String = when (playbackState) {
+                Player.STATE_IDLE -> "Player.STATE_IDLE      -"
+                Player.STATE_BUFFERING -> "Player.STATE_BUFFERING -"
+                Player.STATE_READY -> "Player.STATE_READY     -"
+                Player.STATE_ENDED -> "Player.STATE_ENDED     -"
+                else -> "UNKNOWN_STATE             -"
+            }
+            Log.d(TAG, "changed player state to $stateString")
+        }
+    }
+        /*override fun onIsPlayingChanged(isPlaying: Boolean) {
+            super.onIsPlayingChanged(isPlaying)
+            if (isPlaying) {
+                //active playback
+            } else {
+                // Not playing because playback is paused, ended, suppressed, or the player
+                // is buffering, stopped or failed. Check player.playWhenReady,
+                // player.playbackState, player.playbackSuppressionReason and
+                // player.playerError for details.
+            }
+        }
+*/
+        /*override fun onPlayerError(error: PlaybackException) {
+            val cause = error.cause
+            if (cause is HttpDataSource.HttpDataSourceException) {
+                //An HTTP error occurred.
+                val httpError = cause
+                //It's possible to find out more about the error both by casting and querying the cause
+                if (httpError is HttpDataSource.InvalidResponseCodeException) {
+                    // Cast to InvalidResponseCodeException and retrieve the response code, message
+                    // and headers.
+                } else {
+                    // Try calling httpError.getCause() to retrieve the underlying cause, although
+                    // note that it may be null.
+                }
+            }
+        }*/
+    /*override fun onStart() {
+        super.onStart()
+        if (Build.VERSION.SDK_INT > 23) {
+            initializePlayer()
+            if (playerView != null) {
+                playerView.onResume()
+            }
+        }
+    }*/
+
+    override fun onResume() {
+        super.onResume()
+        audioPlayerView.onResume()
+        videoPlayerView.onResume()
+        /*if (Build.VERSION.SDK_INT <= 23 || player == null) {
+            initializePlayer()
+            if (playerView != null) {
+                playerView.onResume()
+            }
+        }*/
+    }
+
+    override fun onPause() {
+        super.onPause()
+        audioPlayerView.onPause()
+        videoPlayerView.onPause()
+        /*if (Build.VERSION.SDK_INT <= 23) {
+            if (audioPlayerView.player != null) {
+                audioPlayerView.onPause()
+            }
+            releasePlayer()
+        }*/
+    }
+
+    override fun onStop() {
         super.onStop()
-       // audioPlayer.playWhenReady=false
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         audioPlayer.removeListener(playbackStateListener)
-        //videoPlayer.removeListener(playbackStateListener)
-        //videoPlayer.release()
+        videoPlayer.removeListener(playbackStateListener)
+        videoPlayer.release()
         audioPlayer.release()
     }
 
-    override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata){
+    override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
         super.onMediaMetadataChanged(mediaMetadata)
-        audioTitle.text=mediaMetadata.title?:mediaMetadata.displayTitle?: "Title not found"
+        audioTitle.text = mediaMetadata.title ?: mediaMetadata.displayTitle ?: "Title not found"
     }
 }
