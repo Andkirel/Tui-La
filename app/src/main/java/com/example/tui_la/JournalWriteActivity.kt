@@ -14,7 +14,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.time.LocalDateTime
 import java.util.Calendar
 
 class JournalWriteActivity : AppCompatActivity() {
@@ -28,8 +27,9 @@ class JournalWriteActivity : AppCompatActivity() {
     private lateinit var journalEntry: String
     private lateinit var currentDate: String
     private lateinit var currentTime: String
-
     private var journalEmotion: Int = 0
+
+    private val emoteMap = EmotionMap()
 
     private var entryKey: String = ""
 
@@ -47,13 +47,23 @@ class JournalWriteActivity : AppCompatActivity() {
     }
 
     fun save(view: View) {
+        journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
+        journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
+        journalEmotion //= findViewById<ImageView>(R.id.journalWriteEmotion)
+
+
+            //Icon.Afraid.getValue()
+
+
+
+
         if (entryKey.isBlank()) {
 
-            // get all of the fields that have data
+           /* // get all of the fields that have data
             journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
             journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
-            /*journalEmotion = findViewById<ImageView>(R.id.journalWriteEmotion)*/
-
+            journalEmotion = emoteMap.getDrawableKey(findViewById<ImageView>(R.id.journalWriteEmotion).drawable.toString())
+*/
             // gets the calendar date and time
             val calendar = Calendar.getInstance().time
             currentDate = DateFormat.getDateInstance().format(calendar)
@@ -64,20 +74,20 @@ class JournalWriteActivity : AppCompatActivity() {
                 journalTitle,
                 currentTime,
                 currentDate,
-                journalEntry/*,journalEmotion*/
+                journalEntry,
+                journalEmotion
             )
         } else {
-
-            journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
+            /*journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
             journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
-            /*journalEmotion = findViewById<ImageView>(R.id.journalWriteEmotion)*/
-
-            updateEntry(auth.uid!!, journalTitle, journalEntry/*,journalEmotion*/)
+            journalEmotion = emoteMap.getDrawableKey(findViewById<ImageView>(R.id.journalWriteEmotion).drawable.toString())
+*/
+            updateEntry(auth.uid!!, journalTitle, journalEntry,journalEmotion)
         }
     }
 
-    private fun writeNewJournalData(userId: String, title: String, time: String, date: String, entry: String/*, emotion: DrawableRes*/){
-        val data = JournalData(title,time,date,entry,0)
+    private fun writeNewJournalData(userId: String, title: String, time: String, date: String, entry: String, emotion: Int){
+        val data = JournalData(title,time,date,entry,emotion)
 
         val journalId = firebaseReference.push().key!!
         
@@ -100,8 +110,18 @@ class JournalWriteActivity : AppCompatActivity() {
 
             findViewById<TextView>(R.id.journalWriteEntryTitle).text = intent.getStringExtra("journalTitle")
             findViewById<TextView>(R.id.journalWriteEntry).text = intent.getStringExtra("journalEntry")
-            /*findViewById<ImageView>(R.id.journalWriteEmotion).drawable*/
 
+            //findViewById<ImageView>(R.id.journalWriteEmotion).setBackgroundResource(R.drawable.happy)
+
+            // hard code functionality
+            //findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(R.drawable.happy)
+
+            // enum enabled, needs more code for variability
+            //findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(Icon.Happy.resourceId)
+
+            // fully variable support with hashmap keys/values
+            findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(
+                emoteMap.getDrawableValue(intent.getIntExtra("journalEmotion",0)))
 
         }
     }
@@ -112,8 +132,8 @@ class JournalWriteActivity : AppCompatActivity() {
         startActivity(journalTable)
     }
 
-    private fun updateEntry(userId: String, title: String, entry: String/*, emotion: DrawableRes*/) {
-        val data = JournalData(title,currentTime,currentDate,entry,0)
+    private fun updateEntry(userId: String, title: String, entry: String, emotion: Int) {
+        val data = JournalData(title,currentTime,currentDate,entry,emotion)
 
         firebaseReference.child("users").child(userId).child("Journal").child(entryKey).setValue(data)
             .addOnCompleteListener{

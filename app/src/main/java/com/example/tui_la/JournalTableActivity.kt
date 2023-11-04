@@ -42,7 +42,6 @@ class JournalTableActivity : AppCompatActivity() {
         auth = Firebase.auth
         auth.signInWithEmailAndPassword(email, password)
         firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(auth.uid!!).child("Journal")
-        //firebaseReference = Firebase.database.
 
         // getting the recyclerview by its id
         journalRecyclerView = findViewById(R.id.rvJournal)
@@ -66,9 +65,6 @@ class JournalTableActivity : AppCompatActivity() {
                     for (key in snapshot.children) {
                         val userData = key.getValue(JournalData::class.java)
                         journalArrayList.add(userData!!)
-                        // each string is currently the entire data snapshot
-                        //entryKeyList.add(key.toString())
-                        //entryKeyList.add(key.getValue().toString())
                         entryKeyList.add(key.key.toString())
                     }
                     // Setting the adapter to the recyclerview
@@ -86,6 +82,7 @@ class JournalTableActivity : AppCompatActivity() {
                             journalWrite.putExtra("journalId", entryKeyList[position])
                             journalWrite.putExtra("journalTime", journalArrayList[position].time)
                             journalWrite.putExtra("journalDate", journalArrayList[position].date)
+                            journalWrite.putExtra("journalEmotion", journalArrayList[position].emotion)
 
                             startActivity(journalWrite)
                         }

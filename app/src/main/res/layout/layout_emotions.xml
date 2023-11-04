@@ -58,7 +58,7 @@
         android:contentDescription="@string/emoji_relaxed_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Text_happy"
-        app:srcCompat="@drawable/afraid" />
+        app:srcCompat="@drawable/Afraid" />
 
     <ImageButton
         android:id="@+id/Button_Emotions_Loved"

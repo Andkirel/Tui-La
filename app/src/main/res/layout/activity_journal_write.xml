@@ -45,6 +45,8 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+
+
     <ImageView
         android:id="@+id/journalWriteEmotion"
         android:layout_width="84dp"
