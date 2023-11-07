@@ -5,7 +5,9 @@ import android.icu.text.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 
@@ -29,6 +31,9 @@ class JournalWriteActivity : AppCompatActivity() {
     private lateinit var currentTime: String
     private var journalEmotion: Int = 0
 
+    private  var emotionSpinner: Spinner = findViewById<Spinner>(R.id.journalWriteSpinner)
+    private lateinit var setImage: ImageView
+
     private val emoteMap = EmotionMap()
 
     private var entryKey: String = ""
@@ -41,6 +46,10 @@ class JournalWriteActivity : AppCompatActivity() {
         auth = Firebase.auth
         auth.signInWithEmailAndPassword(email, password)
         firebaseReference = Firebase.database.reference
+
+
+        // spinner layout
+        setJournalSpinner()
 
         // set the fields using firebase data if available
         setJournalData()
@@ -120,13 +129,13 @@ class JournalWriteActivity : AppCompatActivity() {
             //findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(Icon.Happy.resourceId)
 
             // fully variable support with hashmap keys/values
-            findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(
-                emoteMap.getDrawableValue(intent.getIntExtra("journalEmotion",0)))
+            /*findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(
+                emoteMap.getDrawableValue(intent.getIntExtra("journalEmotion",0)))*/
 
         }
     }
 
-    fun back(view: View) {
+    private fun back(view: View) {
         val journalTable = Intent(this, JournalTableActivity::class.java)
 
         startActivity(journalTable)
@@ -147,4 +156,23 @@ class JournalWriteActivity : AppCompatActivity() {
     private fun delete(){
 
     }
+
+    private fun setJournalSpinner() {
+        val adapter = JournalSpinnerAdapter(Icon.Emotions.list!!,this)
+        emotionSpinner.adapter = adapter
+
+        emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent!!.getItemAtPosition(position)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+
+        }
+
+    }
+
 }
