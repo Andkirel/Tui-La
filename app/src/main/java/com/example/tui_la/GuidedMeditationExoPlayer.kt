@@ -2,8 +2,8 @@ package com.example.tui_la
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
-import android.media.session.PlaybackState
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,7 +15,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.common.MediaItem.fromUri
 import androidx.media3.common.MediaMetadata
-import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.Player.EVENT_IS_PLAYING_CHANGED
 import androidx.media3.common.util.UnstableApi
@@ -32,16 +31,13 @@ import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.extractor.DefaultExtractorsFactory
 import androidx.media3.ui.PlayerControlView
 import androidx.media3.ui.PlayerView
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.api.client.googleapis.extensions.android.accounts.GoogleAccountManager
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential
 import com.google.api.services.drive.DriveScopes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -52,6 +48,7 @@ import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.DataOutputStream
+import java.io.FileInputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
@@ -62,7 +59,7 @@ import javax.net.ssl.HttpsURLConnection
 //!!DO NOT CHANGE THE BELOW STRINGS. They are necessary to access the SoundCloud API AND Google Drive APIs.!!//
 private const val SC_Client_ID = "7mveilIe54NH0aS3LBqBdkJuyo8CCvIu"
 private const val SC_Client_Secret = "gdzGo4IE4O3AmipQwvu6TGDE52sKBiJY"
-private const val Google_Cloud_API_Key = "AIzaSyA6n51QSYLze9UusF2luIrpk3momzDcm3w"
+private const val Google_Cloud_API_Key = "AIzaSyCct_GWWBsyE9UEdfDhzNi_zWqAr3z2SlY"
 private const val Tui_La_Service_Email =
     "tui-la-admin@tui-la-guided-meditation.iam.gserviceaccount.com"
 private const val Tui_La_Service_Key_ID = "bb19377f0716e67b35ed30e309f3c51e4a8fee2f"
@@ -72,11 +69,14 @@ private const val Tui_La_Google_Client_ID_Web_Application =
     "156633646436-t251lu3n50kpmnstfham4ubj8pd34in9.apps.googleusercontent.com"
 private const val Tui_La_Google_Client_Web_Client_Secret = "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"
 private const val Tui_La_Google_Authorized_Redirect_Uri = "https://tui-la.com/callback"
+private const val Google_Authorization_Code = "ya29.a0AfB_byAua2eZiPUySdgoYbS69sk7e3hCtlRQOL340KH5Rwi1WG7-lb1i2inUjARkhp8Z6JMY9MAuStHHA-b5RMpz5t8OVvunR9OJ0uzn_PSS6RF3CEeBSoosIB1faCwnL5OniJZMBy9qaTF5wYwI8Qddury5rz06wIP0NgANOXQW-moC3dvP-r58R-Ngcy2fk7sm0RO9kxUuV7axGTHc1VodMZpWZBT6wEoyGREa7MU2jV-wklDKTnZhtIg7VcjgtWIuoqS3axWl0iC6uOJbNDYQ5PV7-AkPY662q5J8aOfsbnz2WPCs-BuYwO4Ul_FPrm9vdRwGk84m4j-dkSqAL-ikNhiXAi-GfZrLyEIdXXKqJx3FwgNhAg3oLduDSK3GL-1qKfH4jRh7zdOR9E4AU-MAf2g2bmcaCgYKAd4SARASFQHGX2Mi3fW3tgtKI10hLcRDqNPyjg0422"
 
 var accessToken = ""
 var refreshToken = ""
 var httpStreamUrl = ""
 var trackId = 1074950746
+val credentialsFile = FileInputStream("gdrive-tui-la-admin")
+
 private const val TAG = "PlayerActivity"
 
 @UnstableApi
@@ -148,38 +148,42 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
             }
             launch {
                 delay(1000)
-                getStreamingTrack()
+                //getStreamingTrack()
             }
-            googleDriveAuthorization()
+            //googleDriveAuthorization()
         }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        backButton.setOnClickListener { onStop() }
     }
 
     private fun googleDriveAuthorization() {
-        val accManager = GoogleAccountManager(this)
+        /*val accManager = GoogleAccountManager(this)
         val myAccount = accManager.getAccountByName(Tui_La_Service_Email)
         val myCredential = GoogleAccountCredential.usingOAuth2(
-            applicationContext,
-            listOf(DriveScopes.DRIVE, DriveScopes.DRIVE_FILE)
+            this, listOf(DriveScopes.DRIVE, DriveScopes.DRIVE_FILE)
         )
             .setSelectedAccount(myAccount)
-        GoogleSignIn.getLastSignedInAccount(myCredential.context)
-
+            .setSelectedAccountName(Tui_La_Service_Email)
+        val googleAccessToken = myCredential.token
+        Log.i("GoogleAccessToken",googleAccessToken)*/
+        //GoogleSignIn.getLastSignedInAccount(myCredential.context)
+        val credentials = GoogleCredential.fromStream(credentialsFile)
+            .createScoped(DriveScopes.all())
+            .createDelegated(Tui_La_Service_Email)
+        val tok = credentials.accessToken
+        Log.i("GoogleTok",tok)
         GlobalScope.launch(Dispatchers.IO) {
             val authUrlGoogle = URL("https://accounts.google.com/o/oauth2/v2/auth")
             val authGoogleURLConnection = authUrlGoogle.openConnection() as HttpsURLConnection
+            authGoogleURLConnection.requestMethod = "POST"
             authGoogleURLConnection.setRequestProperty("client_id", Tui_La_Service_OAuth2_Client_ID)
             authGoogleURLConnection.setRequestProperty(
                 "redirect_uri",
                 "https://www.googleapis.com/drive/v3/drives"
             )
             authGoogleURLConnection.setRequestProperty("response_type", "code")
-            authGoogleURLConnection.setRequestProperty(
-                "scopes",
-                "https://www.googleapis.com/auth/drive"
-            )
-            authGoogleURLConnection.setRequestProperty(
-                "Authorization: Bearer",
+            authGoogleURLConnection.setRequestProperty("scopes", "https://www.googleapis.com/auth/drive")
+            authGoogleURLConnection.setRequestProperty("Authorization: Bearer",
                 Tui_La_Service_OAuth2_Client_ID
             )
             authGoogleURLConnection.setRequestProperty("Accept", "application/json")
@@ -188,35 +192,17 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
 
             //Check if connection is successful
             val responseCodeGoogleAuth = authGoogleURLConnection.responseCode
-            if (responseCodeGoogleAuth == HttpURLConnection.HTTP_OK) {
-                //Folder ID: 1S2sGWvIeG3kKtECt200Q92WwgmXnEvZX
-                //File ID: 1RMdKtJUQoYA4t1KfycAuq24QizkKemx7
-                //val url = URL("https://www.googleapis.com/drive/v3/folders/1S2sGWvIeG3kKtECt200Q92WwgmXnEvZX HTTP/1.1")
-                val fileUrl =
-                    URL("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7 HTTP/1.1")
-
-                authGoogleURLConnection.url.sameFile(fileUrl) // Uses the same connection that was confirmed by OAuth2 to access the file.
-                authGoogleURLConnection.connect()
-                authGoogleURLConnection.requestMethod = "GET"
-
-                val responseCodeGoogleGetFile = authGoogleURLConnection.responseCode
-                if (responseCodeGoogleGetFile == HttpURLConnection.HTTP_OK) {
-                    val reader = authGoogleURLConnection.inputStream.bufferedReader()
-                    val response1 = reader.readText()
-                    val jsonObject1 = Gson().toJson(response1).toString()
-
-                    Log.i("Response Message: ", responseCodeGoogleGetFile.toString())
-                    reader.close()
-                    authGoogleURLConnection.disconnect()
-                } else {
-                    Log.e("Google Drive Connection Error", responseCodeGoogleGetFile.toString())
-                    Log.e("ERROR MESSAGE", authGoogleURLConnection.responseMessage)
-                }
-            } else {
-                Log.e("Authorization Connection Error", responseCodeGoogleAuth.toString())
-                Log.e("ERROR MESSAGE", authGoogleURLConnection.responseMessage)
+            if(responseCodeGoogleAuth == HttpURLConnection.HTTP_OK){
+                val reader = authGoogleURLConnection.inputStream.bufferedReader()
+                val response1 = reader.readText()
+                //Log.i("responseGoogleAuthReturnMessage",response1)
+            }
+            else{
+                Log.i("Google Auth Error Code", authGoogleURLConnection.responseCode.toString())
+                Log.i("Google Auth Error",authGoogleURLConnection.responseMessage)
             }
         }
+
     }
 
     private fun postAuthorization() {
@@ -331,13 +317,16 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
     private fun streamMusic() {
         val dataSourceFactory = DefaultHttpDataSource.Factory()
             .setAllowCrossProtocolRedirects(true)
-        val progressiveMediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(fromUri(httpStreamUrl))
+        //val progressiveMediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
+            //.createMediaSource(fromUri(httpStreamUrl))
         val googleVidSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7?alt=media&key=$Google_Cloud_API_Key"))
         val googleAudSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/12CflTXe6_8KKRYOYq0Ssx41lpQUsJXip?alt=media&key=$Google_Cloud_API_Key"))
+        val audSourceTest = ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/1uW0z7nqH6Yn0ADf9FT42kGJdP1Y6X_5P?alt=media&key=$Google_Cloud_API_Key"))
         audioPlayer.setMediaSource(googleAudSource)
+        audioPlayer.seekTo(0)
         videoPlayer.setMediaSource(googleVidSource)
         audioPlayer.prepare()
         videoPlayer.prepare()
@@ -373,9 +362,7 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
         videoPlayer.volume = 0f // Mutes any audio coming from the video stream
         videoPlayerView = findViewById(R.id.gm_player_video)
         videoPlayerView.player = videoPlayer
-        videoPlayerView.useController = true
-        videoPlayerView.setShowNextButton(false)
-        videoPlayerView.setShowPreviousButton(false)
+        videoPlayerView.useController = false
 
         audioPlayer = ExoPlayer.Builder(this)
             .setTrackSelector(trackSelector)
@@ -387,30 +374,11 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
                     DefaultTrackSelector.Parameters.getDefaults(applicationContext)
                 playWhenReady = false
             }
+        audioPlayer.seekToDefaultPosition()
         audioPlayerView = findViewById(R.id.gm_player_audio)
         audioPlayerView.player = audioPlayer
         audioPlayerView.setBackgroundColor(Color.TRANSPARENT)
         audioPlayerView.useController = true
-        audioPlayerView.setShowRewindButton(true)
-        audioPlayerView.setShowFastForwardButton(true)
-        //audioPlayerView.showController()
-
-        val playbackStateBuilder = PlaybackState.Builder()
-            .setActions(PlaybackState.ACTION_PLAY_PAUSE)
-            .setActions(PlaybackState.ACTION_REWIND)
-            .setActions(PlaybackState.ACTION_FAST_FORWARD)
-            .build()
-
-
-          /* val playerControl = PlayerControlView(this)
-           playerControl.findViewById<PlayerControlView>(R.id.gm_player_controlview)
-           playerControl.player = audioPlayer
-           playerControl.show()
-           playerControl.showTimeoutMs = 50*/
-
-        audioPlayer.addListener(playbackStateListener)
-        videoPlayer.addListener(playbackStateListener)
-        //val audioPlayerListener = audioPlayer.addListener(
 
         audioPlayer.addListener(
             object: Player.Listener {
@@ -422,22 +390,6 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
                         }
                         else {
                             videoPlayer.play()
-                        }
-                    }
-                }
-
-                override fun onPlayerError(error: PlaybackException) {
-                    val cause = error.cause
-                    if (cause is HttpDataSource.HttpDataSourceException){
-                        //An HTTP error occurred.
-                        val httpError = cause
-                        //It's possible to find out more about the error both by casting and querying the cause
-                        if (httpError is HttpDataSource.InvalidResponseCodeException){
-                            // Cast to InvalidResponseCodeException and retrieve the response code, message
-                            // and headers.
-                        } else {
-                            // Try calling httpError.getCause() to retrieve the underlying cause, although
-                            // note that it may be null.
                         }
                     }
                 }
@@ -512,39 +464,6 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
                 }
             }
         }*/
-    /*override fun onStart() {
-        super.onStart()
-        if (Build.VERSION.SDK_INT > 23) {
-            initializePlayer()
-            if (playerView != null) {
-                playerView.onResume()
-            }
-        }
-    }*/
-
-    override fun onResume() {
-        super.onResume()
-        audioPlayerView.onResume()
-        videoPlayerView.onResume()
-        /*if (Build.VERSION.SDK_INT <= 23 || player == null) {
-            initializePlayer()
-            if (playerView != null) {
-                playerView.onResume()
-            }
-        }*/
-    }
-
-    override fun onPause() {
-        super.onPause()
-        audioPlayerView.onPause()
-        videoPlayerView.onPause()
-        /*if (Build.VERSION.SDK_INT <= 23) {
-            if (audioPlayerView.player != null) {
-                audioPlayerView.onPause()
-            }
-            releasePlayer()
-        }*/
-    }
 
     override fun onStop() {
         super.onStop()
@@ -553,6 +472,9 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
         videoPlayer.removeListener(playbackStateListener)
         videoPlayer.release()
         audioPlayer.release()
+        finish()
+        val intent = Intent(this,GuidedMeditationActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
