@@ -1,6 +1,7 @@
 package com.example.tui_la
 
 import android.content.Intent
+import android.graphics.drawable.Icon
 import android.icu.text.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,7 @@ class JournalWriteActivity : AppCompatActivity() {
     private val password = "abcdef"
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var uId: String
     private lateinit var firebaseReference: DatabaseReference
 
     private lateinit var journalTitle: String
@@ -31,10 +33,10 @@ class JournalWriteActivity : AppCompatActivity() {
     private lateinit var currentTime: String
     private var journalEmotion: Int = 0
 
-    private  var emotionSpinner: Spinner = findViewById<Spinner>(R.id.journalWriteSpinner)
+    private lateinit var emotionSpinner: Spinner
     private lateinit var setImage: ImageView
 
-    private val emoteMap = EmotionMap()
+    //private val emoteMap = EmotionMap()
 
     private var entryKey: String = ""
 
@@ -47,7 +49,6 @@ class JournalWriteActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
         firebaseReference = Firebase.database.reference
 
-
         // spinner layout
         setJournalSpinner()
 
@@ -58,13 +59,9 @@ class JournalWriteActivity : AppCompatActivity() {
     fun save(view: View) {
         journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
         journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
-        journalEmotion //= findViewById<ImageView>(R.id.journalWriteEmotion)
-
+        //journalEmotion findViewById<ImageView>(R.id.journalWriteEmotion)
 
             //Icon.Afraid.getValue()
-
-
-
 
         if (entryKey.isBlank()) {
 
@@ -84,14 +81,14 @@ class JournalWriteActivity : AppCompatActivity() {
                 currentTime,
                 currentDate,
                 journalEntry,
-                journalEmotion
+                0
             )
         } else {
             /*journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
             journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
             journalEmotion = emoteMap.getDrawableKey(findViewById<ImageView>(R.id.journalWriteEmotion).drawable.toString())
 */
-            updateEntry(auth.uid!!, journalTitle, journalEntry,journalEmotion)
+            updateEntry(auth.uid!!, journalTitle, journalEntry,0)
         }
     }
 
@@ -135,14 +132,14 @@ class JournalWriteActivity : AppCompatActivity() {
         }
     }
 
-    private fun back(view: View) {
+    fun back(view: View) {
         val journalTable = Intent(this, JournalTableActivity::class.java)
 
         startActivity(journalTable)
     }
 
     private fun updateEntry(userId: String, title: String, entry: String, emotion: Int) {
-        val data = JournalData(title,currentTime,currentDate,entry,emotion)
+        val data = JournalData(title,currentTime,currentDate,entry,0)
 
         firebaseReference.child("users").child(userId).child("Journal").child(entryKey).setValue(data)
             .addOnCompleteListener{
@@ -158,7 +155,9 @@ class JournalWriteActivity : AppCompatActivity() {
     }
 
     private fun setJournalSpinner() {
-        val adapter = JournalSpinnerAdapter(Icon.Emotions.list!!,this)
+        emotionSpinner = findViewById(R.id.journalWriteSpinner)
+        val adapter = JournalSpinnerAdapter(Emotions.list!!,this)
+
         emotionSpinner.adapter = adapter
 
         emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -169,10 +168,6 @@ class JournalWriteActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
-
         }
-
     }
-
 }

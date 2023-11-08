@@ -47,19 +47,16 @@
 
     <Spinner
         android:id="@+id/journalWriteSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <ImageView
-        android:id="@+id/journalWriteEmotion"
-        android:layout_width="84dp"
-        android:layout_height="84dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@id/journalWriteEntry"
         app:layout_constraintEnd_toStartOf="@id/journalWriteEntryTitle"
+        android:background="#00000000"
+
         />
+
 
     <EditText
         android:id="@+id/journalWriteEntryTitle"

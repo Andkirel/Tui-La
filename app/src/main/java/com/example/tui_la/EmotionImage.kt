@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.google.firebase.annotations.concurrent.Background
 import com.google.firebase.crashlytics.internal.model.CrashlyticsReport.Session.Event.Application.Execution.Thread.Frame
+/*
 
 class EmotionImage : FrameLayout {
 
     private lateinit var rootLayout: FrameLayout
-    private lateinit var background: Icon
+    private lateinit var background: Emotion
     constructor(context: Context) : super (context) {
         initEmotionImage(context)
     }
@@ -29,4 +30,4 @@ class EmotionImage : FrameLayout {
         LayoutInflater.from(context).inflate(R.layout.layout_emotion_image, this, true)
         rootLayout = findViewById(R.id.emotion_root_layout)
     }
-}
+}*/

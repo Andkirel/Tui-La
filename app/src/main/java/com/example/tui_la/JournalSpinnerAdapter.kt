@@ -1,6 +1,7 @@
 package com.example.tui_la
 
 import android.content.Context
+import android.graphics.drawable.Icon
 import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.Int as Int
 
-class JournalSpinnerAdapter(private var emotionList : MutableList<Icon>, context: Context,
-    ) : ArrayAdapter<Icon>(context, 0, emotionList) {
+class JournalSpinnerAdapter(private var emotionList : MutableList<Emotion>, context: Context,
+    ) : ArrayAdapter<Emotion>(context, 0, emotionList) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return initView(position, convertView, parent)
@@ -28,6 +29,10 @@ class JournalSpinnerAdapter(private var emotionList : MutableList<Icon>, context
 
         val view = convertView?: LayoutInflater.from(context).inflate(R.layout.layout_journal_spinner_items,parent,false)
         view.findViewById<ImageView>(R.id.spinnerImage).setImageResource(emotion!!.image)
+        //view.findViewById<ImageView>(R.id.spinnerImage).background.equals(R.color.non)
+
+
+        //android:background="@android:color/transparent"
 
         return view
     }

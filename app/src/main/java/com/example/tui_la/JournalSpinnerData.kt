@@ -1,4 +1,4 @@
 package com.example.tui_la
 
-data class JournalSpinnerData (val icon: Icon) {
+data class JournalSpinnerData (val icon: Emotion) {
 }
