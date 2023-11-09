@@ -45,28 +45,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/breathing_inflatable_logo"
-        android:layout_width="100dp"
-        android:layout_height="175dp"
-        android:layout_marginTop="50dp"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:contentDescription=""
-        android:focusable="true"
-        android:longClickable="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_breathing_start_stop"
-        app:srcCompat="@drawable/logo" />
-
-    <ImageButton
         android:id="@+id/breathing_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:layout_marginTop="7dp"
+        android:contentDescription=""
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -93,4 +77,44 @@
         app:layout_constraintTop_toTopOf="@id/breathing_timer_progress"
         app:layout_constraintBottom_toBottomOf="@id/breathing_timer_progress"
         />
+
+    <androidx.constraintlayout.helper.widget.Layer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="breathing_inflatable_logo,breathing_circle_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_breathing_start_stop"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="485dp" />
+
+    <ImageButton
+        android:id="@+id/breathing_inflatable_logo"
+        android:layout_width="100dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:contentDescription=""
+        android:focusable="true"
+        android:longClickable="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_breathing_start_stop"
+        app:srcCompat="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/breathing_circle_outline"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="97dp"
+        android:contentDescription=""
+        android:src="@drawable/circle_outline_thin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_breathing_start_stop" />
 </androidx.constraintlayout.widget.ConstraintLayout>
