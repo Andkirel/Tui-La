@@ -9,13 +9,25 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import android.content.Context
+
 
 class LogInFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private var communicator: ICommunicatorLogin? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is ICommunicatorLogin) {
+            communicator = context
+        } else {
+            throw RuntimeException("$context must implement Interface for Login")
+        }
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
+        inflater: LayoutInflater, 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -42,12 +54,8 @@ class LogInFragment : Fragment() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val uid = auth.currentUser?.uid ?: return@addOnCompleteListener
-                        val bundle = Bundle().apply {
-                            putString("UID", uid)
-                        }
-                        val welcomeBackFragment = WelcomeBackFragment()
-                        welcomeBackFragment.arguments = bundle
-                        (activity as? LogInActivity)?.replaceFragment(welcomeBackFragment)
+                        // Using the interface to pass UID to the activity
+                        communicator?.passDataToFragment(uid, "AnySecondaryDataYouWantToPass")
                     } else {
                         Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
@@ -55,5 +63,10 @@ class LogInFragment : Fragment() {
         }
 
         return view
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        communicator = null
     }
 }
