@@ -5,7 +5,9 @@ import androidx.annotation.DrawableRes
 data class GuidedMeditationData (
     var trackName: String,
     val trackId: Int,
-    @DrawableRes val gmImages: Int
+    @DrawableRes val gmImages: Int,
+    val audIds: String,
+    val vidIds: String
 )
 
 object GuidedMeditationDataRepo {
