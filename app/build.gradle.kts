@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.tui_la"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.tui_la"
@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    composeOptions{
+        kotlinCompilerExtensionVersion = "1.4.1"
+    }
     buildFeatures {
         viewBinding = true
         compose = true
@@ -43,6 +46,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.compose.animation:animation-core-android:1.5.4")
     val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -52,7 +56,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
-    implementation("androidx.compose.ui:ui-tooling:1.5.0")
+    implementation("androidx.compose.ui:ui-tooling:1.5.4")
 
     implementation ("com.google.android.gms:play-services-ads:22.3.0")
     implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
