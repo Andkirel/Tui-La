@@ -25,12 +25,12 @@ class MainMenu: AppCompatActivity() {
         }
         val Journal = findViewById<Button>(R.id.Button_MainScreen_Jour)
         Journal.setOnClickListener {
-            val Intent = Intent(this, Login_screen::class.java)
+            val Intent = Intent(this, LogInActivity::class.java)
             startActivity(Intent)
         }
         val Records = findViewById<Button>(R.id.Button_MainScreen_Records)
         Records.setOnClickListener {
-            val Intent = Intent(this, Login_screen::class.java)
+            val Intent = Intent(this, LogInActivity::class.java)
             startActivity(Intent)
         }
         val Edu = findViewById<Button>(R.id.Button_MainScreen_EDU)

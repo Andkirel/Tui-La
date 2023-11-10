@@ -82,7 +82,9 @@ dependencies {
     implementation ("androidx.media3:media3-exoplayer-hls:1.1.1")
     // Firebase Implementations
     implementation("com.google.firebase:firebase-common:20.4.0")
-    implementation("com.google.firebase:firebase-database:20.2.2")
+    implementation("com.google.firebase:firebase-database-ktx:20.3.0")
+    //implementation("com.google.firebase:firebase-database:20.2.2")
+    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
     implementation("com.google.firebase:firebase-auth:22.1.2")
     implementation("com.google.firebase:firebase-storage:20.2.1")
     implementation("com.google.firebase:firebase-database:20.3.0")

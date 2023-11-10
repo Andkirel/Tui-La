@@ -73,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/Button_login_loginButton"
         android:layout_width="232dp"
         android:layout_height="55dp"
         android:background="@drawable/tl_rounded_textbox_pink"
