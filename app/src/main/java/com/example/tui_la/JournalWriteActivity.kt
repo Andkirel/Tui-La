@@ -1,9 +1,7 @@
 package com.example.tui_la
 
 import android.content.Intent
-import android.graphics.drawable.Icon
 import android.icu.text.DateFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,7 +9,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -156,9 +154,9 @@ class JournalWriteActivity : AppCompatActivity() {
 
     private fun setJournalSpinner() {
         emotionSpinner = findViewById(R.id.journalWriteSpinner)
-        val adapter = JournalSpinnerAdapter(Emotions.list!!,this)
+        //val adapter = JournalSpinnerAdapter(Emotions.list!!,this)
 
-        emotionSpinner.adapter = adapter
+        //emotionSpinner.adapter = adapter
 
         emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

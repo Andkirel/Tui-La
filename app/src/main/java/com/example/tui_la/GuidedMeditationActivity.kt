@@ -10,12 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -26,8 +27,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.media3.common.util.UnstableApi
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
@@ -78,24 +77,24 @@ import java.time.format.DateTimeFormatter
         recyclerView.layoutManager = LinearLayoutManager(this)*/
     }
     @Composable
-    fun ListItem(data: GuidedMeditationDataClass,modifier: Modifier = Modifier){
+    fun ListItem(data: GuidedMeditationData, modifier: Modifier = Modifier){
         Card(modifier = Modifier
             .padding(5.dp)
-            .height(126.dp), elevation = CardDefaults.elevatedCardElevation(5.dp)) {
+            .height(126.dp), shape = RoundedCornerShape(8.dp), elevation = CardDefaults.elevatedCardElevation(5.dp),) {
             Row (
                 modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .clickable(onClick = {
                         Toast
-                            .makeText(applicationContext, data.name, Toast.LENGTH_SHORT)
+                            .makeText(applicationContext, data.trackName, Toast.LENGTH_SHORT)
                             .show()
                     })){
-                Image(painterResource(id = data.img), contentDescription = "", alignment = Alignment.Center)
+                Image(painterResource(id = data.gmImages), contentDescription = "", alignment = Alignment.Center)
                 /*Text(text=data.name, modifier = Modifier.shadow(5.dp, shape = RectangleShape,
                         clip = false, ambientColor = colorResource(id = R.color.white)),
                     FontFamily = "@font/philosopher", Color = "#a4133c", TextAlign = TextAlign.End,
                     softWrap = true, TextStyle = "bold")*/
-                Text(text = data.name)
+                Text(text = data.trackName)
             }
 
         }
