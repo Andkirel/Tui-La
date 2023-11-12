@@ -13,13 +13,13 @@
         android:layout_width="308dp"
         android:layout_height="62dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="52dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
         android:text="@string/text_or_call_988"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <Button
@@ -27,13 +27,13 @@
         android:layout_width="308dp"
         android:layout_height="62dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="52dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
         android:text="@string/call_711_then_dial_988"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <Button
@@ -41,77 +41,65 @@
         android:layout_width="308dp"
         android:layout_height="62dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="52dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
         android:text="@string/number"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="313dp"
         android:layout_height="64dp"
-        android:layout_marginStart="52dp"
         android:layout_marginTop="68dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/support_lines"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine2"
-        android:layout_width="302dp"
-        android:layout_height="69dp"
-        android:layout_marginStart="52dp"
-        android:ems="10"
-        android:fontFamily="@font/philosopher"
-        android:gravity="center_horizontal"
-        android:inputType="textMultiLine"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        tools:text="If you are having a medical emergency, call 911 immediately." />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/national_sucicide"
         android:textColor="#000000"
         android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/and_crisis_lifeline"
         android:textColor="#000000"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/for_deaf_and_hard_of_hearing"
         android:textColor="#000000"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Button_Crisis_988" />
 
@@ -119,24 +107,24 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/suicide_and_crisis_line"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/or_use_your_preferred_relay_service"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <TextView
@@ -144,23 +132,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/crisis_counseling_for_distress"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Button_Crisis_711" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
         android:fontFamily="@font/philosopher"
         android:text="@string/related_to_disasters"
         android:textColor="#020202"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -184,6 +172,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gear_icon" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="362dp"
+        android:layout_height="63dp"
+        android:text="If you are having a medical emergency, call 911 immediately."
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

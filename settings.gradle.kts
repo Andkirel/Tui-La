@@ -5,13 +5,13 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-dependencyResolutionManagement {
+/*dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
-}
+}*/
 
 rootProject.name = "Tui-La"
 include(":app")
