@@ -6,9 +6,9 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#FFFFFF">
 
-    tools:context=".com.example.tui_la.MainActivity">
+
 
     <Button
         android:id="@+id/paypal_button"
@@ -42,10 +42,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/visa_button" />
+        app:layout_constraintTop_toBottomOf="@+id/Button_payment_Visa" />
 
     <Button
-        android:id="@+id/visa_button"
+        android:id="@+id/Button_payment_Visa"
         android:layout_width="290dp"
         android:layout_height="70dp"
         android:layout_marginTop="376dp"
@@ -118,7 +118,7 @@
         android:textColor="#0E0E0E"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/visa_button"
+        app:layout_constraintBottom_toTopOf="@+id/Button_payment_Visa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.072"
         app:layout_constraintStart_toStartOf="parent" />

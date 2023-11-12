@@ -26,15 +26,15 @@ class GuidedMeditationPlayer : AppCompatActivity(), Player.Listener{
 
     private fun setupPlayer(){
         player = ExoPlayer.Builder(this).build()
-        playerView = findViewById(R.id.gm_player)
+        playerView = findViewById(R.id.gm_player_audio)
         playerView.player = player
         player.addListener(this)
     }
 
     private fun addMp4Files(){
-        val mediaItem = MediaItem.fromUri(Uri.parse("android.resource://" + packageName+ "/"+ R.raw.basic_relaxation_10mins))
-        player.addMediaItem(mediaItem)
-        player.prepare()
+//        val mediaItem = MediaItem.fromUri(Uri.parse("android.resource://" + packageName+ "/"+ R.raw.basic_relaxation_10mins))
+//        player.addMediaItem(mediaItem)
+//        player.prepare()
     }
 
     override fun onPlaybackStateChanged(playbackState: Int) {

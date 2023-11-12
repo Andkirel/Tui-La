@@ -1,24 +1,21 @@
 package com.example.tui_la
 
-import android.location.GnssAntennaInfo.Listener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.abs
 
-class JournalTableAdapter(private var entryList : MutableList<JournalData>,
-                          /*private var listener: RecyclerViewEvent*/
+class JournalTableAdapter(private var entryList : MutableList<JournalData>
     ) : RecyclerView.Adapter<JournalTableAdapter.ViewHolder>() {
 
-    private lateinit var jListener: onitemClickListener
-    interface onitemClickListener{
+    private lateinit var jListener: OnItemClickListener
+    interface OnItemClickListener{
         fun onItemClick(position: Int)
     }
 
-    fun setOnItemClickListener(clickListener: onitemClickListener) {
+    fun setOnItemClickListener(clickListener: OnItemClickListener) {
         jListener = clickListener
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,14 +32,14 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>,
         holder.time.text = selection.time
         holder.date.text = selection.date
         holder.entry.text = selection.entry/*!!.substring(0,31).plus("...")*/
-        holder.emotion.setImageResource(selection.emotion)
+        holder.emotion.setImageResource(selection.emotion!!)
     }
 
     override fun getItemCount(): Int {
         return entryList.size
     }
 
-    class ViewHolder(entryView: View, clickListener: onitemClickListener) : RecyclerView.ViewHolder(entryView){
+    class ViewHolder(entryView: View, clickListener: OnItemClickListener) : RecyclerView.ViewHolder(entryView){
         val title: TextView = entryView.findViewById(R.id.tvTitle)
         val date: TextView = entryView.findViewById(R.id.tvDate)
         val time: TextView = entryView.findViewById(R.id.tvTime)

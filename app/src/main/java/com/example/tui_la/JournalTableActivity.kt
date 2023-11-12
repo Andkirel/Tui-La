@@ -42,7 +42,6 @@ class JournalTableActivity : AppCompatActivity() {
         auth = Firebase.auth
         auth.signInWithEmailAndPassword(email, password)
         firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(auth.uid!!).child("Journal")
-        //firebaseReference = Firebase.database.
 
         // getting the recyclerview by its id
         journalRecyclerView = findViewById(R.id.rvJournal)
@@ -50,8 +49,9 @@ class JournalTableActivity : AppCompatActivity() {
         // creates a vertical layout Manager
         journalRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        // list of class JournalTable
+        // initialize lists
         journalArrayList = arrayListOf<JournalData>()
+        entryKeyList = arrayListOf<String>()
 
         // get data; pull from firebase
         getUserData()
@@ -65,13 +65,15 @@ class JournalTableActivity : AppCompatActivity() {
                     for (key in snapshot.children) {
                         val userData = key.getValue(JournalData::class.java)
                         journalArrayList.add(userData!!)
-                        entryKeyList.add(key.toString())
+                        entryKeyList.add(key.key.toString())
                     }
                     // Setting the adapter to the recyclerview
                     val jAdapter = JournalTableAdapter(journalArrayList)
                     journalRecyclerView.adapter = jAdapter
 
-                    jAdapter.setOnItemClickListener(object : JournalTableAdapter.onitemClickListener{
+                    // Makes recycler view items clickable
+                    // Takes user to a page with the information of the clicked entry
+                    jAdapter.setOnItemClickListener(object : JournalTableAdapter.OnItemClickListener{
                         override fun onItemClick(position: Int) {
                             val journalWrite = Intent(this@JournalTableActivity, JournalWriteActivity::class.java)
 
@@ -80,6 +82,7 @@ class JournalTableActivity : AppCompatActivity() {
                             journalWrite.putExtra("journalId", entryKeyList[position])
                             journalWrite.putExtra("journalTime", journalArrayList[position].time)
                             journalWrite.putExtra("journalDate", journalArrayList[position].date)
+                            //journalWrite.putExtra("journalEmotion", journalArrayList[position].emotion)
 
                             startActivity(journalWrite)
                         }

@@ -25,7 +25,7 @@ class LogInFragment : Fragment() {
         // Initialize views
         val emailEditText = view.findViewById<EditText>(R.id.usname)
         val passwordEditText = view.findViewById<EditText>(R.id.password)
-        val loginButton = view.findViewById<Button>(R.id.loginButton)
+        val loginButton = view.findViewById<Button>(R.id.Button_login_loginButton)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()

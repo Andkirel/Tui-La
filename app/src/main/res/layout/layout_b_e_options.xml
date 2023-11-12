@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg">
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="373dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/philosopher"
+        android:text="Guided Breathing"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Button_GB_3min"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="#D3F9EC"
+        android:fontFamily="@font/philosopher"
+        android:text="3 Minute Timed Session"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/Button_GB_1min"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="411dp"
+        android:layout_height="78dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/Button_GB_1min"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        android:background="#D3F9EC"
+        android:fontFamily="@font/philosopher"
+        android:text="1 Minute Timed Session"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <Button
+        android:id="@+id/Button_GB_5min"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:background="#D4EFF6"
+        android:fontFamily="@font/philosopher"
+        android:text="5 Minute Timed Session"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_GB_1min" />
+
+    <Button
+        android:id="@+id/Button_GB_10min"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="#D4EFF6"
+        android:fontFamily="@font/philosopher"
+        android:text="10 Minute Timed Session"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toEndOf="@+id/Button_GB_5min"
+        app:layout_constraintTop_toBottomOf="@+id/Button_GB_3min" />
+
+    <Button
+        android:id="@+id/Button_GB_Infinite"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:background="#F8E0D4"
+        android:fontFamily="@font/philosopher"
+        android:text="Infinite Session"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Button_GB_5min" />
+
+    <ImageButton
+        android:id="@+id/ImageButton_GB_Settings"
+        android:layout_width="69dp"
+        android:layout_height="63dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/Dscript_mainmenu_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gear_icon" />
+
+    <ImageButton
+        android:id="@+id/ImageButton_GB_Nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/menu_dots" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
