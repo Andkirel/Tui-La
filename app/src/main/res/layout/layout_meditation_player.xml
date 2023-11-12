@@ -34,53 +34,23 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/gm_player_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidedMeditationTitle">
 
-        <FrameLayout
-            android:id="@+id/frame_layout_video"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/frame_layout_audio"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+    </androidx.media3.ui.PlayerView>
 
-            <androidx.media3.ui.PlayerView
-                android:id="@+id/gm_player_video"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/gm_player_audio"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:use_controller="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-            </androidx.media3.ui.PlayerView>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/frame_layout_audio"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5">
-
-            <androidx.media3.ui.PlayerView
-                android:id="@+id/gm_player_audio"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/black"
-                android:foregroundGravity="fill_horizontal"
-                android:foregroundTint="@color/white"
-                android:visibility="visible">
-
-            </androidx.media3.ui.PlayerView>
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.media3.ui.PlayerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
