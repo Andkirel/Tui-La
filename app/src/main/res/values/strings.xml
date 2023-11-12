@@ -43,9 +43,11 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    
+
 
     <string name="journal">Journal</string>
+    <string name="journal_prompted">Prompted</string>
+    <string name="journal_unprompted">Unprompted</string>
     <string name="journal_prompts">Journal Prompts</string>
     <string name="journal_prompt_love">Increase Self love</string>
     <string name="journal_prompt_confidence">Create Confidence</string>
@@ -53,35 +55,55 @@
     <string name="journal_prompt_passion">Finding Your Passion</string>
     <string name="journal_prompt_anxiety">Relieve Anxiety</string>
 
-    <string name="journal_prompt_passion_1">passion sample 1</string>
-    <string name="journal_prompt_passion_2">passion sample 2</string>
-    <string name="journal_prompt_passion_3">passion sample 3</string>
-    <string name="journal_prompt_passion_4">passion sample 4</string>
-    <string name="journal_prompt_passion_5">passion sample 5</string>
+    <string name="journal_prompt_passion_1">What is that one topic you can keep talking
+        about?</string>
+    <string name="journal_prompt_passion_2">If you had 5 minutes and the whole world was
+        forced to listen, what would you say?</string>
+    <string name="journal_prompt_passion_3">What does passion mean to you?</string>
+    <string name="journal_prompt_passion_4">What skills come to you naturally?</string>
+    <string name="journal_prompt_passion_5">What would you do with your life if you had
+        no fear?</string>
 
-    <string name="journal_prompt_confidence_1">confidence sample 1</string>
-    <string name="journal_prompt_confidence_2">confidence sample 2</string>
-    <string name="journal_prompt_confidence_3">confidence sample 3</string>
-    <string name="journal_prompt_confidence_4">confidence sample 4</string>
-    <string name="journal_prompt_confidence_5">confidence sample 5</string>
+    <string name="journal_prompt_confidence_1">What are 10 things you’re really good at?</string>
+    <string name="journal_prompt_confidence_2">What are 5 things you have done that make
+        you proud?</string>
+    <string name="journal_prompt_confidence_3">Write out a gratitude list of things you
+        are thankful for.</string>
+    <string name="journal_prompt_confidence_4">Write out your ideal vision of your “dream
+        life.”</string>
+    <string name="journal_prompt_confidence_5">What are 3 ways you can take actionable
+        steps towards your dreams?</string>
 
-    <string name="journal_prompt_anxiety_1">anxiety sample 1</string>
-    <string name="journal_prompt_anxiety_2">anxiety sample 2</string>
-    <string name="journal_prompt_anxiety_3">anxiety sample 3</string>
-    <string name="journal_prompt_anxiety_4">anxiety sample 4</string>
-    <string name="journal_prompt_anxiety_5">anxiety sample 5</string>
+    <string name="journal_prompt_anxiety_1">What actions can you take to begin releasing
+        your concerns?</string>
+    <string name="journal_prompt_anxiety_2">Do you take a day off to relax and allow yourself
+        to breathe? Why or why not?</string>
+    <string name="journal_prompt_anxiety_3">What are 3 things that you are most afraid of
+        and the reasons why.</string>
+    <string name="journal_prompt_anxiety_4">What triggers your anxiety or makes your anxiety
+        worse?</string>
+    <string name="journal_prompt_anxiety_5">Write about your evening routine. Then write
+        about things you can adjust in your evening routine to feel happier.</string>
 
-    <string name="journal_prompt_love_1">love sample 1</string>
-    <string name="journal_prompt_love_2">love sample 2</string>
-    <string name="journal_prompt_love_3">love sample 3</string>
-    <string name="journal_prompt_love_4">love sample 4</string>
-    <string name="journal_prompt_love_5">love sample 5</string>
+    <string name="journal_prompt_love_1">Write down 10 positive affirmations that you can
+        recite when you’re overwhelmed by your insecurities.</string>
+    <string name="journal_prompt_love_2">What makes you feel loved?</string>
+    <string name="journal_prompt_love_3">What sets your heart on fire, and why do you love
+        yourself for that?</string>
+    <string name="journal_prompt_love_4">If you struggle with self-care, what are the top
+        reasons you neglect taking care of yourself?</string>
+    <string name="journal_prompt_love_5">Write down 5 positive things you can tell yourself.</string>
 
-    <string name="journal_prompt_work_1">work sample 1</string>
-    <string name="journal_prompt_work_2">work sample 2</string>
-    <string name="journal_prompt_work_3">work sample 3</string>
-    <string name="journal_prompt_work_4">work sample 4</string>
-    <string name="journal_prompt_work_5">work sample 5</string>
+    <string name="journal_prompt_work_1">What are the values you were brought up with?
+        Who demonstrated these values?</string>
+    <string name="journal_prompt_work_2">What are your biggest insecurities, and where
+        do you believe they come from?</string>
+    <string name="journal_prompt_work_3">What do you think is your worst trait? Why is
+        this so bad? What could be a positive aspect of having this trait?</string>
+    <string name="journal_prompt_work_4">What is the biggest lie you’ve ever told anyone
+        else?</string>
+    <string name="journal_prompt_work_5">What’s something that you try to hide about
+        yourself? What do you think would happen if others found this out?</string>
 
     <string name="menu_image">Menu image</string>
     <string name="crisis_support">Crisis Support</string>
@@ -173,4 +195,6 @@
     <string name="_10_00_am">10:00 AM</string>
     <string name="_4_00_pm">4:00 PM</string>
     <string name="_2_00_pm">2:00 PM</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

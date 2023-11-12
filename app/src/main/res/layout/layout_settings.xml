@@ -12,51 +12,39 @@
         android:id="@+id/button_menu_home"
         android:layout_width="361dp"
         android:layout_height="78dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="100dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
         android:text="@string/account_settings"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button_menu_GM"
-        android:layout_width="361dp"
-        android:layout_height="78dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:backgroundTint="#00FFFFFF"
-        android:fontFamily="@font/philosopher"
-        android:text="@string/notifications"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_menu_home" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_menu_GB"
         android:layout_width="361dp"
         android:layout_height="78dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
         android:text="@string/badges_achievements"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_menu_GM" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_menu_home" />
 
     <Button
         android:id="@+id/button_menu_journal"
         android:layout_width="361dp"
         android:layout_height="78dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
         android:text="@string/app_settings"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_GB" />
 
@@ -64,12 +52,12 @@
         android:id="@+id/button_menu_records"
         android:layout_width="361dp"
         android:layout_height="78dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
         android:text="@string/app_help"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_journal" />
 
@@ -77,19 +65,19 @@
         android:id="@+id/button_menu_education"
         android:layout_width="361dp"
         android:layout_height="78dp"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
         android:text="@string/dscript_manage_subscription"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_menu_records" />
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="78dp"
-        android:layout_height="78dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:contentDescription="@string/backb"
         app:layout_constraintStart_toStartOf="parent"

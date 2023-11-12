@@ -86,7 +86,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/ca_button"
+        android:id="@+id/Button_Createaccount"
         android:layout_width="290dp"
         android:layout_height="70dp"
         android:layout_marginStart="60dp"
@@ -108,12 +108,12 @@
         android:text="Already have an account?"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/ca_button"
+        app:layout_constraintEnd_toStartOf="@+id/Login_text"
+        app:layout_constraintTop_toBottomOf="@+id/Button_Createaccount"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/Login_text"
         android:layout_width="79dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
@@ -128,7 +128,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.807"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ca_button"
+        app:layout_constraintTop_toBottomOf="@+id/Button_Createaccount"
         app:layout_constraintVertical_bias="0.0" />
+    <ImageButton
+        android:id="@+id/Backbutton_createaccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/backb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

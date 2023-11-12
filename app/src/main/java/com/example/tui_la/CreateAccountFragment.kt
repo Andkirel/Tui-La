@@ -32,8 +32,8 @@ class CreateAccountFragment : Fragment() {
         val usernameEditText: EditText = view.findViewById(R.id.un_editText)
         val emailEditText: EditText = view.findViewById(R.id.email_editText)
         val passwordEditText: EditText = view.findViewById(R.id.pw_editText)
-        val createAccountButton: Button = view.findViewById(R.id.ca_button)
-        val loginTextView: TextView = view.findViewById(R.id.textView6)
+        val createAccountButton: Button = view.findViewById(R.id.Button_Createaccount)
+        val loginTextView: TextView = view.findViewById(R.id.Login_text)
 
         createAccountButton.setOnClickListener {
             val username = usernameEditText.text.toString().trim()
