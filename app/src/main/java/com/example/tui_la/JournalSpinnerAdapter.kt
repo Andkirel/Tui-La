@@ -23,9 +23,12 @@ class JournalSpinnerAdapter(private var emotionList : MutableList<EmData>, conte
         val em = getItem(position)
 
         val view = convertView?: LayoutInflater.from(context).inflate(R.layout.layout_journal_spinner_items,parent,false)
-        view.findViewById<ImageView>(R.id.spinnerImage).setImageResource(em!!.image)
-        //view.findViewById<ImageView>(R.id.spinnerImage).background.equals(R.color.non)
 
+        /** this line works, not sure why it is being disfunctional currently */
+        //view.findViewById<ImageView>(R.id.spinnerImage).setImageResource(em!!.image)
+        /**                                                                           */
+
+        //view.findViewById<ImageView>(R.id.spinnerImage).background.equals(R.color.non)
 
         //android:background="@android:color/transparent"
 
