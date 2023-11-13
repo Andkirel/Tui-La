@@ -6,10 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.Ease
 import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.repeatable
@@ -20,13 +18,10 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -36,43 +31,62 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.tui_la.ui.theme.TuiLaTheme
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.nanoseconds
 
 class GuidedBreathingActivityCompose : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             TuiLaTheme {
-//                // A surface container using the 'background' color from the theme
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = MaterialTheme.colorScheme.background
-//                ) {
-//                    Greeting("Android")
-//                }
-                GreetingPreview()
+                //A surface container using the 'background' color from the theme
+                /*Surface(
+                    modifier = Modifier
+                        .paint(painterResource(id = R.drawable.main_bg)),
+                ) {*/
+                    CreateLayout()
+
+                    //Greeting("Android")
+               //}
+                //BreathingAnimation()
             }
         }
     }
 }
+@Composable
+@Preview(showBackground = true)
+fun CreateLayout(modifier: Modifier = Modifier) {
+Column {
+    Box(modifier = Modifier
+        .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
+        .fillMaxSize())
+    {
+        Text("Tap the logo to begin")
+    }
+}
+
+        /* Text(
+            text = buildAnnotatedString { append("Tap the logo to begin!") },
+            colorResource(id = R.color.cactus_purple),
+            fontSize = 30.dp,
+            fontFamily = Font(R.font.philosopher_bold),
+            textAlign = TextAlign.Center
+        )*/
+
+}
+
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -83,9 +97,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun BreathingAnimation() {
     TuiLaTheme {
         var isInflated by remember {
             mutableStateOf(false)
@@ -100,14 +114,7 @@ fun GreetingPreview() {
         val sizeTransition = updateTransition(
             targetState = isInflated,
             label = null)
-        val logoSize by sizeTransition.animateDp(
-            transitionSpec = { tween(3000) },
-            label = "Inflate logo size",
-            targetValueByState = { isInflated ->
-                if (isInflated) 600.dp else 175.dp
-            }
-        )
-
+        val tryMe = sizeTransition
         val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
         val scaleItem by infiniteTransition.animateFloat(
             initialValue = 0.75f,
@@ -123,7 +130,8 @@ fun GreetingPreview() {
         )
 
         Column {
-            Text(text = startPrompt)
+            /*TextField(value = prompts[1], onValueChange = prompts[2], textStyle = TextStyle(
+                colorResource(id = R.color.cactus_purple), fontSize = 25.sp, fontWeight = FontWeight.Bold))*/
             Box(contentAlignment = Alignment.Center,modifier = Modifier
                 .size(400.dp,400.dp)
             ){
@@ -143,6 +151,7 @@ fun GreetingPreview() {
                 Button(
                     onClick = {
                         isInflated = !isInflated
+//                        prompts[1] != prompts[2]
                     },
                     modifier = Modifier
                         .background(Color.Transparent)
@@ -156,47 +165,9 @@ fun GreetingPreview() {
                             .background(Color.Transparent)
                             .size(scaleNotInfinite),
                     )
+                    //Text(text = prompts[1], colorResource(id = R.color.black))
                 }
             }
         }
     }
-}
-
-fun Modifier.onTouchHeld(
-    pollDelay: Duration = 3000.milliseconds,
-    onTouchHeld: (timeElapsed: Duration) -> Unit
-) = composed {
-    val scope = rememberCoroutineScope()
-    pointerInput(onTouchHeld) {
-        awaitEachGesture {
-            val initialDown = awaitFirstDown(requireUnconsumed = false)
-            val initialDownTime = System.nanoTime()
-            val initialTouchHeldJob = scope.launch {
-                while (initialDown.pressed) {
-                    val timeElapsed = System.nanoTime() - initialDownTime
-                    onTouchHeld(timeElapsed.nanoseconds)
-                    delay(pollDelay)
-                }
-            }
-            //waitForUpOrCancellation()
-            initialTouchHeldJob.cancel()
-        }
-    }
-}
-fun Modifier.scaleOnPress(
-    interactionSource: InteractionSource
-) = composed {
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(
-        if (isPressed) {
-            0.95f
-        } else {
-            1f
-        }
-    )
-    this
-        .graphicsLayer {
-            scaleX = scale
-            scaleY = scale
-        }
 }
