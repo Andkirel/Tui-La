@@ -41,10 +41,10 @@
             android:exported="false" />
         <activity
             android:name=".JournalTableActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".JournalWriteActivity"
-            android:exported="false"/>
+            android:exported="true"/>
         <activity
             android:name=".GuidedMeditationActivity"
             android:exported="false" />

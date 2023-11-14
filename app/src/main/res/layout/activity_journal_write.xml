@@ -47,17 +47,16 @@
 
     <Spinner
         android:id="@+id/journalWriteSpinner"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@id/journalWriteEntry"
         app:layout_constraintEnd_toStartOf="@id/journalWriteEntryTitle"
         android:background="@android:color/transparent"
         android:popupBackground="@android:color/transparent"
-
+        android:dropDownVerticalOffset="110dp"
         />
-
 
     <EditText
         android:id="@+id/journalWriteEntryTitle"

@@ -1,7 +1,6 @@
 package com.example.tui_la
 
 import android.content.Intent
-import android.graphics.drawable.Icon
 import android.icu.text.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -35,8 +34,6 @@ class JournalWriteActivity : AppCompatActivity() {
 
     private lateinit var emotionSpinner: Spinner
     private lateinit var setImage: ImageView
-
-    //private val emoteMap = EmotionMap()
 
     private var entryKey: String = ""
 
@@ -156,9 +153,8 @@ class JournalWriteActivity : AppCompatActivity() {
 
     private fun setJournalSpinner() {
         emotionSpinner = findViewById(R.id.journalWriteSpinner)
-        val adapter = JournalSpinnerAdapter(Emotions.list!!,this)
-
-        emotionSpinner.adapter = adapter
+        //val adapter = JournalSpinnerAdapter(EmData.list!!,this)
+        emotionSpinner.adapter = JournalSpinnerAdapter(EmData.list!!, this)
 
         emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
