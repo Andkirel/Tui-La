@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.get
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -56,17 +57,9 @@ class JournalWriteActivity : AppCompatActivity() {
     fun save(view: View) {
         journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
         journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
-        //journalEmotion findViewById<ImageView>(R.id.journalWriteEmotion)
-
-            //Icon.Afraid.getValue()
+        // journalEmotion is set by the onItemSelected function of the spinner
 
         if (entryKey.isBlank()) {
-
-           /* // get all of the fields that have data
-            journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
-            journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
-            journalEmotion = emoteMap.getDrawableKey(findViewById<ImageView>(R.id.journalWriteEmotion).drawable.toString())
-*/
             // gets the calendar date and time
             val calendar = Calendar.getInstance().time
             currentDate = DateFormat.getDateInstance().format(calendar)
@@ -78,20 +71,16 @@ class JournalWriteActivity : AppCompatActivity() {
                 currentTime,
                 currentDate,
                 journalEntry,
-                0
+                journalEmotion
             )
+
         } else {
-            /*journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
-            journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
-            journalEmotion = emoteMap.getDrawableKey(findViewById<ImageView>(R.id.journalWriteEmotion).drawable.toString())
-*/
-            updateEntry(auth.uid!!, journalTitle, journalEntry,0)
+            updateEntry(auth.uid!!, journalTitle, journalEntry,journalEmotion)
         }
     }
 
     private fun writeNewJournalData(userId: String, title: String, time: String, date: String, entry: String, emotion: Int){
         val data = JournalData(title,time,date,entry,emotion)
-
         val journalId = firebaseReference.push().key!!
         
         firebaseReference.child("users").child(userId).child("Journal").child(journalId).setValue(data)
@@ -113,18 +102,7 @@ class JournalWriteActivity : AppCompatActivity() {
 
             findViewById<TextView>(R.id.journalWriteEntryTitle).text = intent.getStringExtra("journalTitle")
             findViewById<TextView>(R.id.journalWriteEntry).text = intent.getStringExtra("journalEntry")
-
-            //findViewById<ImageView>(R.id.journalWriteEmotion).setBackgroundResource(R.drawable.happy)
-
-            // hard code functionality
-            //findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(R.drawable.happy)
-
-            // enum enabled, needs more code for variability
-            //findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(Icon.Happy.resourceId)
-
-            // fully variable support with hashmap keys/values
-            /*findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(
-                emoteMap.getDrawableValue(intent.getIntExtra("journalEmotion",0)))*/
+            findViewById<Spinner>(R.id.journalWriteSpinner).setBackgroundResource(intent.getIntExtra("journalEmotion",0))
 
         }
     }
@@ -136,7 +114,7 @@ class JournalWriteActivity : AppCompatActivity() {
     }
 
     private fun updateEntry(userId: String, title: String, entry: String, emotion: Int) {
-        val data = JournalData(title,currentTime,currentDate,entry,0)
+        val data = JournalData(title,currentTime,currentDate,entry,emotion)
 
         firebaseReference.child("users").child(userId).child("Journal").child(entryKey).setValue(data)
             .addOnCompleteListener{
@@ -159,6 +137,7 @@ class JournalWriteActivity : AppCompatActivity() {
         emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent!!.getItemAtPosition(position)
+                journalEmotion = EmData.list!![position].image
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {

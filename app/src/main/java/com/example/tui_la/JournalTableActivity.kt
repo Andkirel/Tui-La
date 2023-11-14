@@ -82,7 +82,7 @@ class JournalTableActivity : AppCompatActivity() {
                             journalWrite.putExtra("journalId", entryKeyList[position])
                             journalWrite.putExtra("journalTime", journalArrayList[position].time)
                             journalWrite.putExtra("journalDate", journalArrayList[position].date)
-                            //journalWrite.putExtra("journalEmotion", journalArrayList[position].emotion)
+                            journalWrite.putExtra("journalEmotion", journalArrayList[position].emotion)
 
                             startActivity(journalWrite)
                         }
