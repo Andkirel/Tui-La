@@ -21,8 +21,15 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -36,12 +43,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.tui_la.ui.theme.TuiLaTheme
 
 class GuidedBreathingActivityCompose : ComponentActivity() {
@@ -64,25 +77,54 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
         }
     }
 }
+
 @Composable
 @Preview(showBackground = true)
 fun CreateLayout(modifier: Modifier = Modifier) {
-Column {
+    val purpleColor = colorResource(id = R.color.cactus_purple)
+Column (modifier = Modifier
+    .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
+    .fillMaxSize()){
+    Row (Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top){
+        Box(modifier = Modifier, contentAlignment = Alignment.TopStart){
+            Button(onClick = { /*TODO*/ },modifier = Modifier
+                .size(75.dp, 75.dp)
+                .background(Color.Transparent),
+                shape = RectangleShape,
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = Color.Black)
+            ) {
+                Image(painter = painterResource(id = R.drawable.back_button), contentDescription = "",Modifier.fillMaxSize())
+            }
+        }
+        Spacer(modifier = Modifier
+            .size(40.dp).width(IntrinsicSize.Max).height(IntrinsicSize.Max).weight(1f))
+        Box(modifier = Modifier, contentAlignment = Alignment.TopEnd){
+            Button(onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .size(75.dp, 75.dp)
+                    .background(Color.Transparent),
+                shape = RectangleShape,
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = Color.Black),
+            ) {
+                Image(painter = painterResource(id = R.drawable.menu_dots), contentDescription = "Menu dots button",Modifier.fillMaxSize())
+            }
+        }
+    }
     Box(modifier = Modifier
-        .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
-        .fillMaxSize())
+        //.paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
+        //.fillMaxSize()
+        .align(Alignment.CenterHorizontally)
+        .padding(0.dp,20.dp))
     {
-        Text("Tap the logo to begin")
+            Text("Tap the logo to begin!", style = TextStyle(
+                color = purpleColor,
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Bold,
+                fontStyle = FontStyle(R.font.philosopher),
+                textAlign = TextAlign.Center),
+                modifier = Modifier.align(Alignment.TopCenter))
     }
 }
-
-        /* Text(
-            text = buildAnnotatedString { append("Tap the logo to begin!") },
-            colorResource(id = R.color.cactus_purple),
-            fontSize = 30.dp,
-            fontFamily = Font(R.font.philosopher_bold),
-            textAlign = TextAlign.Center
-        )*/
 
 }
 
@@ -130,8 +172,6 @@ fun BreathingAnimation() {
         )
 
         Column {
-            /*TextField(value = prompts[1], onValueChange = prompts[2], textStyle = TextStyle(
-                colorResource(id = R.color.cactus_purple), fontSize = 25.sp, fontWeight = FontWeight.Bold))*/
             Box(contentAlignment = Alignment.Center,modifier = Modifier
                 .size(400.dp,400.dp)
             ){
@@ -165,7 +205,6 @@ fun BreathingAnimation() {
                             .background(Color.Transparent)
                             .size(scaleNotInfinite),
                     )
-                    //Text(text = prompts[1], colorResource(id = R.color.black))
                 }
             }
         }
