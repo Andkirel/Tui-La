@@ -12,7 +12,7 @@ package com.example.tui_la
     Sleepy(8, R.drawable.sleepy),
     Stressed(9, R.drawable.stressed);*/
 
-data class JournalSpinnerData(val image: Int, val value: Int)
+data class JournalSpinnerData(val image: Int)
 object EmData {
     private val images = intArrayOf(
         R.drawable.afraid,
@@ -24,15 +24,6 @@ object EmData {
         R.drawable.sad,
         R.drawable.sleepy,
         R.drawable.stressed,
-        /*      Afraid.image,
-              Angry.image,
-              Excited.image,
-              Happy.image,
-              Loved.image,
-              Relaxed.image,
-              Sad.image,
-              Sleepy.image,
-              Stressed.image*/
     )
     var list: ArrayList<JournalSpinnerData>? = null
         get() {
@@ -44,7 +35,7 @@ object EmData {
             for (i in images.indices) {
 
                 val imageId = images[i]
-                val emotion = JournalSpinnerData(imageId, 0)
+                val emotion = JournalSpinnerData(imageId)
                 field!!.add(emotion)
 
             }

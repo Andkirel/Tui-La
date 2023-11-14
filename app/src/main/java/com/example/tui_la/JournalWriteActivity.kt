@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.get
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -102,14 +101,14 @@ class JournalWriteActivity : AppCompatActivity() {
 
             findViewById<TextView>(R.id.journalWriteEntryTitle).text = intent.getStringExtra("journalTitle")
             findViewById<TextView>(R.id.journalWriteEntry).text = intent.getStringExtra("journalEntry")
-            findViewById<Spinner>(R.id.journalWriteSpinner).setBackgroundResource(intent.getIntExtra("journalEmotion",0))
 
+            val index = EmData.list!!.indexOf(JournalSpinnerData(intent.getIntExtra("journalEmotion",0)))
+            emotionSpinner.setSelection(index)
         }
     }
 
     fun back(view: View) {
         val journalTable = Intent(this, JournalTableActivity::class.java)
-
         startActivity(journalTable)
     }
 

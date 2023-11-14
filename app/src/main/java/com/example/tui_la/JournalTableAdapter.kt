@@ -31,8 +31,17 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
         holder.title.text = selection.title
         holder.time.text = selection.time
         holder.date.text = selection.date
-        holder.entry.text = selection.entry/*!!.substring(0,31).plus("...")*/
         holder.emotion.setImageResource(selection.emotion!!)
+
+        var entry = selection.entry!!
+
+        entry =
+        if (entry.length > 50) {
+            entry.take(50).substringBefore('\n').plus(" ...")
+        } else
+            entry.substringBefore('\n')
+
+        holder.entry.text = entry
     }
 
     override fun getItemCount(): Int {

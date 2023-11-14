@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import kotlin.Int as Int
 
 class JournalSpinnerAdapter(private var emotionList : MutableList<JournalSpinnerData>, context: Context,
