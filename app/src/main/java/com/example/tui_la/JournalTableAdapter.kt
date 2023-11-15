@@ -62,4 +62,3 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
         }
     }
 }
-
