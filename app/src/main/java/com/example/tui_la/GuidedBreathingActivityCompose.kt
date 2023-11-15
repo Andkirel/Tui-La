@@ -3,17 +3,23 @@ package com.example.tui_la
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.Ease
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.repeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.with
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,8 +39,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,100 +52,235 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tui_la.ui.theme.TuiLaTheme
+import kotlinx.coroutines.delay
 
 class GuidedBreathingActivityCompose : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            TuiLaTheme {
-                //A surface container using the 'background' color from the theme
-                /*Surface(
-                    modifier = Modifier
-                        .paint(painterResource(id = R.drawable.main_bg)),
-                ) {*/
-                    CreateLayout()
+            Surface (color = Color.White, modifier = Modifier.fillMaxSize()){
+                Box(contentAlignment = Alignment.Center){
+                    BreathingTime(totalTime = 100L * 1000L, inactiveBarColor = Color.LightGray, activeBarColor = Color.Blue, modifier = Modifier.size(300.dp))
+                }
+            }
 
-                    //Greeting("Android")
-               //}
-                //BreathingAnimation()
+                /*CreateLayout()
+                Column {
+                    Spacer(modifier = Modifier.height(100.dp))
+                    BreathingAnimation()*/
+
+                    /*var count by remember {
+                        mutableStateOf(0)
+                    }
+                    AnimatedCounter(
+                        count = count,
+                        style = MaterialTheme.typography.bodyMedium
+                    )*/
+                    /*CircularProgress(modifier = Modifier
+                        .width(150.dp)
+                        .height(150.dp),
+                        progress = 10f,
+                        color = Color.Blue,
+                        backgroundColor = Color.LightGray
+                    )*/
+
+
+
+                }
+            }
+        }
+    //}
+
+@Composable
+fun CircularProgressBarTimer(
+    percentage: Float,
+    number: Int,
+    fontSize: TextUnit = 35.sp,
+    radius: Dp = 75.dp,
+    color: Color = Color.Blue,
+    strokeWidth: Dp = 8.dp,
+    animDuration: Int = 1000,
+    animDelay: Int = 0
+){
+    var animationPlayed by remember{
+        mutableStateOf(false)
+    }
+    val curPercentage = animateFloatAsState(
+        targetValue = if (animationPlayed) percentage else 0f,
+        label = ""
+    )
+
+
+}
+// region CircularProgress Commented out
+/*
+@Composable
+fun CircularProgress(
+    modifier: Modifier = Modifier,
+    color: Color,
+    backgroundColor: Color = color,
+    startingAngle: Float = 270f,
+    progress: Float,
+    animate: Boolean = true,
+    animationSpec: AnimationSpec<Float> = tween(durationMillis = 250, easing = LinearOutSlowInEasing)
+) {
+    val darkMode = isSystemInDarkTheme()
+    val animatedProgress: Float by animateFloatAsState(targetValue = progress, animationSpec = animationSpec)
+    Canvas(modifier) {
+        val sweepAngle = (360 * if (animate) animatedProgress else progress) / 100
+        val ringRadius = size.minDimension * 0.15f
+        val size = Size(size.width, size.height)
+        drawArc(backgroundColor, startingAngle, 360f, false, size = size, alpha = 0.2f, style = Stroke(ringRadius))
+        drawArc(
+            color = if (darkMode) Color.White else Color.Black,
+            startingAngle, sweepAngle, false, Offset(0f, 20f), size, 0.2f, Stroke(ringRadius, cap = StrokeCap.Round)
+        )
+        drawArc(color, startingAngle, sweepAngle, false, size = size, style = Stroke(ringRadius, cap = StrokeCap.Round))
+    }
+}
+*/
+
+/*@ExperimentalFoundationApi
+@Composable
+@Preview
+private fun MockCountdownTimer() {
+    AppTheme {
+        val rows = listOf(
+            Pair(0f, MaterialTheme.colors.primary),
+            Pair(5f, MaterialTheme.colors.primary),
+            Pair(10f, MaterialTheme.colors.primary),
+            Pair(15f, MaterialTheme.colors.primary),
+            Pair(20f, MaterialTheme.colors.primary),
+            Pair(25f, MaterialTheme.colors.primary),
+            Pair(30f, MaterialTheme.colors.primary),
+            Pair(35f, MaterialTheme.colors.primary),
+            Pair(40f, MaterialTheme.colors.primary),
+            Pair(45f, MaterialTheme.colors.primary),
+            Pair(50f, MaterialTheme.colors.primary),
+            Pair(55f, MaterialTheme.colors.primary),
+            Pair(60f, MaterialTheme.colors.primary),
+            Pair(65f, MaterialTheme.colors.primary),
+            Pair(70f, MaterialTheme.colors.primary),
+            Pair(75f, MaterialTheme.colors.primary),
+            Pair(80f, MaterialTheme.colors.primary),
+            Pair(85f, MaterialTheme.colors.primary),
+            Pair(90f, MaterialTheme.colors.primary),
+            Pair(95f, MaterialTheme.colors.primary),
+            Pair(100f, MaterialTheme.colors.primary)
+        )
+        LazyVerticalGrid(modifier = Modifier.fillMaxSize(), cells = GridCells.Adaptive(minSize = 130.dp)) {
+            items(rows) {
+                Box(Modifier.padding(20.dp), contentAlignment = Alignment.Center) {
+                    CircularProgress(
+                        Modifier
+                            .width(80.dp)
+                            .height(80.dp),
+                        progress = it.first, color = it.second
+                    )
+                }
             }
         }
     }
-}
+}*/
+//endregion
 
 @Composable
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 fun CreateLayout(modifier: Modifier = Modifier) {
     val purpleColor = colorResource(id = R.color.cactus_purple)
-Column (modifier = Modifier
-    .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
-    .fillMaxSize()){
-    Row (Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top){
-        Box(modifier = Modifier, contentAlignment = Alignment.TopStart){
-            Button(onClick = { /*TODO*/ },modifier = Modifier
-                .size(75.dp, 75.dp)
-                .background(Color.Transparent),
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = Color.Black)
-            ) {
-                Image(painter = painterResource(id = R.drawable.back_button), contentDescription = "",Modifier.fillMaxSize())
+    Column(
+        modifier = Modifier
+            .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
+            .fillMaxSize()
+    ) {
+
+        // Row with back button and menu button
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+            Box(modifier = Modifier, contentAlignment = Alignment.TopStart) {
+                Button(
+                    onClick = { /*TODO: onClick method for back button*/ }, modifier = Modifier
+                        .size(75.dp, 75.dp)
+                        .background(Color.Transparent),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.Black
+                    )
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.back_button),
+                        contentDescription = "",
+                        Modifier.fillMaxSize()
+                    )
+                }
             }
-        }
-        Spacer(modifier = Modifier
-            .size(40.dp).width(IntrinsicSize.Max).height(IntrinsicSize.Max).weight(1f))
-        Box(modifier = Modifier, contentAlignment = Alignment.TopEnd){
-            Button(onClick = { /*TODO*/ },
+            Spacer(
                 modifier = Modifier
-                    .size(75.dp, 75.dp)
-                    .background(Color.Transparent),
-                shape = RectangleShape,
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent, contentColor = Color.Black),
-            ) {
-                Image(painter = painterResource(id = R.drawable.menu_dots), contentDescription = "Menu dots button",Modifier.fillMaxSize())
+                    .size(40.dp)
+                    .width(IntrinsicSize.Max)
+                    .height(IntrinsicSize.Max)
+                    .weight(1f)
+            )
+            Box(modifier = Modifier, contentAlignment = Alignment.TopEnd) {
+                Button(
+                    onClick = { /*TODO: onClick method for menu button*/ },
+                    modifier = Modifier
+                        .size(75.dp, 75.dp)
+                        .background(Color.Transparent),
+                    shape = RectangleShape,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent,
+                        contentColor = Color.Black
+                    ),
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.menu_dots),
+                        contentDescription = "Menu dots button",
+                        Modifier.fillMaxSize()
+                    )
+                }
             }
         }
+
+        Box(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(0.dp, 20.dp)
+        )
+        {
+            Text(
+                "Tap the logo to begin!", style = TextStyle(
+                    color = purpleColor,
+                    fontSize = 35.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle(R.font.philosopher),
+                    textAlign = TextAlign.Center
+                ),
+                modifier = Modifier.align(Alignment.TopCenter)
+            )
+        }
     }
-    Box(modifier = Modifier
-        //.paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
-        //.fillMaxSize()
-        .align(Alignment.CenterHorizontally)
-        .padding(0.dp,20.dp))
-    {
-            Text("Tap the logo to begin!", style = TextStyle(
-                color = purpleColor,
-                fontSize = 35.sp,
-                fontWeight = FontWeight.Bold,
-                fontStyle = FontStyle(R.font.philosopher),
-                textAlign = TextAlign.Center),
-                modifier = Modifier.align(Alignment.TopCenter))
-    }
-}
 
-}
-
-
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
@@ -146,35 +291,38 @@ fun BreathingAnimation() {
         var isInflated by remember {
             mutableStateOf(false)
         }
-        val buttonInteractionSource = remember { MutableInteractionSource()}
-        var startPrompt by remember {
-            mutableStateOf("Tap the logo to begin")
-        }
+        val buttonInteractionSource = remember { MutableInteractionSource() }
         var prompts by remember {
             mutableStateOf(listOf<String>("Breathe In", "Breathe Out"))
         }
-        val sizeTransition = updateTransition(
+        val inflateDeflateTransition = updateTransition(
             targetState = isInflated,
-            label = null)
-        val tryMe = sizeTransition
+            label = null
+        )
         val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
-        val scaleItem by infiniteTransition.animateFloat(
+        val scaleInfinite by infiniteTransition.animateFloat(
             initialValue = 0.75f,
             targetValue = 1.5f,
-            animationSpec = infiniteRepeatable(tween(3000, delayMillis= 1500), repeatMode = RepeatMode.Reverse),
+            animationSpec = infiniteRepeatable(
+                tween(3000, delayMillis = 1500),
+                repeatMode = RepeatMode.Reverse
+            ),
             label = "scale"
         )
         val scaleNotInfinite by animateDpAsState(
             targetValue = if (isInflated) 600.dp else 175.dp,
-            animationSpec = repeatable(200, animation = tween<Dp>(2500,1000, easing = Ease),
-                RepeatMode.Reverse),
+            animationSpec = repeatable(
+                200, animation = tween<Dp>(2500, 1000, easing = Ease),
+                RepeatMode.Reverse
+            ),
             label = ""
         )
 
         Column {
-            Box(contentAlignment = Alignment.Center,modifier = Modifier
-                .size(400.dp,400.dp)
-            ){
+            Box(
+                contentAlignment = Alignment.Center, modifier = Modifier
+                    .size(400.dp, 400.dp)
+            ) {
                 Image(
                     painterResource(id = R.drawable.logo),
                     contentDescription = null,
@@ -191,7 +339,6 @@ fun BreathingAnimation() {
                 Button(
                     onClick = {
                         isInflated = !isInflated
-//                        prompts[1] != prompts[2]
                     },
                     modifier = Modifier
                         .background(Color.Transparent)
@@ -206,6 +353,139 @@ fun BreathingAnimation() {
                             .size(scaleNotInfinite),
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun BreathingTime(
+    totalTime: Long,
+    inactiveBarColor: Color,
+    activeBarColor: Color,
+    modifier: Modifier = Modifier,
+    initialValue: Float = 1f,
+    strokeWidth: Dp = 5.dp
+) {
+    var size by remember {
+        mutableStateOf(IntSize.Zero)
+    }
+    var value by remember {
+        mutableStateOf(initialValue)
+    }
+    var currentTime by remember {
+        mutableStateOf(totalTime)
+    }
+    var isTimerRunning by remember {
+        mutableStateOf(false)
+    }
+    LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
+        if (currentTime > 0 && isTimerRunning) {
+            delay(100L)
+            currentTime -= 100L
+            value = currentTime / totalTime.toFloat()
+        }
+    }
+    Column {
+        Box(contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .onSizeChanged { size = it }
+        ) {
+            Canvas(modifier = Modifier) {
+                drawArc(
+                    color = inactiveBarColor,
+                    startAngle = -90f,
+                    sweepAngle = 360f,
+                    useCenter = false,
+                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+
+                )
+                drawArc(
+                    color = activeBarColor,
+                    startAngle = -90f,
+                    sweepAngle = 360f * value,
+                    useCenter = false,
+                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(50.dp))
+        Box(contentAlignment = Alignment.Center,
+            modifier = Modifier.onSizeChanged { size = it }) {
+            Button(
+                onClick = {
+                    if (currentTime <= 0L) {
+                        currentTime = totalTime
+                        isTimerRunning = true
+                    } else {
+                        isTimerRunning = !isTimerRunning
+                    }
+                },
+                modifier = Modifier.align(Alignment.BottomCenter),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = if (isTimerRunning || currentTime <= 0L) {
+                        Color.LightGray
+                    } else {
+                        Color.Red
+                    }
+                )
+            )
+            {
+                Text(
+                    text = if (isTimerRunning && currentTime >= 0L) "Stop"
+                    else if (!isTimerRunning && currentTime >= 0L) "Start"
+                    else "Restart"
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(100.dp))
+        Text(
+            text = (currentTime / 1000L).toString(),
+            fontSize = 50.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun AnimatedCounter(
+    count: Int,
+    modifier: Modifier = Modifier,
+    style: TextStyle = MaterialTheme.typography.bodyMedium
+) {
+    var oldCount by remember {
+        mutableStateOf(count)
+    }
+    SideEffect {
+        oldCount = count
+    }
+    Row(modifier = modifier) {
+        val countString = count.toString()
+        val oldCountString = oldCount.toString()
+        for(i in countString.indices) {
+            val oldChar = oldCountString.getOrNull(i)
+            val newChar = countString[i]
+            val char = if(oldChar == newChar) {
+                oldCountString[i]
+            } else {
+                countString[i]
+            }
+            AnimatedContent(
+                targetState = char,
+                transitionSpec = {
+                    slideInVertically { it } with slideOutVertically { -it }
+                }, label = ""
+            ) { char ->
+                Text(
+                    text = char.toString(),
+                    style = style,
+                    softWrap = false
+                )
             }
         }
     }

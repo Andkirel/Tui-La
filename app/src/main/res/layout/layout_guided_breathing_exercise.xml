@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<layout>
+    <data>
+        <variable
+            name="countdownTimeViewModel"
+            type="com.example.tui_la.CountTimeViewModel"/> &lt;!&ndash;// countdowntimer.CountTimeViewModel" />&ndash;&gt;
+    </data>-->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -118,3 +125,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_breathing_start_stop" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--
+</layout>-->
