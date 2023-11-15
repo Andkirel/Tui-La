@@ -28,9 +28,11 @@ class HomeFragment : Fragment() {
             navigateToActivity(GuidedMeditationActivity::class.java)
         }
 
+        /* TODO: link to Breathing Activity
         view.findViewById<Button>(R.id.Button_MainScreen_GB).setOnClickListener {
             navigateToActivity(GuidedBreathingActivity::class.java)
         }
+        */
 
         view.findViewById<Button>(R.id.Button_MainScreen_Jour).setOnClickListener {
             navigateToActivity(JournalWriteActivity::class.java)
@@ -45,7 +47,7 @@ class HomeFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.Button_MainScreen_Crisis).setOnClickListener {
-            navigateToActivity(CSupport::class.java)
+            navigateToActivity(Csupport::class.java)
         }
 
         view.findViewById<ImageButton>(R.id.ImageButton_MainMenu_Settings).setOnClickListener {
