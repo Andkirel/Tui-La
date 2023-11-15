@@ -34,7 +34,6 @@ class HomeActivity : AppCompatActivity(), ICommunicatorHome {
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
-            .addToBackStack(null)  // This line is optional, depending on your back stack needs
             .commit()
     }
 
@@ -42,9 +41,6 @@ class HomeActivity : AppCompatActivity(), ICommunicatorHome {
         // If the HomeFragment is the current fragment, do not pop the back stack
         if (supportFragmentManager.backStackEntryCount > 1) {
             super.onBackPressed()
-        } else {
-            // Prevent going back from HomeFragment or close the activity if needed
-            // finish() // Uncomment this if you want to close the activity
         }
     }
 }

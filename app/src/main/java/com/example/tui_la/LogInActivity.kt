@@ -15,7 +15,6 @@ class LogInActivity : AppCompatActivity(), ICommunicatorLogin {
         binding = FragmentcontainerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initially display the LandingFragment when the activity starts
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, LandingFragment())
