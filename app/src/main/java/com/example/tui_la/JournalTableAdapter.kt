@@ -3,6 +3,7 @@ package com.example.tui_la
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,10 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
     ) : RecyclerView.Adapter<JournalTableAdapter.ViewHolder>() {
 
     private lateinit var jListener: OnItemClickListener
+
     interface OnItemClickListener{
         fun onItemClick(position: Int)
+        fun deleteEntry(position: Int)
     }
 
     fun setOnItemClickListener(clickListener: OnItemClickListener) {
@@ -55,9 +58,14 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
         val entry: TextView = entryView.findViewById(R.id.tvEntry)
         val emotion: ImageView = entryView.findViewById(R.id.ivEmotion)
 
+        var delete: ImageButton = entryView.findViewById(R.id.ivDelete)
+
         init {
             entryView.setOnClickListener{
                 clickListener.onItemClick(absoluteAdapterPosition)
+            }
+            delete.setOnClickListener{
+                clickListener.deleteEntry(absoluteAdapterPosition)
             }
         }
     }

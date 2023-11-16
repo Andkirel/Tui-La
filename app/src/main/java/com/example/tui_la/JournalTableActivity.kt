@@ -3,11 +3,10 @@ package com.example.tui_la
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.annotation.ArrayRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tui_la.JournalTableAdapter.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 
@@ -16,8 +15,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
-import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class JournalTableActivity : AppCompatActivity() {
@@ -26,6 +23,7 @@ class JournalTableActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firebaseReference: DatabaseReference
+    private lateinit var uId: String
 
     private lateinit var journalRecyclerView: RecyclerView
 
@@ -86,6 +84,16 @@ class JournalTableActivity : AppCompatActivity() {
 
                             startActivity(journalWrite)
                         }
+                        override fun deleteEntry(position: Int) {
+                            firebaseReference.child(entryKeyList[position]).removeValue()
+                                .addOnSuccessListener{
+                                    Toast.makeText(this@JournalTableActivity,"Entry deleted",Toast.LENGTH_LONG).show()
+                                }
+                                .addOnFailureListener{err ->
+                                    Toast.makeText(this@JournalTableActivity, "Error ${err.message}", Toast.LENGTH_LONG).show()
+                                }
+                            getUserData()
+                        }
                     })
                 }
             }
@@ -93,5 +101,11 @@ class JournalTableActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    fun addEntry(view: View) {
+        val journalWrite = Intent(this@JournalTableActivity, JournalWriteActivity::class.java)
+
+        startActivity(journalWrite)
     }
 }

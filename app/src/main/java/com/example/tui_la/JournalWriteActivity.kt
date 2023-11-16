@@ -46,7 +46,7 @@ class JournalWriteActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
         firebaseReference = Firebase.database.reference
 
-        // spinner layout
+        // set up spinner/drop down menu
         setJournalSpinner()
 
         // set the fields using firebase data if available
@@ -91,8 +91,22 @@ class JournalWriteActivity : AppCompatActivity() {
             }
     }
 
-    private fun setJournalData() {
+    private fun setJournalSpinner() {
+        emotionSpinner = findViewById(R.id.journalWriteSpinner)
+        emotionSpinner.adapter = JournalSpinnerAdapter(EmData.list!!, this)
 
+        emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent!!.getItemAtPosition(position)
+                journalEmotion = EmData.list!![position].image
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+    }
+
+    private fun setJournalData() {
         if (!(intent.getStringExtra("journalId").isNullOrBlank()))   {
 
             entryKey = intent.getStringExtra("journalId")!!
@@ -122,26 +136,5 @@ class JournalWriteActivity : AppCompatActivity() {
             .addOnFailureListener{err ->
                 Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
             }
-    }
-
-    private fun delete(){
-
-    }
-
-    private fun setJournalSpinner() {
-        emotionSpinner = findViewById(R.id.journalWriteSpinner)
-        //val adapter = JournalSpinnerAdapter(EmData.list!!,this)
-        emotionSpinner.adapter = JournalSpinnerAdapter(EmData.list!!, this)
-
-        emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position)
-                journalEmotion = EmData.list!![position].image
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
     }
 }
