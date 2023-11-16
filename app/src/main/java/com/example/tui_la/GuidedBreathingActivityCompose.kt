@@ -25,6 +25,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -52,13 +53,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -79,9 +80,12 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
 
         setContent {
             Surface (color = Color.White, modifier = Modifier.fillMaxSize()){
-                Box(contentAlignment = Alignment.Center){
-                    BreathingTime(totalTime = 100L * 1000L, inactiveBarColor = Color.LightGray, activeBarColor = Color.Blue, modifier = Modifier.size(300.dp))
-                }
+                //Box(contentAlignment = Alignment.Center){
+                    BreathingTime(totalTime = 100L * 1000L,
+                        inactiveBarColor = Color.LightGray,
+                        activeBarColor = Color.Blue,
+                        modifier = Modifier.size(300.dp))
+                //}
             }
 
                 /*CreateLayout()
@@ -386,18 +390,27 @@ fun BreathingTime(
             value = currentTime / totalTime.toFloat()
         }
     }
-    Column {
-        Box(contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .onSizeChanged { size = it }
+    Column (verticalArrangement = Arrangement.spacedBy(50.dp,Alignment.CenterVertically), horizontalAlignment = Alignment.CenterHorizontally){
+        Box(contentAlignment = Alignment.Center
+            /*modifier = Modifier
+                .onSizeChanged { size = it }*/
         ) {
-            Canvas(modifier = Modifier) {
+            Canvas(modifier = Modifier//.scale(1f)/*.align(alignment = Alignment.Center)*/
+            ) {
+                val arcRadius = 500f
+                val canvasWidth = size.width
+                val canvasHeight = size.height
                 drawArc(
                     color = inactiveBarColor,
                     startAngle = -90f,
                     sweepAngle = 360f,
                     useCenter = false,
-                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    //size = Size(500f,500f),//Size(size.width.toFloat(), size.height.toFloat()),
+                    size = Size(arcRadius, arcRadius),
+                    topLeft = Offset(
+                        (canvasWidth / 2) - (arcRadius / 2),
+                        canvasHeight / 2 - (arcRadius / 2)
+                    ),
                     style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
 
                 )
@@ -406,14 +419,19 @@ fun BreathingTime(
                     startAngle = -90f,
                     sweepAngle = 360f * value,
                     useCenter = false,
-                    size = Size(size.width.toFloat(), size.height.toFloat()),
+                    //size = Size(500f,500f),//Size(size.width.toFloat(), size.height.toFloat()),
+                    size = Size(arcRadius, arcRadius),
+                    topLeft = Offset(
+                        (canvasWidth / 2) - (arcRadius / 2),
+                        canvasHeight / 2 - (arcRadius / 2)
+                    ),
                     style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
                 )
             }
         }
         Spacer(modifier = Modifier.height(50.dp))
-        Box(contentAlignment = Alignment.Center,
-            modifier = Modifier.onSizeChanged { size = it }) {
+        Box(/*contentAlignment = Alignment.Center,*/
+           /* modifier = Modifier.onSizeChanged { size = it }*/) {
             Button(
                 onClick = {
                     if (currentTime <= 0L) {
@@ -423,7 +441,7 @@ fun BreathingTime(
                         isTimerRunning = !isTimerRunning
                     }
                 },
-                modifier = Modifier.align(Alignment.BottomCenter),
+                /*modifier = Modifier.align(Alignment.Center),*/
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (isTimerRunning || currentTime <= 0L) {
                         Color.LightGray
@@ -440,7 +458,7 @@ fun BreathingTime(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(100.dp))
+        //Spacer(modifier = Modifier.height(100.dp))
         Text(
             text = (currentTime / 1000L).toString(),
             fontSize = 50.sp,
