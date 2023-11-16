@@ -73,6 +73,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tui_la.ui.theme.TuiLaTheme
 import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.seconds
+
+enum class lengthOptions(val seconds: Int){
+    oneMinute(60),
+    threeMinutes(180),
+    fiveMinutes(300),
+    tenMinutes(600),
+    fifteenMinutes(900)
+}
 
 class GuidedBreathingActivityCompose : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +90,7 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
         setContent {
             Surface (color = Color.White, modifier = Modifier.fillMaxSize()){
                 //Box(contentAlignment = Alignment.Center){
-                    BreathingTime(totalTime = 100L * 1000L,
+                    BreathingTime(totalTime = lengthOptions.fiveMinutes.seconds,
                         inactiveBarColor = Color.LightGray,
                         activeBarColor = Color.Blue,
                         modifier = Modifier.size(300.dp))
@@ -364,7 +373,7 @@ fun BreathingAnimation() {
 
 @Composable
 fun BreathingTime(
-    totalTime: Long,
+    totalTime: Int,
     inactiveBarColor: Color,
     activeBarColor: Color,
     modifier: Modifier = Modifier,
@@ -385,8 +394,8 @@ fun BreathingTime(
     }
     LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
         if (currentTime > 0 && isTimerRunning) {
-            delay(100L)
-            currentTime -= 100L
+            delay(1000)
+            currentTime -= 1
             value = currentTime / totalTime.toFloat()
         }
     }
@@ -429,12 +438,12 @@ fun BreathingTime(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(50.dp))
+        //Spacer(modifier = Modifier.height(50.dp))
         Box(/*contentAlignment = Alignment.Center,*/
            /* modifier = Modifier.onSizeChanged { size = it }*/) {
             Button(
                 onClick = {
-                    if (currentTime <= 0L) {
+                    if (currentTime <= 0) {
                         currentTime = totalTime
                         isTimerRunning = true
                     } else {
@@ -443,7 +452,7 @@ fun BreathingTime(
                 },
                 /*modifier = Modifier.align(Alignment.Center),*/
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isTimerRunning || currentTime <= 0L) {
+                    containerColor = if (isTimerRunning || currentTime <= 0) {
                         Color.LightGray
                     } else {
                         Color.Red
@@ -452,15 +461,15 @@ fun BreathingTime(
             )
             {
                 Text(
-                    text = if (isTimerRunning && currentTime >= 0L) "Stop"
-                    else if (!isTimerRunning && currentTime >= 0L) "Start"
+                    text = if (isTimerRunning && currentTime >= 0) "Stop"
+                    else if (!isTimerRunning && currentTime >= 0) "Start"
                     else "Restart"
                 )
             }
         }
         //Spacer(modifier = Modifier.height(100.dp))
         Text(
-            text = (currentTime / 1000L).toString(),
+            text = (currentTime).seconds.toString(),
             fontSize = 50.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
