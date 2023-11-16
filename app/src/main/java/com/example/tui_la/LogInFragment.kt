@@ -19,7 +19,7 @@ class LogInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.layout_login, container, false)
+        val view = inflater.inflate(R.layout.layout_login_remade, container, false)
         auth = FirebaseAuth.getInstance()
 
         // Initialize views

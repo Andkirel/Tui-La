@@ -156,9 +156,9 @@ class JournalWriteActivity : AppCompatActivity() {
 
     private fun setJournalSpinner() {
         emotionSpinner = findViewById(R.id.journalWriteSpinner)
-        val adapter = JournalSpinnerAdapter(Emotions.list!!,this)
+        //val adapter = JournalSpinnerAdapter(Emotions.list!!,this)
 
-        emotionSpinner.adapter = adapter
+        //emotionSpinner.adapter = adapter
 
         emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
