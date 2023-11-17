@@ -11,6 +11,23 @@
         android:theme="@style/Theme.TuiLa"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".Acc_Settings"/>
+        <activity android:name=".Add_payment"/>
+        <activity android:name=".App_settings"/>
+        <activity android:name=".B_E_options"/>
+        <activity android:name=".Badges"/>
+        <activity android:name=".Csupport"/>
+        <activity android:name=".Emotions"/>
+        <activity android:name=".MainMenu"/>
+        <activity android:name=".Nav_menu"/>
+        <activity android:name=".Payment"/>
+        <activity android:name=".Prompt"/>
+        <activity android:name=".Settings_menu"/>
+        <activity android:name=".B_E_3Min"/>
+        <activity android:name=".B_E_5Min"/>
+        <activity android:name=".B_E_10Min"/>
+        <activity android:name=".B_E_Infinite"/>
         <activity
             android:name=".LogInActivity"
             android:exported="true">
@@ -24,35 +41,16 @@
             android:exported="false" />
         <activity
             android:name=".JournalTableActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".JournalWriteActivity"
-            android:exported="true"/>
+            android:exported="false"/>
         <activity
             android:name=".GuidedMeditationActivity"
             android:exported="false" />
         <activity
             android:name=".GuidedMeditationPlayer"
             android:exported="false" />
-        <activity android:name=".Acc_Settings"
-            android:exported="false" />
-        <activity android:name=".Add_payment"
-            android:exported="false" />
-        <activity android:name=".App_settings"
-            android:exported="false" />
-        <activity android:name=".Badges"
-            android:exported="false" />
-        <activity android:name=".Csupport"
-            android:exported="false" />
-        <activity android:name=".Nav_menu"
-            android:exported="false" />
-        <activity android:name=".Payment"
-            android:exported="false" />
-        <activity android:name=".Prompt"
-            android:exported="false" />
-        <activity android:name=".Settings_menu"
-            android:exported="false" />
-
 
         <meta-data
             android:name="preloaded_fonts"

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "339700818726",
+    "firebase_url": "https://tui-la-default-rtdb.firebaseio.com",
+    "project_id": "tui-la",
+    "storage_bucket": "tui-la.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339700818726:android:5e54b0c4774b097ce1d7e7",
+        "android_client_info": {
+          "package_name": "com.example.tui_la"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339700818726-a3lahgfei1pv91d1jl8kdhv9k18r6rgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtGwKZIXv9V8L_7GK6RSPNtdHMBHiKQ2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339700818726-a3lahgfei1pv91d1jl8kdhv9k18r6rgc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
