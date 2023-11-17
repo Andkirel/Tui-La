@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -34,6 +35,7 @@ class CreateAccountFragment : Fragment() {
         val passwordEditText: EditText = view.findViewById(R.id.pw_editText)
         val createAccountButton: Button = view.findViewById(R.id.Button_Createaccount)
         val loginTextView: TextView = view.findViewById(R.id.Login_text)
+        val backButtonCreateAccount: ImageButton = view.findViewById(R.id.Backbutton_createaccount)
 
         createAccountButton.setOnClickListener {
             val username = usernameEditText.text.toString().trim()
@@ -83,6 +85,13 @@ class CreateAccountFragment : Fragment() {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
                 .replace(R.id.coordinatorLayout, LogInFragment())
+                .commit()
+        }
+
+        backButtonCreateAccount.setOnClickListener {
+            // Navigate to the login fragment
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.coordinatorLayout, LandingFragment())
                 .commit()
         }
 

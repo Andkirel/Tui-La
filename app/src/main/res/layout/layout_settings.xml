@@ -29,7 +29,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
-        android:text="@string/badges_achievements"
+        android:text="@string/stickers"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

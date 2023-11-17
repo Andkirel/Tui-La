@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/journal_cardView"
-    android:layout_margin="5dp"
+    android:layout_margin="10dp"
     android:padding="0dp"
     app:cardBackgroundColor="@android:color/transparent"
     app:cardElevation="0dp"
@@ -26,10 +27,12 @@
 
         <TextView
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
             android:text="Title"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/tvTime"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +40,7 @@
             android:id="@+id/tvEntry"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="This would be a portion of the journal entry you'd go to by clicking on this"
+            android:text="Entry"
             android:textSize="12sp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
@@ -50,6 +53,7 @@
             android:id="@+id/ivEmotion"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/afraid" />
@@ -60,7 +64,7 @@
             android:layout_height="wrap_content"
             android:text="Time"
             android:textSize="16sp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="12dp"
             app:layout_constraintEnd_toStartOf="@id/tvDate"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,6 +76,17 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/ivDelete"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/journal_jpg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="5dp"
+            />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
