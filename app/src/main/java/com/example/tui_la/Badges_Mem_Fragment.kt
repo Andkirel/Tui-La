@@ -12,7 +12,7 @@ class Badges_Mem_Fragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.layout_badges_journal, container, false)
+        val view = inflater.inflate(R.layout.layout_badges_mem, container, false)
 
 
 

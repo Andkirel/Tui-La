@@ -9,19 +9,27 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.tui_la.R
+import com.example.tui_la.databinding.FragmentcontainerBinding
 
 class Settings_menu: AppCompatActivity() {
+    private lateinit var binding: FragmentcontainerBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.layout_settings)
+        binding = FragmentcontainerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val stickers = findViewById<Button>(R.id.button_stickers)
-        stickers .setOnClickListener {
-            val Intent = Intent(this, BadgesActivity::class.java)
-            startActivity(Intent)
+        // Display the EmotionsFragment without adding it to the back stack
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, settingsfragment())
+                .commit()
         }
+    }
 
-
-
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
     }
 }

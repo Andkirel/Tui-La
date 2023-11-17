@@ -9,10 +9,10 @@
 
 
     <Button
-        android:id="@+id/button_menu_home"
+        android:id="@+id/button_AccontSettings"
         android:layout_width="361dp"
         android:layout_height="78dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="96dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
         android:text="@string/account_settings"
@@ -33,10 +33,10 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_menu_home" />
+        app:layout_constraintTop_toBottomOf="@+id/button_AccontSettings" />
 
     <Button
-        android:id="@+id/button_menu_journal"
+        android:id="@+id/button_Appsettings"
         android:layout_width="361dp"
         android:layout_height="78dp"
         android:layout_marginTop="8dp"
@@ -49,17 +49,17 @@
         app:layout_constraintTop_toBottomOf="@+id/button_stickers" />
 
     <Button
-        android:id="@+id/button_menu_records"
+        android:id="@+id/button_apphelp"
         android:layout_width="361dp"
         android:layout_height="78dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/philosopher"
         android:text="@string/app_help"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_menu_journal" />
+        app:layout_constraintTop_toBottomOf="@+id/button_Appsettings" />
 
     <Button
         android:id="@+id/button_menu_education"
@@ -72,7 +72,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_menu_records" />
+        app:layout_constraintTop_toBottomOf="@+id/button_apphelp" />
 
     <ImageButton
         android:id="@+id/imageButton"
