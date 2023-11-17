@@ -33,7 +33,7 @@ object GuidedMeditationDataRepo {
         R.drawable.gm_still_waterfalls_over_pond_facing_right,
         R.drawable.gm_still_waves_from_above,
         R.drawable.gm_still_slow_waves_closeup,
-        R.drawable.gm_still_large_moon_on_lake,
+        R.drawable.gm_still_large_moon_over_lake_resized,
         R.drawable.gm_still_steaming_teacup_with_sun,
         R.drawable.gm_still_windy_meadow
     )

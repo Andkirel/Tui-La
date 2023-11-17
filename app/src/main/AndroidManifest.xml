@@ -9,8 +9,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.TuiLa"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".GuidedMeditationCompose"
+            android:exported="true"
+            android:label="@string/title_activity_guided_meditation_compose"
+            android:theme="@style/Theme.TuiLa" />
         <activity
             android:name=".GuidedBreathingActivityCompose"
             android:exported="true"
@@ -21,6 +26,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,35 +45,48 @@
         <activity
             android:name=".GuidedMeditationPlayer"
             android:exported="false" />
-        <activity android:name=".Acc_Settings"
+        <activity
+            android:name=".Acc_Settings"
             android:exported="false" />
-        <activity android:name=".Add_payment"
+        <activity
+            android:name=".Add_payment"
             android:exported="false" />
-        <activity android:name=".App_settings"
+        <activity
+            android:name=".App_settings"
             android:exported="false" />
-        <activity android:name=".B_E_options"
+        <activity
+            android:name=".B_E_options"
             android:exported="false" />
-        <activity android:name=".Badges"
+        <activity
+            android:name=".Badges"
             android:exported="false" />
-        <activity android:name=".Csupport"
+        <activity
+            android:name=".Csupport"
             android:exported="false" />
-        <activity android:name=".Nav_menu"
+        <activity
+            android:name=".Nav_menu"
             android:exported="false" />
-        <activity android:name=".Payment"
+        <activity
+            android:name=".Payment"
             android:exported="false" />
-        <activity android:name=".Prompt"
+        <activity
+            android:name=".Prompt"
             android:exported="false" />
-        <activity android:name=".Settings_menu"
+        <activity
+            android:name=".Settings_menu"
             android:exported="false" />
-        <activity android:name=".B_E_3Min"
+        <activity
+            android:name=".B_E_3Min"
             android:exported="false" />
-        <activity android:name=".B_E_5Min"
+        <activity
+            android:name=".B_E_5Min"
             android:exported="false" />
-        <activity android:name=".B_E_10Min"
+        <activity
+            android:name=".B_E_10Min"
             android:exported="false" />
-        <activity android:name=".B_E_Infinite"
+        <activity
+            android:name=".B_E_Infinite"
             android:exported="false" />
-
 
         <meta-data
             android:name="preloaded_fonts"
