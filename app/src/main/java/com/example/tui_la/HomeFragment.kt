@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import androidx.media3.common.util.UnstableApi
 
-class HomeFragment : Fragment() {
+@UnstableApi class HomeFragment : Fragment() {
 
     private var uid: String? = null
 

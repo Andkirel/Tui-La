@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import android.content.Context
+import android.widget.ImageButton
 
 
 class LogInFragment : Fragment() {
@@ -38,6 +39,7 @@ class LogInFragment : Fragment() {
         val emailEditText = view.findViewById<EditText>(R.id.usname)
         val passwordEditText = view.findViewById<EditText>(R.id.password)
         val loginButton = view.findViewById<Button>(R.id.Button_login_loginButton)
+        val backButtonLogin: ImageButton = view.findViewById(R.id.Backbutton_login)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
@@ -60,6 +62,12 @@ class LogInFragment : Fragment() {
                         Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
                 }
+        }
+        backButtonLogin.setOnClickListener {
+            // Navigate to the login fragment
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.coordinatorLayout, LandingFragment())
+                .commit()
         }
 
         return view
