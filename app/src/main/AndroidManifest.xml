@@ -15,9 +15,9 @@
         <activity android:name=".Acc_Settings"/>
         <activity android:name=".Add_payment"/>
         <activity android:name=".App_settings"/>
-        <activity android:name=".Badges"/>
+        <activity android:name=".BadgesFragment"/>
+        <activity android:name=".BadgesActivity"/>
         <activity android:name=".Csupport"/>
-        <activity android:name=".Emotions"/>
         <activity android:name=".MainMenu"/>
         <activity android:name=".Nav_menu"/>
         <activity android:name=".Payment"/>

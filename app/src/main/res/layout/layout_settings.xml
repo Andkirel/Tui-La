@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_menu_GB"
+        android:id="@+id/button_stickers"
         android:layout_width="361dp"
         android:layout_height="78dp"
         android:layout_marginTop="8dp"
@@ -46,7 +46,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_menu_GB" />
+        app:layout_constraintTop_toBottomOf="@+id/button_stickers" />
 
     <Button
         android:id="@+id/button_menu_records"
