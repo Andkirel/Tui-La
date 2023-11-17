@@ -97,7 +97,7 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
 @Composable
 //@Preview(showBackground = true)
 fun CreateLayout(modifier: Modifier = Modifier) {
-    val purpleColor = colorResource(id = R.color.cactus_purple)
+    val blueColor = colorResource(id = R.color.light_blue_900)
     Column(
         modifier = Modifier
             .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
@@ -151,7 +151,6 @@ fun CreateLayout(modifier: Modifier = Modifier) {
                 }
             }
         }
-
         Box(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
@@ -160,7 +159,7 @@ fun CreateLayout(modifier: Modifier = Modifier) {
         {
             Text(
                 "Tap the logo to begin!", style = TextStyle(
-                    color = purpleColor,
+                    color = blueColor,
                     fontSize = 35.sp,
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle(R.font.philosopher),
