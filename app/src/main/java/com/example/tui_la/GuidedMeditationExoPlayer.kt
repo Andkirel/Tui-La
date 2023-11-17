@@ -84,6 +84,9 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
     CoroutineScope by MainScope() {
     lateinit var videoPlayer: ExoPlayer
     lateinit var audioPlayer: ExoPlayer
+    lateinit var audId: String
+    lateinit var vidId: String
+    lateinit var currentTrackName: String
     private lateinit var videoPlayerView: PlayerView
     private lateinit var audioPlayerView: PlayerView
     private var playbackStateListener: Player.Listener = playbackStateListener()
@@ -97,8 +100,11 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_meditation_player)
+        audId = intent.getStringExtra("AudioId").toString()
+        vidId = intent.getStringExtra("VideoId").toString()
+        currentTrackName = intent.getStringExtra("Name").toString()
         audioTitle = findViewById(R.id.guidedMeditationTitle)
-        audioTitle.text = "My Title"
+        audioTitle.text = currentTrackName
         val backButton: Button = findViewById(R.id.btn_gm_player_back)
         backButton.setBackgroundResource(R.drawable.back_button)
 
@@ -320,9 +326,11 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
         //val progressiveMediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
             //.createMediaSource(fromUri(httpStreamUrl))
         val googleVidSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7?alt=media&key=$Google_Cloud_API_Key"))
+            //.createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/1RMdKtJUQoYA4t1KfycAuq24QizkKemx7?alt=media&key=$Google_Cloud_API_Key"))
+            .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/$vidId?alt=media&key=$Google_Cloud_API_Key"))
         val googleAudSource = ProgressiveMediaSource.Factory(dataSourceFactory)
-            .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/12CflTXe6_8KKRYOYq0Ssx41lpQUsJXip?alt=media&key=$Google_Cloud_API_Key"))
+            //.createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/12CflTXe6_8KKRYOYq0Ssx41lpQUsJXip?alt=media&key=$Google_Cloud_API_Key"))
+            .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/$audId?alt=media&key=$Google_Cloud_API_Key"))
         val audSourceTest = ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(fromUri("https://www.googleapis.com/drive/v3/files/1uW0z7nqH6Yn0ADf9FT42kGJdP1Y6X_5P?alt=media&key=$Google_Cloud_API_Key"))
         audioPlayer.setMediaSource(googleAudSource)

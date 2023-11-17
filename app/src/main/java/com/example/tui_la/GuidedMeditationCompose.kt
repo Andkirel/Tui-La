@@ -1,9 +1,14 @@
 package com.example.tui_la
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,40 +35,36 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 
 class GuidedMeditationCompose : ComponentActivity() {
+    //val context = this.applicationContext
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp()
+
+            MyApp(this.applicationContext)
+
         }
     }
 }
 
+//@Preview(showBackground = true)
+@SuppressLint("UnsafeOptInUsageError")
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MyApp() {
+fun MyApp(applicationContext: Context) {
     val meditations = remember { DataProvider.gmDataList }
     LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
         items(
             items = meditations,
             itemContent = {
-                GmListItem(meditationData = it)
+                GmListItem(meditationData = it,applicationContext)
+                //onItemClick(it,applicationContext)
+                //onItemClick(it,context)
             })
     }
 }
@@ -122,19 +123,19 @@ object DataProvider {
     )
 }
 
+@SuppressLint("UnsafeOptInUsageError")
 @Composable
-fun GmListItem(meditationData: GuidedMeditationData) {
+fun GmListItem(meditationData: GuidedMeditationData, context: Context) {
     Card(
         modifier = Modifier
             .padding(5.dp)
             .height(126.dp)
             .fillMaxWidth()
-            .wrapContentHeight(align = Alignment.CenterVertically),
-        /*.clickable(onClick = {
-            Toast
-                .makeText(applicationContext, data.trackName, Toast.LENGTH_SHORT)
-                .show()
-        })*/
+            .wrapContentHeight(align = Alignment.CenterVertically)
+            .clickable(onClick = {
+                Toast.makeText(context,"Loading, please wait...",Toast.LENGTH_SHORT).show()
+                onItemClick(meditationData,context)
+            }),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.elevatedCardElevation(5.dp),
     ) {
@@ -150,18 +151,30 @@ fun GmListItem(meditationData: GuidedMeditationData) {
                         .align(Alignment.Center)
                         .wrapContentSize(),
                         contentScale = ContentScale.FillBounds, alignment = Alignment.Center)
-                Text(text = meditationData.trackName, modifier = Modifier.align(Alignment.BottomEnd)
-                    .padding(5.dp).shadow(4.dp, clip = true),
+                Text(text = meditationData.trackName, modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(5.dp)
+                    .shadow(4.dp, clip = true),
                     style = TextStyle(color = colorResource(id = R.color.light_salmon),
                         shadow = Shadow(color = Color.Black, offset = Offset(3f,3f), blurRadius = 5f),
                         fontSize = 30.sp,
-                    ), fontStyle = FontStyle(R.font.philosopher_bold), textAlign = TextAlign.Right,
-                    fontFamily = FontFamily(Font(R.font.philosopher)),
+                    ), textAlign = TextAlign.Right,
+                    //fontFamily = FontFamily(Font(R.font.philosopher)),
                 )
             }
-
-
         }
     }
+}
 
+@SuppressLint("UnsafeOptInUsageError")
+fun onItemClick(data: GuidedMeditationData, context: Context) {
+    val bundle = Bundle()
+    bundle.putString("VideoId",data.vidIds)
+    bundle.putString("AudioId",data.audIds)
+    bundle.putInt("Image",data.gmImages)
+    bundle.putString("Name",data.trackName)
+    val intent = Intent(context,GuidedMeditationExoPlayer::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    intent.putExtras(bundle)
+    startActivity(context,intent,bundle)
+    //startActivity(context,Intent(context,GuidedMeditationExoPlayer::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),null)
 }
