@@ -15,7 +15,6 @@
         <activity android:name=".Acc_Settings"/>
         <activity android:name=".Add_payment"/>
         <activity android:name=".App_settings"/>
-        <activity android:name=".B_E_options"/>
         <activity android:name=".Badges"/>
         <activity android:name=".Csupport"/>
         <activity android:name=".Emotions"/>
@@ -24,10 +23,6 @@
         <activity android:name=".Payment"/>
         <activity android:name=".Prompt"/>
         <activity android:name=".Settings_menu"/>
-        <activity android:name=".B_E_3Min"/>
-        <activity android:name=".B_E_5Min"/>
-        <activity android:name=".B_E_10Min"/>
-        <activity android:name=".B_E_Infinite"/>
         <activity
             android:name=".LogInActivity"
             android:exported="true">
