@@ -3,24 +3,14 @@ package com.example.tui_la
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.Ease
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.repeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.with
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -40,12 +30,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -68,14 +56,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tui_la.ui.theme.TuiLaTheme
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
-enum class lengthOptions(val seconds: Int){
+enum class lengthOptions(val seconds: Int) {
     oneMinute(60),
     threeMinutes(180),
     fiveMinutes(300),
@@ -88,134 +75,24 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Surface (color = Color.White, modifier = Modifier.fillMaxSize()){
-                //Box(contentAlignment = Alignment.Center){
-                    BreathingTime(totalTime = lengthOptions.fiveMinutes.seconds,
+            Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
+                CreateLayout()
+                
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Spacer(modifier = Modifier.height(100.dp))
+                    BreathingAnimation()
+
+                    BreathingTime(
+                        totalTime = lengthOptions.fiveMinutes.seconds,
                         inactiveBarColor = Color.LightGray,
                         activeBarColor = Color.Blue,
-                        modifier = Modifier.size(300.dp))
-                //}
-            }
-
-                /*CreateLayout()
-                Column {
-                    Spacer(modifier = Modifier.height(100.dp))
-                    BreathingAnimation()*/
-
-                    /*var count by remember {
-                        mutableStateOf(0)
-                    }
-                    AnimatedCounter(
-                        count = count,
-                        style = MaterialTheme.typography.bodyMedium
-                    )*/
-                    /*CircularProgress(modifier = Modifier
-                        .width(150.dp)
-                        .height(150.dp),
-                        progress = 10f,
-                        color = Color.Blue,
-                        backgroundColor = Color.LightGray
-                    )*/
-
-
-
-                }
-            }
-        }
-    //}
-
-@Composable
-fun CircularProgressBarTimer(
-    percentage: Float,
-    number: Int,
-    fontSize: TextUnit = 35.sp,
-    radius: Dp = 75.dp,
-    color: Color = Color.Blue,
-    strokeWidth: Dp = 8.dp,
-    animDuration: Int = 1000,
-    animDelay: Int = 0
-){
-    var animationPlayed by remember{
-        mutableStateOf(false)
-    }
-    val curPercentage = animateFloatAsState(
-        targetValue = if (animationPlayed) percentage else 0f,
-        label = ""
-    )
-
-
-}
-// region CircularProgress Commented out
-/*
-@Composable
-fun CircularProgress(
-    modifier: Modifier = Modifier,
-    color: Color,
-    backgroundColor: Color = color,
-    startingAngle: Float = 270f,
-    progress: Float,
-    animate: Boolean = true,
-    animationSpec: AnimationSpec<Float> = tween(durationMillis = 250, easing = LinearOutSlowInEasing)
-) {
-    val darkMode = isSystemInDarkTheme()
-    val animatedProgress: Float by animateFloatAsState(targetValue = progress, animationSpec = animationSpec)
-    Canvas(modifier) {
-        val sweepAngle = (360 * if (animate) animatedProgress else progress) / 100
-        val ringRadius = size.minDimension * 0.15f
-        val size = Size(size.width, size.height)
-        drawArc(backgroundColor, startingAngle, 360f, false, size = size, alpha = 0.2f, style = Stroke(ringRadius))
-        drawArc(
-            color = if (darkMode) Color.White else Color.Black,
-            startingAngle, sweepAngle, false, Offset(0f, 20f), size, 0.2f, Stroke(ringRadius, cap = StrokeCap.Round)
-        )
-        drawArc(color, startingAngle, sweepAngle, false, size = size, style = Stroke(ringRadius, cap = StrokeCap.Round))
-    }
-}
-*/
-
-/*@ExperimentalFoundationApi
-@Composable
-@Preview
-private fun MockCountdownTimer() {
-    AppTheme {
-        val rows = listOf(
-            Pair(0f, MaterialTheme.colors.primary),
-            Pair(5f, MaterialTheme.colors.primary),
-            Pair(10f, MaterialTheme.colors.primary),
-            Pair(15f, MaterialTheme.colors.primary),
-            Pair(20f, MaterialTheme.colors.primary),
-            Pair(25f, MaterialTheme.colors.primary),
-            Pair(30f, MaterialTheme.colors.primary),
-            Pair(35f, MaterialTheme.colors.primary),
-            Pair(40f, MaterialTheme.colors.primary),
-            Pair(45f, MaterialTheme.colors.primary),
-            Pair(50f, MaterialTheme.colors.primary),
-            Pair(55f, MaterialTheme.colors.primary),
-            Pair(60f, MaterialTheme.colors.primary),
-            Pair(65f, MaterialTheme.colors.primary),
-            Pair(70f, MaterialTheme.colors.primary),
-            Pair(75f, MaterialTheme.colors.primary),
-            Pair(80f, MaterialTheme.colors.primary),
-            Pair(85f, MaterialTheme.colors.primary),
-            Pair(90f, MaterialTheme.colors.primary),
-            Pair(95f, MaterialTheme.colors.primary),
-            Pair(100f, MaterialTheme.colors.primary)
-        )
-        LazyVerticalGrid(modifier = Modifier.fillMaxSize(), cells = GridCells.Adaptive(minSize = 130.dp)) {
-            items(rows) {
-                Box(Modifier.padding(20.dp), contentAlignment = Alignment.Center) {
-                    CircularProgress(
-                        Modifier
-                            .width(80.dp)
-                            .height(80.dp),
-                        progress = it.first, color = it.second
+                        modifier = Modifier.size(300.dp)
                     )
                 }
             }
         }
     }
-}*/
-//endregion
+}
 
 @Composable
 //@Preview(showBackground = true)
@@ -296,7 +173,6 @@ fun CreateLayout(modifier: Modifier = Modifier) {
 
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalAnimationApi::class)
 //@Preview(showBackground = true)
 @Composable
 fun BreathingAnimation() {
@@ -312,16 +188,6 @@ fun BreathingAnimation() {
             targetState = isInflated,
             label = null
         )
-        val infiniteTransition = rememberInfiniteTransition(label = "infinite transition")
-        val scaleInfinite by infiniteTransition.animateFloat(
-            initialValue = 0.75f,
-            targetValue = 1.5f,
-            animationSpec = infiniteRepeatable(
-                tween(3000, delayMillis = 1500),
-                repeatMode = RepeatMode.Reverse
-            ),
-            label = "scale"
-        )
         val scaleNotInfinite by animateDpAsState(
             targetValue = if (isInflated) 600.dp else 175.dp,
             animationSpec = repeatable(
@@ -330,7 +196,6 @@ fun BreathingAnimation() {
             ),
             label = ""
         )
-
         Column {
             Box(
                 contentAlignment = Alignment.Center, modifier = Modifier
@@ -399,12 +264,17 @@ fun BreathingTime(
             value = currentTime / totalTime.toFloat()
         }
     }
-    Column (verticalArrangement = Arrangement.spacedBy(50.dp,Alignment.CenterVertically), horizontalAlignment = Alignment.CenterHorizontally){
-        Box(contentAlignment = Alignment.Center
+    Column(
+        verticalArrangement = Arrangement.spacedBy(50.dp, Alignment.CenterVertically),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            contentAlignment = Alignment.Center
             /*modifier = Modifier
                 .onSizeChanged { size = it }*/
         ) {
-            Canvas(modifier = Modifier//.scale(1f)/*.align(alignment = Alignment.Center)*/
+            Canvas(
+                modifier = Modifier
             ) {
                 val arcRadius = 500f
                 val canvasWidth = size.width
@@ -414,7 +284,6 @@ fun BreathingTime(
                     startAngle = -90f,
                     sweepAngle = 360f,
                     useCenter = false,
-                    //size = Size(500f,500f),//Size(size.width.toFloat(), size.height.toFloat()),
                     size = Size(arcRadius, arcRadius),
                     topLeft = Offset(
                         (canvasWidth / 2) - (arcRadius / 2),
@@ -428,7 +297,6 @@ fun BreathingTime(
                     startAngle = -90f,
                     sweepAngle = 360f * value,
                     useCenter = false,
-                    //size = Size(500f,500f),//Size(size.width.toFloat(), size.height.toFloat()),
                     size = Size(arcRadius, arcRadius),
                     topLeft = Offset(
                         (canvasWidth / 2) - (arcRadius / 2),
@@ -438,9 +306,7 @@ fun BreathingTime(
                 )
             }
         }
-        //Spacer(modifier = Modifier.height(50.dp))
-        Box(/*contentAlignment = Alignment.Center,*/
-           /* modifier = Modifier.onSizeChanged { size = it }*/) {
+        Box {
             Button(
                 onClick = {
                     if (currentTime <= 0) {
@@ -450,7 +316,6 @@ fun BreathingTime(
                         isTimerRunning = !isTimerRunning
                     }
                 },
-                /*modifier = Modifier.align(Alignment.Center),*/
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (isTimerRunning || currentTime <= 0) {
                         Color.LightGray
@@ -467,7 +332,6 @@ fun BreathingTime(
                 )
             }
         }
-        //Spacer(modifier = Modifier.height(100.dp))
         Text(
             text = (currentTime).seconds.toString(),
             fontSize = 50.sp,
@@ -475,45 +339,5 @@ fun BreathingTime(
             color = Color.Black
         )
 
-    }
-}
-
-@OptIn(ExperimentalAnimationApi::class)
-@Composable
-fun AnimatedCounter(
-    count: Int,
-    modifier: Modifier = Modifier,
-    style: TextStyle = MaterialTheme.typography.bodyMedium
-) {
-    var oldCount by remember {
-        mutableStateOf(count)
-    }
-    SideEffect {
-        oldCount = count
-    }
-    Row(modifier = modifier) {
-        val countString = count.toString()
-        val oldCountString = oldCount.toString()
-        for(i in countString.indices) {
-            val oldChar = oldCountString.getOrNull(i)
-            val newChar = countString[i]
-            val char = if(oldChar == newChar) {
-                oldCountString[i]
-            } else {
-                countString[i]
-            }
-            AnimatedContent(
-                targetState = char,
-                transitionSpec = {
-                    slideInVertically { it } with slideOutVertically { -it }
-                }, label = ""
-            ) { char ->
-                Text(
-                    text = char.toString(),
-                    style = style,
-                    softWrap = false
-                )
-            }
-        }
     }
 }
