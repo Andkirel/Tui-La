@@ -18,26 +18,11 @@ class MainMenu: AppCompatActivity() {
             val Intent = Intent(this, GuidedMeditationActivity::class.java)
             startActivity(Intent)
         }
-        val B_E = findViewById<Button>(R.id.Button_MainScreen_GB)
-        B_E.setOnClickListener {
-            val Intent = Intent(this, B_E_options::class.java)
-            startActivity(Intent)
-        }
-        val Journal = findViewById<Button>(R.id.Button_MainScreen_Jour)
-        Journal.setOnClickListener {
-            val Intent = Intent(this, LogInActivity::class.java)
-            startActivity(Intent)
-        }
-        val Records = findViewById<Button>(R.id.Button_MainScreen_Records)
-        Records.setOnClickListener {
-            val Intent = Intent(this, LogInActivity::class.java)
-            startActivity(Intent)
-        }
-        val Edu = findViewById<Button>(R.id.Button_MainScreen_EDU)
+        /*val Edu = findViewById<Button>(R.id.Button_MainScreen_EDU)
         Edu.setOnClickListener {
             val Intent = Intent(this, Education::class.java)
             startActivity(Intent)
-        }
+        }*/
         val Crisis = findViewById<Button>(R.id.Button_MainScreen_Crisis)
         Crisis.setOnClickListener {
             val Intent = Intent(this, Csupport::class.java)

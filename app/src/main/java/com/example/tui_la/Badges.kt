@@ -29,7 +29,7 @@ class Badges: Fragment() {
         val BEButton: Button = view.findViewById(R.id.email_editText)
         val GMButton: Button = view.findViewById(R.id.pw_editText)
         val MemButton: Button = view.findViewById(R.id.Button_Createaccount)
-        val Backbutton: ImageButton = view.findViewById(R.id.Backbutton_Badges)
+       // val Backbutton: ImageButton = view.findViewById(R.id.Backbutton_Badges)
 
         Jbutton.setOnClickListener {
             // Navigate to the login fragment
@@ -53,12 +53,6 @@ class Badges: Fragment() {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
                 .replace(R.id.coordinatorLayout, Badges_Mem_Fragment())
-                .commit()
-        }
-        Backbutton.setOnClickListener {
-            // Navigate to the login fragment
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, Settings_menu())
                 .commit()
         }
 
