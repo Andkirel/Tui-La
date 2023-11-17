@@ -3,6 +3,7 @@ package com.example.tui_la
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,10 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
     ) : RecyclerView.Adapter<JournalTableAdapter.ViewHolder>() {
 
     private lateinit var jListener: OnItemClickListener
+
     interface OnItemClickListener{
         fun onItemClick(position: Int)
+        fun deleteEntry(position: Int)
     }
 
     fun setOnItemClickListener(clickListener: OnItemClickListener) {
@@ -31,8 +34,17 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
         holder.title.text = selection.title
         holder.time.text = selection.time
         holder.date.text = selection.date
-        holder.entry.text = selection.entry/*!!.substring(0,31).plus("...")*/
         holder.emotion.setImageResource(selection.emotion!!)
+
+        var entry = selection.entry!!
+
+        entry =
+        if (entry.length > 50) {
+            entry.take(50).substringBefore('\n').plus(" ...")
+        } else
+            entry.substringBefore('\n')
+
+        holder.entry.text = entry
     }
 
     override fun getItemCount(): Int {
@@ -46,11 +58,15 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
         val entry: TextView = entryView.findViewById(R.id.tvEntry)
         val emotion: ImageView = entryView.findViewById(R.id.ivEmotion)
 
+        var delete: ImageButton = entryView.findViewById(R.id.ivDelete)
+
         init {
             entryView.setOnClickListener{
                 clickListener.onItemClick(absoluteAdapterPosition)
             }
+            delete.setOnClickListener{
+                clickListener.deleteEntry(absoluteAdapterPosition)
+            }
         }
     }
 }
-
