@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/philosopher"
+                android:textAlignment="center"
                 android:text="a mental health support app"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
@@ -65,7 +66,7 @@
                 android:background="@drawable/tl_rounded_textbox_pink"
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/philosopher"
-                android:hint=" Enter username"
+                android:hint=" Enter First name"
                 android:inputType="text"
                 android:padding="8dp"
                 android:textColor="@color/black" />

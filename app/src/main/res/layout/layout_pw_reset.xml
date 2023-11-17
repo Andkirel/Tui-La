@@ -10,8 +10,6 @@
     android:background="@drawable/main_bg"
     tools:context=".LogInFragment">
 
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,94 +25,56 @@
             android:padding="24dp"
             android:background="@drawable/custom_file_for_entry">
 
-            <ImageButton
-                android:id="@+id/Backbutton_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|left"
-                android:background="#00FFFFFF"
-                android:contentDescription="@string/backb"
-                app:srcCompat="@drawable/back_button" />
-
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
-                android:id="@+id/Logintext"
-                android:textSize="36sp"
+                android:text="Enter your new Password"
+                android:id="@+id/confirm_Email"
+                android:textSize="30sp"
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:fontFamily="@font/philosopher"/>
+
             <EditText
-                android:id="@+id/usname"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/tl_rounded_textbox_pink"
-                android:layout_marginTop="30dp"
-                android:padding="8dp"
-                android:hint="@string/login_email"
-                android:drawableLeft="@drawable/baseline_person_24"
-                android:textColor="@color/black"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/philosopher"/>
-            <EditText
-                android:id="@+id/password"
+                android:id="@+id/new_password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/tl_rounded_textbox_pink"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
-                android:hint="@string/login_password"
+                android:hint="New password"
                 android:inputType="textPassword"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:textColor="@color/black"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/philosopher"
                 app:passwordToggleEnabled="true"/>
-
-             <TextView
-                android:id="@+id/forpw"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="5dp"
-                android:clickable="true"
-                android:textStyle="bold"
-                android:focusable="auto"
-                android:focusableInTouchMode="true"
-                android:textSize="14sp"
+            <EditText
+                android:id="@+id/confirm_newpassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/tl_rounded_textbox_pink"
+                android:layout_marginTop="40dp"
+                android:padding="8dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:textColor="@color/black"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/philosopher"
-                android:text="@string/login_forgot_email_password"
-                android:textAlignment="center"
-                android:textColor="#000000" />
-
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="128dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="155dp"
-                android:layout_marginTop="-25dp"
-                android:fontFamily="@font/philosopher"
-                android:textStyle="bold"
-                android:button="@null"
-                android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="@string/login_remember_me"
-                android:textAlignment="center"
-                android:textColor="#000000" />
-
+                app:passwordToggleEnabled="true"/>
             <Button
-                android:id="@+id/Button_login_loginButton"
+                android:id="@+id/Button_PWreset_SendEmail"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Login"
+                android:text="Change Password"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/philosopher"
                 android:textStyle="bold"
                 android:background="@drawable/tl_rounded_textbox_pink"/>
-
 
 
 
