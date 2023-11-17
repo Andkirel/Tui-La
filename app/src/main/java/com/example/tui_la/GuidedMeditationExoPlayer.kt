@@ -145,7 +145,7 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
                 Log.e("Database Error : ", "Firebase DateTime Check Error")
             }
         })
-        setupPlayer()
+        //setupPlayer()
 
         runBlocking {
             launch {
@@ -154,6 +154,7 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
             }
             launch {
                 delay(1000)
+                setupPlayer()
                 //getStreamingTrack()
             }
             //googleDriveAuthorization()
