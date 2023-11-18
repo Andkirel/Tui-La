@@ -17,12 +17,19 @@ class settingsfragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.layout_settings, container, false)
 
+        val backbutton: ImageButton = view.findViewById(R.id.Backbutton_settings)
         val accsettingsbutton: Button = view.findViewById(R.id.button_AccontSettings)
         val stickersbutton: Button = view.findViewById(R.id.button_stickers)
         val appsettingsbutton: Button = view.findViewById(R.id.button_Appsettings)
         val apphelpbutton: Button = view.findViewById(R.id.button_apphelp)
-        val Logoutbutton: ImageButton = view.findViewById(R.id.Backbutton_Badges)
+        val Logoutbutton: Button = view.findViewById(R.id.Button_Logout)
 
+        backbutton.setOnClickListener {
+            // Navigate to the login fragment
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, EmotionsFragment())
+                .commit()
+        }
         accsettingsbutton.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
