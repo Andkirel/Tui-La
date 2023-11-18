@@ -40,8 +40,6 @@
             android:exported="false" />
         <activity android:name=".App_settings"
             android:exported="false" />
-        <activity android:name=".B_E_options"
-            android:exported="false" />
         <activity android:name=".Badges"
             android:exported="false" />
         <activity android:name=".Csupport"
@@ -53,14 +51,6 @@
         <activity android:name=".Prompt"
             android:exported="false" />
         <activity android:name=".Settings_menu"
-            android:exported="false" />
-        <activity android:name=".B_E_3Min"
-            android:exported="false" />
-        <activity android:name=".B_E_5Min"
-            android:exported="false" />
-        <activity android:name=".B_E_10Min"
-            android:exported="false" />
-        <activity android:name=".B_E_Infinite"
             android:exported="false" />
 
 
