@@ -138,8 +138,8 @@ class GuidedMeditationActivity : AppCompatActivity(){
                                 ),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.menu_dots),
-                                    contentDescription = "Menu dots button",
+                                    painter = painterResource(id = R.drawable.gear_icon),
+                                    contentDescription = "Gear Button",
                                     Modifier.fillMaxSize()
                                 )
                             }
