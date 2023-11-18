@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tui_la.R
 
 class MainMenu: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +12,7 @@ class MainMenu: AppCompatActivity() {
         setContentView(R.layout.layout_mainscreen)
 
         val GMeditation = findViewById<Button>(R.id.Button_MainScreen_GM)
-        GMeditation .setOnClickListener {
+        GMeditation.setOnClickListener {
             val Intent = Intent(this, GuidedMeditationActivity::class.java)
             startActivity(Intent)
         }
