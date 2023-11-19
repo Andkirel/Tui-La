@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/main_bg"
+    tools:context=".LogInFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/custom_file_for_entry"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <ImageButton
+                android:id="@+id/Backbutton_Badges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:background="#00FFFFFF"
+                android:contentDescription="@string/backb"
+                app:srcCompat="@drawable/back_button" />
+
+            <TextView
+                android:id="@+id/text_badges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/philosopher"
+                android:text="Journal Stickers"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/Button_1stJournal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/first_journal" />
+
+            <ImageButton
+                android:id="@+id/Button_5thJournal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="151dp"
+                android:layout_marginTop="-144dp"
+                android:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/fifth_journal" />
+
+            <ImageButton
+                android:id="@+id/Button_10thJournal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/tenth_journal" />
+
+            <ImageButton
+                android:id="@+id/Button_20thJournal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="151dp"
+                android:layout_marginTop="-145dp"
+                android:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/twenty_journal" />
+
+            <ImageButton
+                android:id="@+id/Button_50thJournal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#00FFFFFF"
+                app:srcCompat="@drawable/fifty_journal" />
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    </ScrollView>
+
+</LinearLayout>

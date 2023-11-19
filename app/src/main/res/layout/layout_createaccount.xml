@@ -1,143 +1,142 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:background="@drawable/main_bg"
 
     tools:context=".CreateAccountFragment">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:fontFamily="@font/nickainley"
-        android:text="Tui-La"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="80sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
 
-    <EditText
-        android:id="@+id/un_editText"
-        android:layout_width="327dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="432dp"
-        android:background="@drawable/tl_rounded_textbox_pink"
-        android:drawablePadding="5dp"
-        android:fontFamily="@font/philosopher"
-        android:hint=" Enter username"
-        android:inputType="text"
-        android:padding="8dp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/email_editText"
-        android:layout_width="327dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/tl_rounded_textbox_pink"
-        android:drawablePadding="5dp"
-        android:fontFamily="@font/philosopher"
-        android:hint=" Enter email"
-        android:inputType="text"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/un_editText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/custom_file_for_entry"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <EditText
-        android:id="@+id/pw_editText"
-        android:layout_width="327dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/tl_rounded_textbox_pink"
-        android:drawablePadding="5dp"
-        android:fontFamily="@font/philosopher"
-        android:hint=" Password"
-        android:inputType="textPassword"
-        android:padding="8dp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_editText" />
+            <ImageButton
+                android:id="@+id/Backbutton_createaccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:background="#00FFFFFF"
+                android:contentDescription="@string/backb"
+                app:srcCompat="@drawable/back_button" />
 
-    <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:fontFamily="@font/philosopher"
-        android:text="a mental health support app"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/un_editText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nickainley"
+                android:textAlignment="center"
+                android:text="Tui-La"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="80sp"/>
 
-    <Button
-        android:id="@+id/Button_Createaccount"
-        android:layout_width="290dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
-        android:background="@drawable/tl_rounded_textbox_pink"
-        android:fontFamily="@font/philosopher"
-        android:text="Create Account"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pw_editText" />
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/philosopher"
+                android:textAlignment="center"
+                android:text="a mental health support app"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="4dp"
-        android:fontFamily="@font/philosopher"
-        android:text="Already have an account?"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Login_text"
-        app:layout_constraintTop_toBottomOf="@+id/Button_Createaccount"
-        app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/un_editText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/tl_rounded_textbox_pink"
+                android:drawablePadding="5dp"
+                android:fontFamily="@font/philosopher"
+                android:hint=" Enter First name"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/Login_text"
-        android:layout_width="79dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:clickable="true"
-        android:fontFamily="@font/philosopher"
-        android:text="Log in"
-        android:textAllCaps="false"
-        android:textColor="#020202"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.807"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Button_Createaccount"
-        app:layout_constraintVertical_bias="0.0" />
-    <ImageButton
-        android:id="@+id/Backbutton_createaccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:contentDescription="@string/backb"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_button" />
+            <EditText
+                android:id="@+id/email_editText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/tl_rounded_textbox_pink"
+                android:fontFamily="@font/philosopher"
+                android:drawableLeft="@drawable/baseline_person_24"
+                android:textColor="@color/black"
+                android:drawablePadding="8dp"
+                android:padding="8dp"
+                android:hint=" Enter email"
+                android:inputType="text"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/pw_editText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/tl_rounded_textbox_pink"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/philosopher"
+                android:hint=" Password"
+                android:drawableLeft="@drawable/baseline_lock_24"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black" />
+
+
+            <Button
+                android:id="@+id/Button_Createaccount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/tl_rounded_textbox_pink"
+                android:fontFamily="@font/philosopher"
+                android:text="Create Account"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/philosopher"
+                android:text="Already have an account?"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Login_text"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="-25dp"
+                android:clickable="true"
+                android:fontFamily="@font/philosopher"
+                android:text="Log in"
+                android:textAllCaps="false"
+                android:textColor="#020202"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

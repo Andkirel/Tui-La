@@ -29,7 +29,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginBottom="44dp"
         android:fontFamily="@font/philosopher"
-        android:text="Emotions"
+        android:text="@string/emotions"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="28sp"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/philosopher"
-        android:text="Journal"
+        android:text="@string/journal"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textSize="28sp"
@@ -56,6 +56,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.344" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/rvJournal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/playlist_add"
+        android:background="@android:color/transparent"
+        android:onClick="addEntry"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

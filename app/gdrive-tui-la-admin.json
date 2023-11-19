@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "tui-la-guided-meditation",
+  "private_key_id": "bb19377f0716e67b35ed30e309f3c51e4a8fee2f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCgS+hDQX+POybm\n1nK3maY41fOeAk/TpIhkZ15f8uKSi+KOYEW58ex0h60xFaGFqlx2DngUyr/surFI\n+Ia4B/EwGHZzOv43l+zXAKhjrPErge94Lq8BCrJHGIUAjbEVNaqrJyrDQRdr06Lf\nmn0eIQayL9FP/ua0hDplUDhj39u6z4+qyoMyxeM14q3SXg1m17jdirhggWvdXQOq\nBm5MLRhUUCdRajyv8PeMAWmfpscMWr24py1j+W15vPiB/P7wXGH+C8iVk75CIHTp\nJEqOWR3usCChxcj/XWB33nDJHU6+ZDTvvBeZPxEsvpc3QNyKNRM+LlQ62kFay3Fa\n0f7ThAyNAgMBAAECggEAIA7uVb0cuNWYsyQCb2vATa+keF53/pjyWjo+KqxV2f82\nAUmJyGV0591WqvFri2MF+Opt46Kk/cBcwn5J2zZjaz4JOoR64T12NY3BH6Yv2Ya0\nEPItN+UewI9L0k+EMfy4tGAx8jjraTo7YcLw8Pyj7TEZCImvND0ZvLdtf7P+qv6U\novrJ++0O64Sp67clmRXTf1pF8IHBsxEL1kG2FDkmBJLamLdaxLGY7xqsjSZ9618k\nW9pvWeswp7Ovxv5YgtGqGLGEdiQxrDtDBLh+0f241amcNNPwBZav4BmoOqfrPzZ+\n24RleHAndXuiyY1yu3hZllPWQBZFmRDwbhtyG7ipgQKBgQDdJrl23U5Cn7stMOfm\nheK5ZiP9Bi5I6tGVZYZT1uWuXJg/oiDAyQMJxRMnJmY0Bp2xoXan8STWGcTgowMc\nUTfmUeH4WHMlaA+EFubFQ/pREMZNM4ss3RfQMBmMZ7K879eGeMYx7/eKAMhLkInl\nYEd6610q/PYljVBuek7cBBF/rQKBgQC5jkr1vc3SsXewv8DumpOaLByVmkbn3jKf\nZy1/dQBGe/gQFZggyVT8Cnp7vlqgxnl+LKii5S1U2j/cwVgnd5ZzilecpKG5SRCz\nkhazbx47fGw4mG8OFxX5xj65Na6ojvq4iu+0supxUrD5B3MqeYl+pVRc3Xke9c17\nt8CY+RLcYQKBgQCkFSRMNfzn372v1PZqinHi3w7an+hdf6RK9U3KDMrTKK5poDAu\n+bWAXTFNvebcuP/tmIACMSAEno/9n9UiAHy6LYy8h1u/qErC1X8ZY8totEp9Yz3i\n5pPRiq6aByKNnmJJyng6+vGt+dCiiDZX8qx2XgT9bTxwNj40ChlSks4s7QKBgHJt\ndH6M+QOIW3ZNGg5KluGJeGstg7JzjSZN+3nRTkUpJ/XLS1BUuCrhz1zGK59gJgYQ\nRkKGL+lW2fEp7lIQZmCEHLlFsVHQ5BLI8WTgDnXCqf5QypOW2v94KLAQkc/ytFzf\nmSkG+Jq/0tEPrg6weoD2Ncs67PmRvZEg5Q2w89ehAoGAVqVYI519zGBm7yUxgWLB\nps20N+GXZZMZZYKgZgASHBR32lhl/6RYcsNJJPGqReFPQaUjL0HHzWKhd5JBgzLB\nzs0wg0GCk45gCh9ujK+KQVg4p0+n8BDRmRUFAuAlzLtN2vb/SF93eV2ihcvlDMzZ\nAXujQgDLYW/azu5sNhrh/Bc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tui-la-admin@tui-la-guided-meditation.iam.gserviceaccount.com",
+  "client_id": "117055122084581803157",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tui-la-admin%40tui-la-guided-meditation.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
