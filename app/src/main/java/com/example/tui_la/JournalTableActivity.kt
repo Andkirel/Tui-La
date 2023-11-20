@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,8 @@ class JournalTableActivity : AppCompatActivity() {
 
     private lateinit var journalRecyclerView: RecyclerView
 
+    private lateinit var backButton: ImageButton
+
     // implement clearing on logout
     private lateinit var journalArrayList: ArrayList<JournalData>
     // holds journal identifier keys
@@ -43,6 +46,9 @@ class JournalTableActivity : AppCompatActivity() {
 
         // getting the recyclerview by its id
         journalRecyclerView = findViewById(R.id.rvJournal)
+
+        // back button to home activity
+        backButton = findViewById(R.id.backButton)
 
         // creates a vertical layout Manager
         journalRecyclerView.layoutManager = LinearLayoutManager(this)

@@ -66,7 +66,7 @@ class LogInFragment : Fragment() {
         backButtonLogin.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, LandingFragment())
+                .replace(R.id.fragmentContainer, LandingFragment())
                 .commit()
         }
 

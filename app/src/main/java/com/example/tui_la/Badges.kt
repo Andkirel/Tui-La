@@ -34,25 +34,25 @@ class Badges: Fragment() {
         Jbutton.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, Badges_Journal_Fragment())
+                .replace(R.id.fragmentContainer, Badges_Journal_Fragment())
                 .commit()
         }
         BEButton.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, Badges_BE_Fragment())
+                .replace(R.id.fragmentContainer, Badges_BE_Fragment())
                 .commit()
         }
         GMButton.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, Badges_GM_Fragment())
+                .replace(R.id.fragmentContainer, Badges_GM_Fragment())
                 .commit()
         }
         MemButton.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, Badges_Mem_Fragment())
+                .replace(R.id.fragmentContainer, Badges_Mem_Fragment())
                 .commit()
         }
 
