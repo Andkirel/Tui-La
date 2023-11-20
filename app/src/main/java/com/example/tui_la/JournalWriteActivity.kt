@@ -11,6 +11,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -19,11 +20,8 @@ import com.google.firebase.ktx.Firebase
 import java.util.Calendar
 
 class JournalWriteActivity : AppCompatActivity() {
-    private val email = "ed'stestuser@gmail.com"
-    private val password = "abcdef"
 
-    private lateinit var auth: FirebaseAuth
-    private lateinit var uId: String
+    private lateinit var uid: String
     private lateinit var firebaseReference: DatabaseReference
 
     private lateinit var journalTitle: String
@@ -41,10 +39,8 @@ class JournalWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_journal_write)
 
-        // firebase authentication
-        auth = Firebase.auth
-        auth.signInWithEmailAndPassword(email, password)
-        firebaseReference = Firebase.database.reference
+        uid = intent.getStringExtra("UID") ?: return
+        firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid).child("Journal")
 
         // set up spinner/drop down menu
         setJournalSpinner()
@@ -65,7 +61,7 @@ class JournalWriteActivity : AppCompatActivity() {
             currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
 
             writeNewJournalData(
-                auth.uid!!,
+                uid,
                 journalTitle,
                 currentTime,
                 currentDate,
@@ -73,7 +69,7 @@ class JournalWriteActivity : AppCompatActivity() {
                 journalEmotion
             )
         } else {
-            updateEntry(auth.uid!!, journalTitle, journalEntry,journalEmotion)
+            updateEntry(uid, journalTitle, journalEntry,journalEmotion)
         }
     }
 
@@ -122,6 +118,7 @@ class JournalWriteActivity : AppCompatActivity() {
 
     fun back(view: View) {
         val journalTable = Intent(this, JournalTableActivity::class.java)
+        journalTable.putExtra("UID", uid) // Adding the UID to the intent
         startActivity(journalTable)
     }
 
