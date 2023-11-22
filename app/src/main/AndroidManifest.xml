@@ -43,7 +43,8 @@
             android:exported="true" />
         <activity
             android:name=".GuidedMeditationExoPlayer"
-            android:exported="true" />
+            android:exported="true"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
         <activity
             android:name=".Acc_Settings"
             android:exported="false" />

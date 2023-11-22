@@ -344,12 +344,6 @@ class GuidedMeditationExoPlayer : AppCompatActivity(), Player.Listener,
 
     }
 
-    /*override fun onSaveInstanceState(outState:Bundle){
-        super.onSaveInstanceState(outState)
-        outState.putLong("seekTime",audioPlayer.currentPosition)
-        outState.putInt("mediaItem",audioPlayer.currentMediaItemIndex)
-    }*/
-
     @SuppressLint("UnsafeOptInUsageError")
     private fun setupPlayer() {
         val renderersFactory = buildRenderersFactory(this, true)

@@ -38,6 +38,7 @@
         android:id="@+id/gm_player_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:resize_mode="zoom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidedMeditationTitle">
 
