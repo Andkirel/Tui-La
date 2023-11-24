@@ -60,7 +60,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tui_la.ui.theme.TuiLaTheme
 import kotlinx.coroutines.delay
-import kotlin.time.Duration.Companion.seconds
 
 enum class lengthOptions(val seconds: Int) {
     oneMinute(60),
@@ -77,17 +76,21 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
         setContent {
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
                 CreateLayout()
-                
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Spacer(modifier = Modifier.height(100.dp))
-                    BreathingAnimation()
+                //Spacer(modifier = Modifier.height(50.dp))
+                Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy((-200).dp,Alignment.Top)) {
+                    Spacer(modifier = Modifier.height(250.dp))
+                    Box{
+                        BreathingAnimation()
+                    }
+                    Box {
+                        BreathingTime(
+                            totalTime = lengthOptions.fiveMinutes.seconds,
+                            inactiveBarColor = Color.LightGray,
+                            activeBarColor = Color.Blue,
+                            modifier = Modifier.size(300.dp)
+                        )
+                    }
 
-                    BreathingTime(
-                        totalTime = lengthOptions.fiveMinutes.seconds,
-                        inactiveBarColor = Color.LightGray,
-                        activeBarColor = Color.Blue,
-                        modifier = Modifier.size(300.dp)
-                    )
                 }
             }
         }
@@ -154,7 +157,7 @@ fun CreateLayout(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(0.dp, 20.dp)
+                .padding(0.dp, 10.dp)
         )
         {
             Text(
@@ -264,11 +267,11 @@ fun BreathingTime(
         }
     }
     Column(
-        verticalArrangement = Arrangement.spacedBy(50.dp, Alignment.CenterVertically),
-        horizontalAlignment = Alignment.CenterHorizontally
+       /* verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally*/
     ) {
         Box(
-            contentAlignment = Alignment.Center
+            //contentAlignment = Alignment.Center
             /*modifier = Modifier
                 .onSizeChanged { size = it }*/
         ) {
@@ -305,7 +308,7 @@ fun BreathingTime(
                 )
             }
         }
-        Box {
+        /*Box {
             Button(
                 onClick = {
                     if (currentTime <= 0) {
@@ -330,13 +333,13 @@ fun BreathingTime(
                     else "Restart"
                 )
             }
-        }
-        Text(
+        }*/
+        /*Text(
             text = (currentTime).seconds.toString(),
             fontSize = 50.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
-        )
+        )*/
 
     }
 }
