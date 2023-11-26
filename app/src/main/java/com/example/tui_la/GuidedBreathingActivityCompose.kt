@@ -75,31 +75,48 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
 
         setContent {
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
-                CreateLayout()
-                //Spacer(modifier = Modifier.height(50.dp))
-                Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy((-200).dp,Alignment.Top)) {
-                    Spacer(modifier = Modifier.height(250.dp))
-                    Box{
-                        BreathingAnimation()
-                    }
-                    Box {
-                        BreathingTime(
-                            totalTime = lengthOptions.fiveMinutes.seconds,
-                            inactiveBarColor = Color.LightGray,
-                            activeBarColor = Color.Blue,
-                            modifier = Modifier.size(300.dp)
-                        )
-                    }
+                //var start by remember { mutableStateOf(false)}
+                //val onClick = { start = !start }
 
-                }
+                CreateButtonAndTitleLayout()
+                Spacer(modifier = Modifier.height(250.dp))
+                Spacer(modifier = Modifier.height(250.dp))
+                BreathingAnimationAndCountdownTimer()
+
             }
         }
+    }
+}
+@Composable
+fun BreathingAnimationAndCountdownTimer(
+   ){
+    var isStarted by remember {
+        mutableStateOf(false)
+    }
+    val interactionSource = remember { MutableInteractionSource()}
+    Column(horizontalAlignment = Alignment.CenterHorizontally,
+        /*verticalArrangement = Arrangement.spacedBy((-200).dp,Alignment.Top),*/
+        ) {
+        Spacer(modifier = Modifier.height(250.dp))
+        Box {
+            BreathingAnimation(isStarted = isStarted)
+        }
+        /*Box{
+            BreathingTime(
+                totalTime = lengthOptions.fiveMinutes.seconds,
+                inactiveBarColor = Color.LightGray,
+                activeBarColor = Color.Blue,
+                modifier = Modifier
+                    .size(300.dp),
+                isStarted = isStarted
+            )
+        }*/
     }
 }
 
 @Composable
 //@Preview(showBackground = true)
-fun CreateLayout(modifier: Modifier = Modifier) {
+fun CreateButtonAndTitleLayout() {
     val blueColor = colorResource(id = R.color.light_blue_900)
     Column(
         modifier = Modifier
@@ -177,10 +194,35 @@ fun CreateLayout(modifier: Modifier = Modifier) {
 
 //@Preview(showBackground = true)
 @Composable
-fun BreathingAnimation() {
+fun BreathingAnimation(isStarted: Boolean) {
     TuiLaTheme {
+        val strokeWidth = 5.dp
+        val activeBarColor = Color.Blue
+        val inactiveBarColor = Color.LightGray
         var isInflated by remember {
             mutableStateOf(false)
+            //mutableStateOf(isStarted)
+        }
+        var size by remember {
+            mutableStateOf(IntSize.Zero)
+        }
+        var value by remember {
+            mutableStateOf(1f)
+        }
+        var totalTime = lengthOptions.oneMinute.seconds
+        var currentTime by remember {
+            mutableStateOf(totalTime)
+        }
+        var isTimerRunning by remember {
+            //mutableStateOf(false)
+            mutableStateOf(isStarted)
+        }
+        LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
+            if (currentTime > 0 && isTimerRunning) {
+                delay(1000)
+                currentTime -= 1
+                value = currentTime / totalTime.toFloat()
+            }
         }
         val buttonInteractionSource = remember { MutableInteractionSource() }
         var prompts by remember {
@@ -198,39 +240,115 @@ fun BreathingAnimation() {
             ),
             label = ""
         )
-        Column {
-            Box(
-                contentAlignment = Alignment.Center, modifier = Modifier
-                    .size(400.dp, 400.dp)
+        Column (verticalArrangement = Arrangement.Center){
+            Column(
+                verticalArrangement = Arrangement.spacedBy(
+                    (-200).dp,
+                    Alignment.CenterVertically
+                ), horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painterResource(id = R.drawable.logo),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(165.dp, 165.dp)
-                        .background(Color.Transparent)
-                        .border(
-                            BorderStroke(
-                                width = 4.dp,
-                                colorResource(id = R.color.light_coral), //TODO: Change color to cactus_purple when ready to finish
-                            ), shape = CircleShape
-                        ),
-                )
-                Button(
-                    onClick = {
-                        isInflated = !isInflated
-                    },
-                    modifier = Modifier
-                        .background(Color.Transparent)
-                        .align(Alignment.Center),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent),
+                Box(
+                    contentAlignment = Alignment.Center, modifier = Modifier
+                        .size(400.dp, 400.dp)
                 ) {
                     Image(
                         painterResource(id = R.drawable.logo),
-                        contentDescription = "",
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(165.dp, 165.dp)
+                            .background(Color.Transparent)
+                            .border(
+                                BorderStroke(
+                                    width = 4.dp,
+                                    colorResource(id = R.color.light_coral), //TODO: Change color to cactus_purple when ready to finish
+                                ), shape = CircleShape
+                            ),
+                    )
+                    Button(
+                        onClick = {
+                            isInflated = !isInflated
+                            isTimerRunning = !isTimerRunning
+                        },
                         modifier = Modifier
                             .background(Color.Transparent)
-                            .size(scaleNotInfinite),
+                            .align(Alignment.Center),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent),
+                    ) {
+                        Image(
+                            painterResource(id = R.drawable.logo),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .size(scaleNotInfinite),
+                        )
+                    }
+                }
+                Box(contentAlignment = Alignment.Center) {
+                    Box {
+                        Canvas(
+                            modifier = Modifier
+                        ) {
+                            val arcRadius = 500f
+                            val canvasWidth = size.width
+                            val canvasHeight = size.height
+                            drawArc(
+                                color = inactiveBarColor,
+                                startAngle = -90f,
+                                sweepAngle = 360f,
+                                useCenter = false,
+                                size = Size(arcRadius, arcRadius),
+                                topLeft = Offset(
+                                    (canvasWidth / 2) - (arcRadius / 2),
+                                    canvasHeight / 2 - (arcRadius / 2)
+                                ),
+                                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+
+                            )
+                            drawArc(
+                                color = activeBarColor,
+                                startAngle = -90f,
+                                sweepAngle = 360f * value,
+                                useCenter = false,
+                                size = Size(arcRadius, arcRadius),
+                                topLeft = Offset(
+                                    (canvasWidth / 2) - (arcRadius / 2),
+                                    canvasHeight / 2 - (arcRadius / 2)
+                                ),
+                                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+                            )
+                        }
+                    }
+
+                }
+
+            }
+            Spacer(modifier = Modifier.height(100.dp))
+            Box (modifier = Modifier.align(Alignment.CenterHorizontally)){
+                Button(
+                    onClick = {
+                        if (currentTime <= 0) {
+                            currentTime = totalTime
+                            isTimerRunning = true
+                            isInflated = true
+                        } else {
+                            isTimerRunning = !isTimerRunning
+                            isInflated = !isInflated
+
+                        }
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = if (isTimerRunning || currentTime <= 0) {
+                            Color.LightGray
+                        } else {
+                            Color.Red
+                        }
+                    )
+                )
+                {
+                    Text(
+                        text = if (isTimerRunning && currentTime >= 0) "Stop"
+                        else if (!isTimerRunning && currentTime >= 0) "Start"
+                        else "Restart"
                     )
                 }
             }
@@ -245,7 +363,8 @@ fun BreathingTime(
     activeBarColor: Color,
     modifier: Modifier = Modifier,
     initialValue: Float = 1f,
-    strokeWidth: Dp = 5.dp
+    strokeWidth: Dp = 5.dp,
+    isStarted: Boolean
 ) {
     var size by remember {
         mutableStateOf(IntSize.Zero)
@@ -257,7 +376,8 @@ fun BreathingTime(
         mutableStateOf(totalTime)
     }
     var isTimerRunning by remember {
-        mutableStateOf(false)
+        //mutableStateOf(false)
+        mutableStateOf(isStarted)
     }
     LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
         if (currentTime > 0 && isTimerRunning) {
@@ -266,15 +386,8 @@ fun BreathingTime(
             value = currentTime / totalTime.toFloat()
         }
     }
-    Column(
-       /* verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally*/
-    ) {
-        Box(
-            //contentAlignment = Alignment.Center
-            /*modifier = Modifier
-                .onSizeChanged { size = it }*/
-        ) {
+    Column {
+        Box {
             Canvas(
                 modifier = Modifier
             ) {
@@ -308,32 +421,33 @@ fun BreathingTime(
                 )
             }
         }
-        /*Box {
-            Button(
-                onClick = {
-                    if (currentTime <= 0) {
-                        currentTime = totalTime
-                        isTimerRunning = true
-                    } else {
-                        isTimerRunning = !isTimerRunning
-                    }
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isTimerRunning || currentTime <= 0) {
-                        Color.LightGray
-                    } else {
-                        Color.Red
-                    }
-                )
+
+        }
+    Box {
+        Button(
+            onClick = {
+                if (currentTime <= 0) {
+                    currentTime = totalTime
+                    isTimerRunning = true
+                } else {
+                    isTimerRunning = !isTimerRunning
+                }
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (isTimerRunning || currentTime <= 0) {
+                    Color.LightGray
+                } else {
+                    Color.Red
+                }
             )
-            {
-                Text(
-                    text = if (isTimerRunning && currentTime >= 0) "Stop"
-                    else if (!isTimerRunning && currentTime >= 0) "Start"
-                    else "Restart"
-                )
-            }
-        }*/
+        )
+        {
+            Text(
+                text = if (isTimerRunning && currentTime >= 0) "Stop"
+                else if (!isTimerRunning && currentTime >= 0) "Start"
+                else "Restart"
+            )
+        }
         /*Text(
             text = (currentTime).seconds.toString(),
             fontSize = 50.sp,
