@@ -3,6 +3,7 @@ package com.example.tui_la
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.Ease
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateDpAsState
@@ -14,7 +15,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -54,6 +54,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextMotion
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -68,6 +69,12 @@ enum class lengthOptions(val seconds: Int) {
     tenMinutes(600),
     fifteenMinutes(900)
 }
+enum class promptOptions(val words: String){
+    startPrompt("Tap the button to begin!"),
+    inPrompt("Breathe in"),
+    outPrompt("Breathe out"),
+    completedPrompt("All done. Good job!")
+}
 
 class GuidedBreathingActivityCompose : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,12 +82,8 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
 
         setContent {
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
-                //var start by remember { mutableStateOf(false)}
-                //val onClick = { start = !start }
-
-                CreateButtonAndTitleLayout()
-                Spacer(modifier = Modifier.height(250.dp))
-                Spacer(modifier = Modifier.height(250.dp))
+                CreateHeader()
+                Spacer(modifier = Modifier.height(500.dp))
                 BreathingAnimationAndCountdownTimer()
 
             }
@@ -93,38 +96,23 @@ fun BreathingAnimationAndCountdownTimer(
     var isStarted by remember {
         mutableStateOf(false)
     }
-    val interactionSource = remember { MutableInteractionSource()}
     Column(horizontalAlignment = Alignment.CenterHorizontally,
-        /*verticalArrangement = Arrangement.spacedBy((-200).dp,Alignment.Top),*/
         ) {
         Spacer(modifier = Modifier.height(250.dp))
         Box {
             BreathingAnimation(isStarted = isStarted)
         }
-        /*Box{
-            BreathingTime(
-                totalTime = lengthOptions.fiveMinutes.seconds,
-                inactiveBarColor = Color.LightGray,
-                activeBarColor = Color.Blue,
-                modifier = Modifier
-                    .size(300.dp),
-                isStarted = isStarted
-            )
-        }*/
     }
 }
 
 @Composable
 //@Preview(showBackground = true)
-fun CreateButtonAndTitleLayout() {
-    val blueColor = colorResource(id = R.color.light_blue_900)
+fun CreateHeader() {
     Column(
         modifier = Modifier
             .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)
             .fillMaxSize()
     ) {
-
-        // Row with back button and menu button
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
             Box(modifier = Modifier, contentAlignment = Alignment.TopStart) {
                 Button(
@@ -171,37 +159,52 @@ fun CreateButtonAndTitleLayout() {
                 }
             }
         }
-        Box(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(0.dp, 10.dp)
-        )
-        {
-            Text(
-                "Tap the logo to begin!", style = TextStyle(
-                    color = blueColor,
-                    fontSize = 35.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontStyle = FontStyle(R.font.philosopher),
-                    textAlign = TextAlign.Center
-                ),
-                modifier = Modifier.align(Alignment.TopCenter)
-            )
-        }
     }
-
 }
 
 //@Preview(showBackground = true)
+@OptIn(ExperimentalStdlibApi::class)
+@Composable
+fun updateTransitionData(isStarted: Boolean){
+    val transitionData = updateTransitionData(isStarted)
+    Box(
+        modifier = Modifier
+            .padding(0.dp, 10.dp)
+    )
+    {
+        Text(
+            text = promptOptions.startPrompt.words, style = TextStyle(
+                color = Color.White,
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Bold,
+                fontStyle = FontStyle(R.font.philosopher),
+                textAlign = TextAlign.Center,
+                textMotion = TextMotion.Animated
+            ),
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+        )
+    }
+    val transition = updateTransition(targetState = promptOptions.values(),label = "prompt")
+   /* val inPrompt = transition.animateValue(label = "prompt") {state ->
+        if (isStarted) promptOptions.inPrompt.words else promptOptions.outPrompt.words
+
+    }*/
+}
+
+//@Preview(showBackground = true)
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BreathingAnimation(isStarted: Boolean) {
     TuiLaTheme {
+        //region Declared Variables and variables by remember
         val strokeWidth = 5.dp
         val activeBarColor = Color.Blue
         val inactiveBarColor = Color.LightGray
+        val blueColor = colorResource(id = R.color.light_blue_900)
+        val headerText = "Tap the button to begin!"
         var isInflated by remember {
             mutableStateOf(false)
-            //mutableStateOf(isStarted)
         }
         var size by remember {
             mutableStateOf(IntSize.Zero)
@@ -214,9 +217,9 @@ fun BreathingAnimation(isStarted: Boolean) {
             mutableStateOf(totalTime)
         }
         var isTimerRunning by remember {
-            //mutableStateOf(false)
             mutableStateOf(isStarted)
         }
+        //endregion
         LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
             if (currentTime > 0 && isTimerRunning) {
                 delay(1000)
@@ -224,29 +227,86 @@ fun BreathingAnimation(isStarted: Boolean) {
                 value = currentTime / totalTime.toFloat()
             }
         }
-        val buttonInteractionSource = remember { MutableInteractionSource() }
-        var prompts by remember {
-            mutableStateOf(listOf<String>("Breathe In", "Breathe Out"))
-        }
-        val inflateDeflateTransition = updateTransition(
-            targetState = isInflated,
-            label = null
-        )
         val scaleNotInfinite by animateDpAsState(
             targetValue = if (isInflated) 600.dp else 175.dp,
+            label = "Inflate Breathing Logo",
             animationSpec = repeatable(
                 200, animation = tween<Dp>(2500, 1000, easing = Ease),
                 RepeatMode.Reverse
-            ),
-            label = ""
+            )
         )
+        val textValue by remember {
+            mutableStateOf(headerText)
+        }
+        val transitionTextValue = updateTransition(textValue)
+
+        val transition = updateTransition(targetState = promptOptions.values(),label = "prompt")
+        //transition.AnimatedContent(modifier = Modifier.background(Color.Green), content = )
+           // when (isStarted) promptOptions.inPrompt.words else promptOptions.outPrompt.words
+
         Column (verticalArrangement = Arrangement.Center){
+            Box(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(0.dp, 10.dp)
+            )
+            {
+                Text(
+                    "Tap the button to begin!", style = TextStyle(
+                        color = blueColor,
+                        fontSize = 35.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle(R.font.philosopher),
+                        textAlign = TextAlign.Center,
+                        textMotion = TextMotion.Animated
+                    ),
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                )
+                Text(
+                    text = promptOptions.inPrompt.words, style = TextStyle(
+                        color = blueColor,
+                        fontSize = 35.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle(R.font.philosopher),
+                        textAlign = TextAlign.Center,
+                        textMotion = TextMotion.Animated
+                    ),
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                )
+                Text(
+                    text = promptOptions.outPrompt.words, style = TextStyle(
+                        color = blueColor,
+                        fontSize = 35.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle(R.font.philosopher),
+                        textAlign = TextAlign.Center,
+                        textMotion = TextMotion.Animated
+                    ),
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                )
+                Text(
+                    text = promptOptions.completedPrompt.words, style = TextStyle(
+                        color = blueColor,
+                        fontSize = 60.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle(R.font.philosopher),
+                        textAlign = TextAlign.Center,
+                        textMotion = TextMotion.Animated
+                    ),
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                )
+            }
             Column(
                 verticalArrangement = Arrangement.spacedBy(
                     (-200).dp,
                     Alignment.CenterVertically
                 ), horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                //region Breathing Logo and Outline
                 Box(
                     contentAlignment = Alignment.Center, modifier = Modifier
                         .size(400.dp, 400.dp)
@@ -283,12 +343,14 @@ fun BreathingAnimation(isStarted: Boolean) {
                         )
                     }
                 }
+                //endregion
+                //region Drawing Timer
                 Box(contentAlignment = Alignment.Center) {
                     Box {
                         Canvas(
                             modifier = Modifier
                         ) {
-                            val arcRadius = 500f
+                            val arcRadius = 600f
                             val canvasWidth = size.width
                             val canvasHeight = size.height
                             drawArc(
@@ -302,7 +364,6 @@ fun BreathingAnimation(isStarted: Boolean) {
                                     canvasHeight / 2 - (arcRadius / 2)
                                 ),
                                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-
                             )
                             drawArc(
                                 color = activeBarColor,
@@ -318,11 +379,11 @@ fun BreathingAnimation(isStarted: Boolean) {
                             )
                         }
                     }
-
                 }
-
+                //endregion
             }
             Spacer(modifier = Modifier.height(100.dp))
+            //region Start/Stop Button and Functionality
             Box (modifier = Modifier.align(Alignment.CenterHorizontally)){
                 Button(
                     onClick = {
@@ -352,108 +413,7 @@ fun BreathingAnimation(isStarted: Boolean) {
                     )
                 }
             }
+            //endregion
         }
-    }
-}
-
-@Composable
-fun BreathingTime(
-    totalTime: Int,
-    inactiveBarColor: Color,
-    activeBarColor: Color,
-    modifier: Modifier = Modifier,
-    initialValue: Float = 1f,
-    strokeWidth: Dp = 5.dp,
-    isStarted: Boolean
-) {
-    var size by remember {
-        mutableStateOf(IntSize.Zero)
-    }
-    var value by remember {
-        mutableStateOf(initialValue)
-    }
-    var currentTime by remember {
-        mutableStateOf(totalTime)
-    }
-    var isTimerRunning by remember {
-        //mutableStateOf(false)
-        mutableStateOf(isStarted)
-    }
-    LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
-        if (currentTime > 0 && isTimerRunning) {
-            delay(1000)
-            currentTime -= 1
-            value = currentTime / totalTime.toFloat()
-        }
-    }
-    Column {
-        Box {
-            Canvas(
-                modifier = Modifier
-            ) {
-                val arcRadius = 500f
-                val canvasWidth = size.width
-                val canvasHeight = size.height
-                drawArc(
-                    color = inactiveBarColor,
-                    startAngle = -90f,
-                    sweepAngle = 360f,
-                    useCenter = false,
-                    size = Size(arcRadius, arcRadius),
-                    topLeft = Offset(
-                        (canvasWidth / 2) - (arcRadius / 2),
-                        canvasHeight / 2 - (arcRadius / 2)
-                    ),
-                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-
-                )
-                drawArc(
-                    color = activeBarColor,
-                    startAngle = -90f,
-                    sweepAngle = 360f * value,
-                    useCenter = false,
-                    size = Size(arcRadius, arcRadius),
-                    topLeft = Offset(
-                        (canvasWidth / 2) - (arcRadius / 2),
-                        canvasHeight / 2 - (arcRadius / 2)
-                    ),
-                    style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
-                )
-            }
-        }
-
-        }
-    Box {
-        Button(
-            onClick = {
-                if (currentTime <= 0) {
-                    currentTime = totalTime
-                    isTimerRunning = true
-                } else {
-                    isTimerRunning = !isTimerRunning
-                }
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = if (isTimerRunning || currentTime <= 0) {
-                    Color.LightGray
-                } else {
-                    Color.Red
-                }
-            )
-        )
-        {
-            Text(
-                text = if (isTimerRunning && currentTime >= 0) "Stop"
-                else if (!isTimerRunning && currentTime >= 0) "Start"
-                else "Restart"
-            )
-        }
-        /*Text(
-            text = (currentTime).seconds.toString(),
-            fontSize = 50.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )*/
-
     }
 }
