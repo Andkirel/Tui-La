@@ -16,14 +16,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -106,7 +104,7 @@ fun CreateHeader() {
                 Button(
                     onClick = { /*TODO: onClick method for back button*/ },
                     modifier = Modifier
-                        .size(75.dp, 75.dp)
+                        .size(100.dp, 100.dp)
                         .background(Color.Transparent),
                     shape = RectangleShape,
                     colors = ButtonDefaults.buttonColors(
@@ -120,7 +118,8 @@ fun CreateHeader() {
                     )
                 }
             }
-            Spacer(
+            // Top-right button, possibly for settings/customization
+            /*Spacer(
                 modifier = Modifier
                     .size(40.dp)
                     .width(IntrinsicSize.Max)
@@ -129,7 +128,7 @@ fun CreateHeader() {
             )
             Box(modifier = Modifier, contentAlignment = Alignment.TopEnd) {
                 Button(
-                    onClick = { /*TODO: onClick method for menu button*/ },
+                    onClick = { *//* },
                     modifier = Modifier
                         .size(75.dp, 75.dp)
                         .background(Color.Transparent),
@@ -144,7 +143,7 @@ fun CreateHeader() {
                         Modifier.fillMaxSize()
                     )
                 }
-            }
+            }*/
         }
     }
 }
@@ -205,7 +204,7 @@ fun BreathingAnimation(isStarted: Boolean) {
             targetValue = if (isInflated) 600.dp else 175.dp,
             label = "Inflate Breathing Logo",
             animationSpec = repeatable(
-                18, animation = tween<Dp>(2500, 500), RepeatMode.Reverse
+                18, animation = tween<Dp>(3000, 1500), RepeatMode.Reverse
             )
         )
         Column {
@@ -364,12 +363,13 @@ fun BreathingAnimation(isStarted: Boolean) {
                         } else {
                             colorResource(id = R.color.light_green)
                         }
-                    )
+                    ), modifier = Modifier.size(125.dp)
                 ) {
                     Text(
                         text = if (isTimerRunning && currentTime > 0) "Stop"
                         else if (!isTimerRunning && currentTime >= 0) "Start"
-                        else "Complete"
+                        else "Done",
+                        fontSize = 35.sp
                     )
                 }
             }
