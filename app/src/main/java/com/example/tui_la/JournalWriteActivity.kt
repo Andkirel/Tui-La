@@ -1,6 +1,7 @@
 package com.example.tui_la
 
 import android.content.Intent
+import android.graphics.drawable.Icon
 import android.icu.text.DateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -33,6 +34,8 @@ class JournalWriteActivity : AppCompatActivity() {
     private lateinit var emotionSpinner: Spinner
     private lateinit var setImage: ImageView
 
+    //private val emoteMap = EmotionMap()
+
     private var entryKey: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +45,7 @@ class JournalWriteActivity : AppCompatActivity() {
         uid = intent.getStringExtra("UID") ?: return
         firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid).child("Journal")
 
-        // set up spinner/drop down menu
+        // spinner layout
         setJournalSpinner()
 
         // set the fields using firebase data if available
@@ -52,9 +55,17 @@ class JournalWriteActivity : AppCompatActivity() {
     fun save(view: View) {
         journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
         journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
-        // journalEmotion is set by the onItemSelected function of the spinner
+        //journalEmotion findViewById<ImageView>(R.id.journalWriteEmotion)
+
+            //Icon.Afraid.getValue()
 
         if (entryKey.isBlank()) {
+
+           /* // get all of the fields that have data
+            journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
+            journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
+            journalEmotion = emoteMap.getDrawableKey(findViewById<ImageView>(R.id.journalWriteEmotion).drawable.toString())
+*/
             // gets the calendar date and time
             val calendar = Calendar.getInstance().time
             currentDate = DateFormat.getDateInstance().format(calendar)
@@ -66,15 +77,20 @@ class JournalWriteActivity : AppCompatActivity() {
                 currentTime,
                 currentDate,
                 journalEntry,
-                journalEmotion
+                0
             )
         } else {
             updateEntry(uid, journalTitle, journalEntry,journalEmotion)
+            /*journalTitle = findViewById<TextView>(R.id.journalWriteEntryTitle).text.toString()
+            journalEntry = findViewById<TextView>(R.id.journalWriteEntry).text.toString()
+            journalEmotion = emoteMap.getDrawableKey(findViewById<ImageView>(R.id.journalWriteEmotion).drawable.toString())
+*/
         }
     }
 
     private fun writeNewJournalData(userId: String, title: String, time: String, date: String, entry: String, emotion: Int){
         val data = JournalData(title,time,date,entry,emotion)
+
         val journalId = firebaseReference.push().key!!
         
         firebaseReference.child("users").child(userId).child("Journal").child(journalId).setValue(data)
@@ -86,22 +102,8 @@ class JournalWriteActivity : AppCompatActivity() {
             }
     }
 
-    private fun setJournalSpinner() {
-        emotionSpinner = findViewById(R.id.journalWriteSpinner)
-        emotionSpinner.adapter = JournalSpinnerAdapter(EmData.list!!, this)
-
-        emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent!!.getItemAtPosition(position)
-                journalEmotion = EmData.list!![position].image
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
-    }
-
     private fun setJournalData() {
+
         if (!(intent.getStringExtra("journalId").isNullOrBlank()))   {
 
             entryKey = intent.getStringExtra("journalId")!!
@@ -111,8 +113,21 @@ class JournalWriteActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.journalWriteEntryTitle).text = intent.getStringExtra("journalTitle")
             findViewById<TextView>(R.id.journalWriteEntry).text = intent.getStringExtra("journalEntry")
 
-            val index = EmData.list!!.indexOf(JournalSpinnerData(intent.getIntExtra("journalEmotion",0)))
-            emotionSpinner.setSelection(index)
+            // val index = EmData.list!!.indexOf(JournalSpinnerData(intent.getIntExtra("journalEmotion",0)))
+            // emotionSpinner.setSelection(index)
+
+            //findViewById<ImageView>(R.id.journalWriteEmotion).setBackgroundResource(R.drawable.happy)
+
+            // hard code functionality
+            //findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(R.drawable.happy)
+
+            // enum enabled, needs more code for variability
+            //findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(Icon.Happy.resourceId)
+
+            // fully variable support with hashmap keys/values
+            /*findViewById<ImageView>(R.id.journalWriteEmotion).setImageResource(
+                emoteMap.getDrawableValue(intent.getIntExtra("journalEmotion",0)))*/
+
         }
     }
 
@@ -123,7 +138,7 @@ class JournalWriteActivity : AppCompatActivity() {
     }
 
     private fun updateEntry(userId: String, title: String, entry: String, emotion: Int) {
-        val data = JournalData(title,currentTime,currentDate,entry,emotion)
+        val data = JournalData(title,currentTime,currentDate,entry,0)
 
         firebaseReference.child("users").child(userId).child("Journal").child(entryKey).setValue(data)
             .addOnCompleteListener{
@@ -132,5 +147,26 @@ class JournalWriteActivity : AppCompatActivity() {
             .addOnFailureListener{err ->
                 Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_LONG).show()
             }
+    }
+
+    private fun delete(){
+
+    }
+
+    private fun setJournalSpinner() {
+        emotionSpinner = findViewById(R.id.journalWriteSpinner)
+        //val adapter = JournalSpinnerAdapter(Emotions.list!!,this)
+
+        //emotionSpinner.adapter = adapter
+
+        emotionSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent!!.getItemAtPosition(position)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
     }
 }

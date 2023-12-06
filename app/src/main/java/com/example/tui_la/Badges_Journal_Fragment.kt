@@ -14,7 +14,19 @@ class Badges_Journal_Fragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.layout_badges_journal,container,false)
-    }
+        val view = inflater.inflate(R.layout.layout_badges_journal, container, false)
 
+        val onejournal: ImageButton = view.findViewById(R.id.Button_1stJournal)
+
+        onejournal.setOnClickListener {
+            // Navigate to the login fragment
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, BadgesFragment())
+                .commit()
+        }
+
+
+        return view
+
+    }
 }

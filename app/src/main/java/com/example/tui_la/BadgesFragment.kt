@@ -5,31 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 
-class Badges: Fragment() {
+class BadgesFragment: Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.layout_badges,container,false)
-    }
+        val view = inflater.inflate(R.layout.layout_badges, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val Jbutton: Button = view.findViewById(R.id.un_editText)
-        val BEButton: Button = view.findViewById(R.id.email_editText)
-        val GMButton: Button = view.findViewById(R.id.pw_editText)
-        val MemButton: Button = view.findViewById(R.id.Button_Createaccount)
-       // val Backbutton: ImageButton = view.findViewById(R.id.Backbutton_Badges)
+        val Jbutton: Button = view.findViewById(R.id.Button_badges_Journal)
+        val BEButton: Button = view.findViewById(R.id.Button_badges_BreathingExercise)
+        val GMButton: Button = view.findViewById(R.id.Button_badges_GuidedMeditation)
+        val MemButton: Button = view.findViewById(R.id.Button_badges_Membership)
+        val Backbutton: ImageButton = view.findViewById(R.id.Backbutton_Badges)
 
         Jbutton.setOnClickListener {
             // Navigate to the login fragment
@@ -55,6 +46,12 @@ class Badges: Fragment() {
                 .replace(R.id.fragmentContainer, Badges_Mem_Fragment())
                 .commit()
         }
-
+        Backbutton.setOnClickListener {
+            // Navigate to the login fragment
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, HomeFragment())
+                .commit()
+        }
+       return view
     }
 }

@@ -1,24 +1,13 @@
 package com.example.tui_la
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.media3.common.util.UnstableApi
-import com.example.tui_la.R
 import com.example.tui_la.databinding.FragmentcontainerBinding
 
-@UnstableApi class Settings_menu: AppCompatActivity() {
-
+class BadgesActivity: AppCompatActivity() {
 
     private lateinit var binding: FragmentcontainerBinding
-
-    private lateinit var uid: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +17,7 @@ import com.example.tui_la.databinding.FragmentcontainerBinding
         // Display the EmotionsFragment without adding it to the back stack
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, settingsfragment())
+                .replace(R.id.fragmentContainer, BadgesFragment())
                 .commit()
         }
     }
@@ -37,16 +26,5 @@ import com.example.tui_la.databinding.FragmentcontainerBinding
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
-        uid = intent.getStringExtra("UID") ?: return
-
-        val backButton = findViewById<ImageButton>(R.id.backButton)
-        backButton.setOnClickListener {
-            backToHome()
-        }
-    }
-    private fun backToHome() {
-        val homeIntent = Intent(this, HomeActivity::class.java)
-        homeIntent.putExtra("UID", uid) // Adding the UID to the intent
-        startActivity(homeIntent)
     }
 }
