@@ -101,9 +101,10 @@ class GuidedMeditationActivity : AppCompatActivity(){
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
                         Box(modifier = Modifier, contentAlignment = Alignment.TopStart) {
                             Button(
-                                onClick = { /*TODO: onClick method for back button*/ },
+                                onClick = {  val intent = Intent(applicationContext, HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    ContextCompat.startActivity(applicationContext, intent,null) },
                                 modifier = Modifier
-                                    .size(75.dp, 75.dp)
+                                    .size(100.dp, 100.dp)
                                     .background(Color.Transparent),
                                 shape = RectangleShape,
                                 colors = ButtonDefaults.buttonColors(
@@ -125,9 +126,10 @@ class GuidedMeditationActivity : AppCompatActivity(){
                                 .height(IntrinsicSize.Max)
                                 .weight(1f)
                         )
-                        Box(modifier = Modifier, contentAlignment = Alignment.TopEnd) {
+                        //Upper-right button for settings/customizations
+                        /*Box(modifier = Modifier, contentAlignment = Alignment.TopEnd) {
                             Button(
-                                onClick = { /*TODO: onClick method for menu button*/ },
+                                onClick = { *//* },
                                 modifier = Modifier
                                     .size(75.dp, 75.dp)
                                     .background(Color.Transparent),
@@ -143,7 +145,7 @@ class GuidedMeditationActivity : AppCompatActivity(){
                                     Modifier.fillMaxSize()
                                 )
                             }
-                        }
+                        }*/
                     }
                     Text(
                         text = "Guided Meditations", modifier = Modifier
@@ -153,7 +155,7 @@ class GuidedMeditationActivity : AppCompatActivity(){
                     )
                     Spacer(
                         modifier = Modifier
-                            .size(40.dp)
+                            .size(10.dp)
                             .width(IntrinsicSize.Max)
                             .height(IntrinsicSize.Max)
                             .weight(1f)

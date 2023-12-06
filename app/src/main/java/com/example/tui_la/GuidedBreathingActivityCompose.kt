@@ -1,5 +1,7 @@
 package com.example.tui_la
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -53,6 +55,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.example.tui_la.ui.theme.TuiLaTheme
 import kotlinx.coroutines.delay
 
@@ -66,7 +69,7 @@ class GuidedBreathingActivityCompose : ComponentActivity() {
 
         setContent {
             Surface(color = Color.White, modifier = Modifier.fillMaxSize()) {
-                CreateHeader()
+                CreateHeader(applicationContext)
                 Spacer(modifier = Modifier.height(250.dp))
                 BreathingAnimationAndCountdownTimer()
 
@@ -91,7 +94,7 @@ fun BreathingAnimationAndCountdownTimer(
 }
 
 @Composable
-fun CreateHeader() {
+fun CreateHeader(context: Context) {
     Column(
         modifier = Modifier
             .paint(
@@ -102,7 +105,10 @@ fun CreateHeader() {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
             Box(modifier = Modifier, contentAlignment = Alignment.TopStart) {
                 Button(
-                    onClick = { /*TODO: onClick method for back button*/ },
+                    onClick = {
+                        val intent = Intent(context, HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        ContextCompat.startActivity(context, intent,null)
+                              },
                     modifier = Modifier
                         .size(100.dp, 100.dp)
                         .background(Color.Transparent),
