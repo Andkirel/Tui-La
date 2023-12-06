@@ -205,7 +205,7 @@ fun BreathingAnimation(isStarted: Boolean) {
             targetValue = if (isInflated) 600.dp else 175.dp,
             label = "Inflate Breathing Logo",
             animationSpec = repeatable(
-                18, animation = tween<Dp>(2500, 1000), RepeatMode.Reverse
+                18, animation = tween<Dp>(2500, 500), RepeatMode.Reverse
             )
         )
         Column {
@@ -300,6 +300,8 @@ fun BreathingAnimation(isStarted: Boolean) {
                 }
                 //endregion
                 //region Drawing Timer
+                //TODO: pull counting from the timer below to show the countdown of in/out
+                //TODO: Poss. customize with changing the time to breathe in/out
                 Box(contentAlignment = Alignment.Center) {
                     Box {
                         Canvas(
