@@ -202,15 +202,15 @@ fun BreathingAnimation(isStarted: Boolean) {
         LaunchedEffect(key1 = isTextVisible) {
             // Oscillator for Breathe In / Breathe Out
             if (currentTime > 0 && isTimerRunning) {
-                delay(3750)
+                delay(3500)
                 isTextVisible = !isTextVisible
             }
         }
         val scaleNotInfinite by animateDpAsState(
-            targetValue = if (isInflated) 600.dp else 175.dp,
+            targetValue = if (isInflated) 200.dp else 125.dp,
             label = "Inflate Breathing Logo",
             animationSpec = repeatable(
-                18, animation = tween<Dp>(3000, 1500), RepeatMode.Reverse
+                18, animation = tween<Dp>(3000, 500), RepeatMode.Reverse
             )
         )
         Column {
@@ -274,7 +274,7 @@ fun BreathingAnimation(isStarted: Boolean) {
                         painterResource(id = R.drawable.logo),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(165.dp, 165.dp)
+                            .size(200.dp, 200.dp)
                             .background(Color.Transparent)
                             .border(
                                 BorderStroke(
@@ -295,7 +295,7 @@ fun BreathingAnimation(isStarted: Boolean) {
                         colors = ButtonDefaults.buttonColors(Color.Transparent),
                     ) {
                         Image(
-                            painterResource(id = R.drawable.logo),
+                            painterResource(id = R.drawable.perfect_circle_logo),
                             contentDescription = "",
                             modifier = Modifier
                                 .background(Color.Transparent)
@@ -312,7 +312,7 @@ fun BreathingAnimation(isStarted: Boolean) {
                         Canvas(
                             modifier = Modifier
                         ) {
-                            val arcRadius = 600f
+                            val arcRadius = 650f
                             val canvasWidth = size.width
                             val canvasHeight = size.height
                             drawArc(

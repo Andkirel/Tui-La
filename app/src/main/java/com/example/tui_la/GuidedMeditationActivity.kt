@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -96,10 +97,11 @@ class GuidedMeditationActivity : AppCompatActivity(){
         composeView.setContent {
             Surface(modifier = Modifier.paint(painterResource(id = R.drawable.main_bg))) {
                 Column(modifier = Modifier
-                    .fillMaxSize()
-                    .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop)) {
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.95f)
+                    .paint(painterResource(id = R.drawable.main_bg), contentScale = ContentScale.Crop), verticalArrangement = Arrangement.Top, horizontalAlignment = Alignment.CenterHorizontally) {
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
-                        Box(modifier = Modifier, contentAlignment = Alignment.TopStart) {
+                        Box(modifier = Modifier.size(100.dp,100.dp), contentAlignment = Alignment.TopStart) {
                             Button(
                                 onClick = {  val intent = Intent(applicationContext, HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                     ContextCompat.startActivity(applicationContext, intent,null) },
@@ -115,7 +117,7 @@ class GuidedMeditationActivity : AppCompatActivity(){
                                 Image(
                                     painter = painterResource(id = R.drawable.back_button),
                                     contentDescription = "",
-                                    Modifier.fillMaxSize()
+                                    Modifier.size(100.dp,100.dp)
                                 )
                             }
                         }
