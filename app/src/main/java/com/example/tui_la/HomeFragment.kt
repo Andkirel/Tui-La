@@ -29,11 +29,9 @@ import androidx.media3.common.util.UnstableApi
             navigateToActivity(GuidedMeditationActivity::class.java)
         }
 
-        /* TODO: link to Breathing Activity
         view.findViewById<Button>(R.id.Button_MainScreen_GB).setOnClickListener {
-            navigateToActivity(GuidedBreathingActivity::class.java)
+            navigateToActivity(GuidedBreathingActivityCompose::class.java)
         }
-        */
 
         view.findViewById<Button>(R.id.Button_MainScreen_Jour).setOnClickListener {
             navigateToActivity(JournalWriteActivity::class.java)
