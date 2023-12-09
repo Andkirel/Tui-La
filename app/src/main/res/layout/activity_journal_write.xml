@@ -49,11 +49,12 @@
         android:id="@+id/journalWriteSpinner"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@id/journalWriteEntry"
         app:layout_constraintEnd_toStartOf="@id/journalWriteEntryTitle"
-        android:background="@android:color/transparent"
+        android:background="@drawable/spinner_box"
         android:popupBackground="@android:color/transparent"
         android:dropDownVerticalOffset="110dp"
         />
@@ -90,7 +91,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-    <ImageButton
+<!--    <ImageButton
         android:id="@+id/journalWriteSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,6 +102,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="save"
-        />
+        />-->
+
+        <Button
+            android:id="@+id/journalWriteSaveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:fontFamily="@font/philosopher"
+            android:textSize="24sp"
+            android:background="@drawable/tl_rounded_textbox_pink"
+            app:layout_constraintTop_toBottomOf="@id/journalWriteEntry"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="save"
+            />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

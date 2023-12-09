@@ -72,6 +72,7 @@
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="emotions">Emotions</string>
+    <string name="save">Save</string>
 
     <string name="menu_image">Menu image</string>
     <string name="crisis_support">Crisis Support</string>
@@ -166,4 +167,6 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="stickers">Stickers</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

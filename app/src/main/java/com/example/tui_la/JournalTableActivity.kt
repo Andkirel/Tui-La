@@ -29,8 +29,9 @@ class JournalTableActivity : AppCompatActivity() {
 
     // implement clearing on logout
     private lateinit var journalArrayList: ArrayList<JournalData>
-    // holds journal identifier keys
     private lateinit var entryKeyList: ArrayList<String>
+
+    private var reverse: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,18 +55,21 @@ class JournalTableActivity : AppCompatActivity() {
         // get data; pull from firebase
         getUserData()
     }
-
     private fun getUserData() {
         firebaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                journalArrayList.clear()
                 if (snapshot.exists()) {
-                    for (key in snapshot.children) {
-                        val userData = key.getValue(JournalData::class.java)
-                        journalArrayList.add(userData!!)
-                        entryKeyList.add(key.key.toString())
+                    if (journalArrayList.isEmpty()) {
+                        for (key in snapshot.children) {
+                            val userData = key.getValue(JournalData::class.java)
+                            journalArrayList.add(userData!!)
+                            entryKeyList.add(key.key.toString())
+                        }
                     }
                     // Setting the adapter to the recyclerview
+                    if (reverse)
+                        reverseList()
+
                     val jAdapter = JournalTableAdapter(journalArrayList)
                     journalRecyclerView.adapter = jAdapter
 
@@ -87,12 +91,15 @@ class JournalTableActivity : AppCompatActivity() {
                         override fun deleteEntry(position: Int) {
                             firebaseReference.child(entryKeyList[position]).removeValue()
                                 .addOnSuccessListener{
-                                    Toast.makeText(this@JournalTableActivity,"Entry deleted",Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this@JournalTableActivity,"Entry deleted",Toast.LENGTH_SHORT).show()
                                 }
                                 .addOnFailureListener{err ->
-                                    Toast.makeText(this@JournalTableActivity, "Error ${err.message}", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this@JournalTableActivity, "Error ${err.message}", Toast.LENGTH_SHORT).show()
                                 }
-                            getUserData()
+                            journalArrayList.removeAt(position)
+                            entryKeyList.removeAt(position)
+                            jAdapter.notifyItemRemoved(position)
+                            jAdapter.notifyItemRangeChanged(position, journalArrayList.size)
                         }
                     })
                 }
@@ -102,10 +109,15 @@ class JournalTableActivity : AppCompatActivity() {
             }
         })
     }
-
     fun addEntry(view: View) {
         val journalWrite = Intent(this@JournalTableActivity, JournalWriteActivity::class.java)
 
         startActivity(journalWrite)
     }
+
+   private fun reverseList(){
+       journalArrayList.reverse()
+       entryKeyList.reverse()
+   }
+
 }

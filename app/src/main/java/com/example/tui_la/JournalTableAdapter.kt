@@ -12,12 +12,10 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
     ) : RecyclerView.Adapter<JournalTableAdapter.ViewHolder>() {
 
     private lateinit var jListener: OnItemClickListener
-
     interface OnItemClickListener{
         fun onItemClick(position: Int)
         fun deleteEntry(position: Int)
     }
-
     fun setOnItemClickListener(clickListener: OnItemClickListener) {
         jListener = clickListener
     }
@@ -27,14 +25,13 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
 
         return ViewHolder(inflatedView, jListener)
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val selection: JournalData = entryList[position]
 
         holder.title.text = selection.title
         holder.time.text = selection.time
         holder.date.text = selection.date
-        holder.emotion.setImageResource(selection.emotion!!)
+        holder.emotion.setImageResource(HMData.getValue(selection.emotion!!))
 
         var entry = selection.entry!!
 
@@ -46,11 +43,9 @@ class JournalTableAdapter(private var entryList : MutableList<JournalData>
 
         holder.entry.text = entry
     }
-
     override fun getItemCount(): Int {
         return entryList.size
     }
-
     class ViewHolder(entryView: View, clickListener: OnItemClickListener) : RecyclerView.ViewHolder(entryView){
         val title: TextView = entryView.findViewById(R.id.tvTitle)
         val date: TextView = entryView.findViewById(R.id.tvDate)
