@@ -72,6 +72,7 @@
     <string name="time">Time</string>
     <string name="date">Date</string>
     <string name="emotions">Emotions</string>
+    <string name="save">Save</string>
 
     <string name="menu_image">Menu image</string>
     <string name="crisis_support">Crisis Support</string>
@@ -167,5 +168,4 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_guided_breathing_compose">GuidedBreathingActivityCompose</string>
     <string name="stickers">Stickers</string>
-    <string name="title_activity_guided_meditation_compose">GuidedMeditationCompose</string>
 </resources>

@@ -5,7 +5,7 @@ data class JournalData(
     val time: String? = null,
     val date: String? = null,
     val entry: String? = null,
-    val emotion: Int? = null
+    val emotion: String? = null
 ) {
-    constructor() : this("","","","",0)
+    constructor() : this("","","","","")
 }
