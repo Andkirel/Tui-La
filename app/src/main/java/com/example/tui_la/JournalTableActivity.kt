@@ -1,15 +1,15 @@
 package com.example.tui_la
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -26,6 +26,7 @@ class JournalTableActivity : AppCompatActivity() {
     private lateinit var uId: String
 
     private lateinit var journalRecyclerView: RecyclerView
+    private lateinit var backButton: Button
 
     // implement clearing on logout
     private lateinit var journalArrayList: ArrayList<JournalData>
@@ -51,6 +52,13 @@ class JournalTableActivity : AppCompatActivity() {
         // initialize lists
         journalArrayList = arrayListOf<JournalData>()
         entryKeyList = arrayListOf<String>()
+
+        // button functionality
+        backButton = findViewById(R.id.button_records_backButton)
+        backButton.setOnClickListener{
+            val intent = Intent(this,MainMenu::class.java)
+            startActivity(intent)
+        }
 
         // get data; pull from firebase
         getUserData()

@@ -7,6 +7,16 @@
     android:background="@drawable/main_bg"
     tools:context=".JournalTableActivity">
 
+    <Button
+        android:id="@+id/button_records_backButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvJournal"
         android:layout_width="0dp"
