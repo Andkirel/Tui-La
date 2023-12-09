@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.media3.common.util.UnstableApi
 
@@ -42,7 +43,10 @@ import androidx.media3.common.util.UnstableApi
         }
 
         view.findViewById<Button>(R.id.Button_MainScreen_EDU).setOnClickListener {
-            navigateToActivity(Education::class.java)
+            //TODO: Create the Education layout and class. Then uncomment line below.
+            //navigateToActivity(Education::class.java)
+            val toast = Toast.makeText(view.context,"Coming Soon!",Toast.LENGTH_SHORT)
+            toast.show()
         }
 
         view.findViewById<Button>(R.id.Button_MainScreen_Crisis).setOnClickListener {

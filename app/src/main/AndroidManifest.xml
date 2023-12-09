@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:icon="@drawable/perfect_circle_logo"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -14,7 +15,7 @@
         <activity
             android:name=".GuidedMeditationCompose"
             android:exported="true"
-            android:label="@string/title_activity_guided_meditation_compose"
+            android:label="title_activity_guided_meditation_compose"
             android:theme="@style/Theme.TuiLa" />
         <activity
             android:name=".GuidedBreathingActivityCompose"
