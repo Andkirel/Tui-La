@@ -114,8 +114,6 @@ import com.google.firebase.database.ValueEventListener
     }
 
     private fun backToHome() {
-        val homeIntent = Intent(this, HomeActivity::class.java)
-        homeIntent.putExtra("UID", uid) // Adding the UID to the intent
-        startActivity(homeIntent)
+        onBackPressed();
     }
 }

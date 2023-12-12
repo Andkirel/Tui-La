@@ -63,6 +63,7 @@ import androidx.media3.common.util.UnstableApi
         startActivity(intent)
     }
 
+    // possible redundant function, can remove after checking
     companion object {
         fun newInstance(uid: String?): HomeFragment {
             val fragment = HomeFragment()

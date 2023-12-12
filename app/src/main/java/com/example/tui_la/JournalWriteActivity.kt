@@ -132,9 +132,7 @@ class JournalWriteActivity : AppCompatActivity() {
     }
 
     fun back(view: View) {
-        val journalTable = Intent(this, JournalTableActivity::class.java)
-        journalTable.putExtra("UID", uid) // Adding the UID to the intent
-        startActivity(journalTable)
+        onBackPressed();
     }
 
     private fun updateEntry(userId: String, title: String, entry: String, emotion: Int) {
