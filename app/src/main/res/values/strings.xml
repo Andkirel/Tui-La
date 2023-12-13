@@ -166,6 +166,7 @@
     <string name="_2_00_pm">2:00 PM</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="stickers">stickers</string>
     <string name="title_activity_guided_breathing_compose">GuidedBreathingActivityCompose</string>
-    <string name="stickers">Stickers</string>
+    <string name="title_activity_guided_meditation_compose">GuidedMeditationCompose</string>
 </resources>
