@@ -27,12 +27,12 @@
 
         <activity
             android:name=".GuidedMeditationCompose"
-            android:exported="true"
+            android:exported="false"
             android:label="title_activity_guided_meditation_compose"
             android:theme="@style/Theme.TuiLa" />
         <activity
             android:name=".GuidedBreathingActivityCompose"
-            android:exported="true"
+            android:exported="false"
             android:label="@string/title_activity_guided_breathing_compose"
             android:theme="@style/Theme.TuiLa" />
         <activity
@@ -56,18 +56,9 @@
             android:name=".GuidedMeditationActivity"
             android:exported="false" />
         <activity
-            android:name=".GuidedMeditationPlayer"
-            android:exported="false" />
-        <activity
             android:name=".GuidedMeditationExoPlayer"
-            android:exported="true"
+            android:exported="false"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"/>
-        <activity
-            android:name=".Badges"
-            android:exported="false" />
-
-
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
