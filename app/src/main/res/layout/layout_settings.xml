@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/main_bg"
-    tools:context=".BadgesFragment">
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
