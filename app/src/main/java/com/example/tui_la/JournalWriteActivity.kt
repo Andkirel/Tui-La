@@ -1,5 +1,6 @@
 package com.example.tui_la
 
+import android.content.Intent
 import android.icu.text.DateFormat
 import android.os.Bundle
 import android.view.View
@@ -116,7 +117,8 @@ class JournalWriteActivity : AppCompatActivity() {
         }
     }
     fun back(view: View) {
-        onBackPressed();
+        val journalTable = Intent(this, JournalTableActivity::class.java)
+        startActivity(journalTable)
     }
     private fun updateEntry(userId: String, title: String, entry: String, emotion: String) {
         val data = JournalData(title,currentTime,currentDate,entry,emotion)

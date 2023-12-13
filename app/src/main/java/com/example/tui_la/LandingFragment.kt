@@ -20,7 +20,7 @@ class LandingFragment : Fragment() {
 
         // Initialize the buttons and set their click listeners
         val signInButton: Button = view.findViewById(R.id.signinButton)
-        val createAccountButton: TextView = view.findViewById(R.id.createAccountButton)
+        val createAccountButton: TextView = view.findViewById(R.id.signupButton)
 
         signInButton.setOnClickListener {
             // Replace with LogInFragment

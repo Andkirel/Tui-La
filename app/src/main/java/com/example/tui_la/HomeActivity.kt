@@ -20,7 +20,7 @@ class HomeActivity : AppCompatActivity(), ICommunicatorHome {
         // Display the EmotionsFragment without adding it to the back stack
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, HomeFragment())
+                .replace(R.id.fragmentContainer, EmotionsFragment())
                 .commit()
         }
     }
