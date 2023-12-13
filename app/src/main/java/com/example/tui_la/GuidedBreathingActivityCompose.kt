@@ -106,6 +106,7 @@ fun CreateHeader(context: Context) {
             Box(modifier = Modifier, contentAlignment = Alignment.TopStart) {
                 Button(
                     onClick = {
+                        //TODO: Implement back button functionality to HomeActivity
                         val intent = Intent(context, HomeActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         ContextCompat.startActivity(context, intent,null)
                               },

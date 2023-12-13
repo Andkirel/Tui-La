@@ -65,7 +65,7 @@ class CreateAccountFragment : Fragment() {
 
                                         // Navigate to the login fragment
                                         parentFragmentManager.beginTransaction()
-                                            .replace(R.id.coordinatorLayout, LogInFragment())
+                                            .replace(R.id.fragmentContainer, LogInFragment())
                                             .commit()
                                     } else {
                                         Toast.makeText(activity, "Failed to save user info.", Toast.LENGTH_SHORT).show()
@@ -84,14 +84,14 @@ class CreateAccountFragment : Fragment() {
         loginTextView.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, LogInFragment())
+                .replace(R.id.fragmentContainer, LogInFragment())
                 .commit()
         }
 
         backButtonCreateAccount.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.coordinatorLayout, LandingFragment())
+                .replace(R.id.fragmentContainer, LandingFragment())
                 .commit()
         }
 

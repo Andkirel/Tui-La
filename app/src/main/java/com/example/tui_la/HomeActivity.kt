@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.media3.common.util.UnstableApi
 import com.example.tui_la.databinding.FragmentcontainerBinding
 
+@UnstableApi
 class HomeActivity : AppCompatActivity(), ICommunicatorHome {
 
     private lateinit var binding: FragmentcontainerBinding
@@ -18,7 +20,7 @@ class HomeActivity : AppCompatActivity(), ICommunicatorHome {
         // Display the EmotionsFragment without adding it to the back stack
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, EmotionsFragment())
+                .replace(R.id.fragmentContainer, HomeFragment())
                 .commit()
         }
     }

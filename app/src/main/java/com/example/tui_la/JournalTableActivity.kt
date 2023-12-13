@@ -56,8 +56,7 @@ class JournalTableActivity : AppCompatActivity() {
         // button functionality
         backButton = findViewById(R.id.button_records_backButton)
         backButton.setOnClickListener{
-            val intent = Intent(this,MainMenu::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
 
         // get data; pull from firebase
