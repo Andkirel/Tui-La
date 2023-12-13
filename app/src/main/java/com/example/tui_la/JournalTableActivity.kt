@@ -9,14 +9,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.media3.common.util.UnstableApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 
 @UnstableApi class JournalTableActivity : AppCompatActivity() {
 
+    private val email = "ed'stestuser@gmail.com"
+    private val password = "abcdef"
+
+    private lateinit var auth: FirebaseAuth
     private lateinit var firebaseReference: DatabaseReference
     private lateinit var uid: String
 
@@ -35,8 +42,10 @@ import com.google.firebase.database.ValueEventListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_journal_table)
 
-        uid = intent.getStringExtra("UID") ?: return
+        //uid = intent.getStringExtra("UID") ?: return
 
+        auth = Firebase.auth
+        auth.signInWithEmailAndPassword(email,password)
         firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid).child("Journal")
 
         // getting the recyclerview by its id

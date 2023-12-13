@@ -10,14 +10,24 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.util.UnstableApi
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
 import java.util.Calendar
 
+@UnstableApi
 class JournalWriteActivity : AppCompatActivity() {
 
-    private lateinit var uid: String
+    private val email = "ed'stestuser@gmail.com"
+    private val password = "abcdef"
+
+    private lateinit var auth: FirebaseAuth
     private lateinit var firebaseReference: DatabaseReference
+    private lateinit var uid: String
 
     private lateinit var journalTitle: String
     private lateinit var journalEntry: String
@@ -34,8 +44,9 @@ class JournalWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_journal_write)
 
-        uid = intent.getStringExtra("UID") ?: return
-        firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid).child("Journal")
+        auth = Firebase.auth
+        auth.signInWithEmailAndPassword(email,password)
+        firebaseReference = Firebase.database.reference
 
         // set up spinner/drop down menu
         setJournalSpinner()
@@ -59,7 +70,7 @@ class JournalWriteActivity : AppCompatActivity() {
 //            currentTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)
 
             writeNewJournalData(
-                uid,
+                auth.uid!!,
                 journalTitle,
                 currentTime,
                 currentDate,
@@ -67,7 +78,7 @@ class JournalWriteActivity : AppCompatActivity() {
                 journalEmotion
             )
         } else {
-            updateEntry(uid, journalTitle, journalEntry,journalEmotion)
+            updateEntry(auth.uid!!, journalTitle, journalEntry,journalEmotion)
         }
     }
     private fun writeNewJournalData(userId: String, title: String, time: String, date: String, entry: String, emotion: String){
