@@ -4,25 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 
-class Badges_Journal_Fragment: Fragment() {
+class PopipjournalFragment: DialogFragment(R.layout.layout_monthone) {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.layout_badges_journal, container, false)
+        val view = inflater.inflate(R.layout.layout_monthone, container, false)
 
-        val onejournal: ImageButton = view.findViewById(R.id.Button_1stJournal)
+        val closebutton: ImageButton = view.findViewById(R.id.closebutton_Badges)
 
-        onejournal.setOnClickListener {
+        closebutton.setOnClickListener {
             // Navigate to the login fragment
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, PopipjournalFragment())
+                .replace(R.id.fragmentContainer, Badges_Journal_Fragment())
                 .commit()
         }
 
@@ -30,4 +29,5 @@ class Badges_Journal_Fragment: Fragment() {
         return view
 
     }
+
 }

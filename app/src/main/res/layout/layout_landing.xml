@@ -13,7 +13,7 @@
         android:id="@+id/imageView"
         android:layout_width="398dp"
         android:layout_height="377dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toTopOf="@+id/signinButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
@@ -24,42 +24,41 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:fontFamily="@font/nickainley_normal"
         android:text="Tui-La"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="96sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="320dp"
+        android:layout_height="70dp"
+        android:background="@drawable/tl_rounded_textbox_pink"
+        android:fontFamily="@font/philosopher"
+        android:text="Sign up"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="584dp" />
 
     <Button
         android:id="@+id/signinButton"
         android:layout_width="320dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="116dp"
         android:background="@drawable/tl_rounded_textbox_pink"
         android:fontFamily="@font/philosopher"
-        android:textStyle="bold"
         android:text="Sign In"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/createAccountButton"
-        android:layout_width="350dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="8dp"
-        android:clickable="true"
         android:textStyle="bold"
-        android:fontFamily="@font/philosopher"
-        android:text="Start your 2 month free trial! Create Account"
-        android:textColor="#302E2E"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signinButton" />
+        tools:layout_editor_absoluteY="496dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
