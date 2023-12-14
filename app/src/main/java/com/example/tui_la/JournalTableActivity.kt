@@ -6,27 +6,30 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.media3.common.util.UnstableApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.ktx.Firebase
 
-@UnstableApi class JournalTableActivity : AppCompatActivity() {
+class JournalTableActivity : AppCompatActivity() {
+    private val email = "ed'stestuser@gmail.com"
+    private val password = "abcdef"
 
+    private lateinit var auth: FirebaseAuth
     private lateinit var firebaseReference: DatabaseReference
-    private lateinit var uid: String
+    private lateinit var uId: String
+    private lateinit var backButton: Button
 
     private lateinit var journalRecyclerView: RecyclerView
 
-    private lateinit var backButton: Button
-
     // implement clearing on logout
     private lateinit var journalArrayList: ArrayList<JournalData>
-    // holds journal identifier keys
     private lateinit var entryKeyList: ArrayList<String>
 
     private var reverse: Boolean = true
@@ -35,15 +38,13 @@ import com.google.firebase.database.ValueEventListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_journal_table)
 
-        uid = intent.getStringExtra("UID") ?: return
-
-        firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(uid).child("Journal")
+        // firebase authentication
+        auth = Firebase.auth
+        auth.signInWithEmailAndPassword(email, password)
+        firebaseReference = FirebaseDatabase.getInstance().getReference("users").child(auth.uid!!).child("Journal")
 
         // getting the recyclerview by its id
         journalRecyclerView = findViewById(R.id.rvJournal)
-
-        // back button to home activity
-        backButton = findViewById(R.id.button_records_backButton)
 
         // creates a vertical layout Manager
         journalRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -52,14 +53,12 @@ import com.google.firebase.database.ValueEventListener
         journalArrayList = arrayListOf<JournalData>()
         entryKeyList = arrayListOf<String>()
 
-        backButton.setOnClickListener {
-            backToHome()
-        }
+        backButton = findViewById<Button>(R.id.button_records_backButton)
+        backButton.setOnClickListener{onBackPressed()}
 
         // get data; pull from firebase
         getUserData()
     }
-
     private fun getUserData() {
         firebaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -118,10 +117,6 @@ import com.google.firebase.database.ValueEventListener
         val journalWrite = Intent(this@JournalTableActivity, JournalWriteActivity::class.java)
 
         startActivity(journalWrite)
-    }
-
-    private fun backToHome() {
-        onBackPressed();
     }
 
     private fun reverseList(){
